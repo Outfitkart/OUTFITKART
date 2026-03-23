@@ -6,7 +6,7 @@
    ============================================================ */
 
 const STATIC_CACHE  = 'outfitkart-static-v8';
-const DYNAMIC_CACHE = 'outfitkart-dynamic-v8';
+const DYNAMIC_CACHE = 'outfitkart-dynamic-v9';
 
 const PRECACHE_URLS = [
     './index.html',
