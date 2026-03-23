@@ -122,7 +122,7 @@
 <body class="bg-gray-50 text-gray-800 pb-20 flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- HEADER -->
-      <header class="fixed top-0 w-full bg-white shadow-sm z-50 h-16 flex items-center justify-between px-4 md:px-8" style="border-bottom:1px solid #e8e4dc;">
+      <header class="fixed top-0 w-full bg-white shadow-sm z-50 h-16 flex items-center justify-between px-4 md:px-8" style="border-bottom:2px solid #000000;">
  
     <!-- LEFT: Logo + Brand Name (Photo 3 style) -->
     <div class="flex items-center gap-2 cursor-pointer select-none"
@@ -139,22 +139,41 @@
         </div>
  
         <!-- Brand Name — gold elegant style like photo 3 -->
-        <div style="display:flex;flex-direction:column;line-height:1;">
+       
+
+ <div style="display:flex;flex-direction:column;line-height:1;">
+
             <span style="
+
                 font-family:'Playfair Display',Georgia,serif;
+
                 font-weight:700;
+
                 font-size:1.25rem;
+
                 letter-spacing:0.12em;
+
                 text-transform:uppercase;
+
                 background:linear-gradient(135deg,#B8860B 0%,#C9A84C 40%,#DAA520 60%,#B8860B 100%);
+
                 -webkit-background-clip:text;
+
                 -webkit-text-fill-color:transparent;
+
                 background-clip:text;
+
                 display:block;
+
             ">OutfitKart</span>
+
             <span style="font-size:8px;font-weight:600;letter-spacing:0.2em;color:#9ca3af;text-transform:uppercase;margin-top:1px;">Premium Fashion</span>
+
         </div>
-    </div>
+
+    </div> 
+
+
         <!-- CENTER: Desktop Search -->
     <div class="hidden md:flex relative w-1/2 bg-gray-100 rounded-md items-center border border-transparent focus-within:border-amber-500 focus-within:bg-white transition-colors">
         <i class="fas fa-search text-gray-400 ml-3"></i>
@@ -1193,11 +1212,33 @@
         function openGoldSection() { navigate('gold'); }
         window.openGoldSection = openGoldSection;
 
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () =>
-                navigator.serviceWorker.register('./sw.js').catch(() => {})
-            );
-        }
+        
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            // 1. Service Worker Register karein
+            navigator.serviceWorker.register('./sw.js?v=8')
+            .then(reg => {
+                console.log('SW Registered!');
+                
+                // 2. Periodic Check: Har 1 ghante mein update check karega
+                // Taki agar user ne tab band nahi kiya, toh bhi update mil jaye
+                setInterval(() => {
+                    reg.update();
+                }, 1000 * 60 * 60); 
+            })
+            .catch(err => console.log('SW Error:', err));
+        });
+
+        // 3. AUTO-UPDATE LOGIC: 
+        // Jab SW activate ho jaye aur 'SW_UPDATED' message bheje, tab page reload karo
+        navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'SW_UPDATED') {
+                console.log("Naya version mil gaya! Auto-reloading...");
+                window.location.reload();
+            }
+        });
+    }
+
     </script>
 </body>
 </html>
