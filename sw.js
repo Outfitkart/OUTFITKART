@@ -1,10 +1,12 @@
 /* ============================================================
-   OutfitKart Service Worker — v6
-   ⚠️  v6: Cache purge — logo fix, script-fixes.js removed
+   OutfitKart Service Worker — v8
+   ✅ Force update: old logo/cache purge on reinstall
+   ✅ Auto skipWaiting — no manual update needed
+   ✅ Periodic cache bust via versioned cache names
    ============================================================ */
 
-const STATIC_CACHE  = 'outfitkart-static-v7';
-const DYNAMIC_CACHE = 'outfitkart-dynamic-v7';
+const STATIC_CACHE  = 'outfitkart-static-v8';
+const DYNAMIC_CACHE = 'outfitkart-dynamic-v8';
 
 const PRECACHE_URLS = [
     './index.html',
@@ -12,20 +14,19 @@ const PRECACHE_URLS = [
     './styles.css',
     './script-core.js',
     './script-admin.js',
-    /* script-fixes.js removed — merged into script-core.js */
 ];
 
-/* ── INSTALL: cache core files ───────────────────────────── */
+/* ── INSTALL ──────────────────────────────────────────────── */
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(STATIC_CACHE)
             .then(c => c.addAll(PRECACHE_URLS).catch(() => {}))
     );
-    /* Force new SW to activate immediately — no waiting */
+    /* Always activate new SW immediately */
     self.skipWaiting();
 });
 
-/* ── ACTIVATE: delete ALL old caches ────────────────────── */
+/* ── ACTIVATE: purge ALL old caches ──────────────────────── */
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(keys =>
@@ -33,14 +34,22 @@ self.addEventListener('activate', event => {
                 keys
                     .filter(k => k !== STATIC_CACHE && k !== DYNAMIC_CACHE)
                     .map(k => {
-                        console.log('[SW v6] Deleting old cache:', k);
+                        console.log('[SW v8] Deleting old cache:', k);
                         return caches.delete(k);
                     })
             )
-        )
+        ).then(() => {
+            /* Take control of all open tabs immediately */
+            return self.clients.claim();
+        }).then(() => {
+            /* Notify all clients to reload for fresh content */
+            return self.clients.matchAll({ type: 'window' }).then(clients => {
+                clients.forEach(client => {
+                    client.postMessage({ type: 'SW_UPDATED' });
+                });
+            });
+        })
     );
-    /* Take control of all open tabs immediately */
-    self.clients.claim();
 });
 
 /* ── FETCH ───────────────────────────────────────────────── */
@@ -92,13 +101,12 @@ self.addEventListener('fetch', event => {
     if (
         url.hostname.includes('i.ibb.co')   ||
         url.hostname.includes('ibb.co')     ||
-        url.pathname.includes('IMG-20260323')   /* our specific logo filename */
+        url.pathname.includes('IMG-20260323')
     ) {
         event.respondWith(
             fetch(event.request)
                 .then(res => {
                     if (res.ok) {
-                        /* Update cache with fresh logo */
                         caches.open(DYNAMIC_CACHE).then(c => c.put(event.request, res.clone()));
                     }
                     return res;
@@ -108,7 +116,7 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    /* ── Other images: cache first (product photos etc.) ── */
+    /* ── Other images: cache first ── */
     if (
         url.pathname.match(/\.(png|jpg|jpeg|webp|gif|svg|ico)$/) ||
         url.hostname.includes('placehold.co')                    ||
@@ -139,7 +147,7 @@ self.addEventListener('fetch', event => {
     );
 });
 
-/* ── PUSH NOTIFICATION RECEIVE ───────────────────────────── */
+/* ── PUSH NOTIFICATION ───────────────────────────────────── */
 self.addEventListener('push', event => {
     if (!event.data) return;
     let payload;
@@ -173,9 +181,7 @@ self.addEventListener('push', event => {
 self.addEventListener('notificationclick', event => {
     event.notification.close();
     if (event.action === 'dismiss') return;
-
     const targetUrl = event.notification.data?.url || './';
-
     event.waitUntil(
         clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
             for (const c of list) {
