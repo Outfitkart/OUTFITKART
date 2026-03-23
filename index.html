@@ -8,8 +8,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="OutfitKart">
     <meta name="google-site-verification" content="Cun-xISrGnbkgnwNdLw86cG79am_gceaKFBERyR0iPo" />
-    <link rel="apple-touch-icon" href="https://placehold.co/180x180/e11d48/ffffff?text=OK">
     <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/8DxtmN09/IMG-20260323-141417.png">
     <meta name="description" content="OutfitKart — Premium Fashion at Best Prices. Buy trendy fashion outfits at affordable prices.Oufitkart offers premium cloyhing with latest styles. COD available.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="OutfitKart">
@@ -122,29 +122,60 @@
 <body class="bg-gray-50 text-gray-800 pb-20 flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- HEADER -->
-    <header class="fixed top-0 w-full bg-white shadow-sm z-50 h-16 flex items-center justify-between px-4 md:px-8">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-black text-sm flex-shrink-0"
-                 style="background:linear-gradient(135deg,#C8102E,#e11d48);box-shadow:0 2px 8px rgba(200,16,46,0.35);">OK</div>
-            <h1 class="text-2xl font-bold text-rose-600 cursor-pointer tracking-tight select-none"
-                onmousedown="startAdminTimer()" onmouseup="cancelAdminTimer()" onmouseleave="cancelAdminTimer()"
-                ontouchstart="startAdminTimer()" ontouchend="cancelAdminTimer()">
-                OutfitKart
-            </h1>
+      <header class="fixed top-0 w-full bg-white shadow-sm z-50 h-16 flex items-center justify-between px-4 md:px-8" style="border-bottom:1px solid #e8e4dc;">
+ 
+    <!-- LEFT: Logo + Brand Name (Photo 3 style) -->
+    <div class="flex items-center gap-2 cursor-pointer select-none"
+         onmousedown="startAdminTimer()" onmouseup="cancelAdminTimer()"
+         onmouseleave="cancelAdminTimer()"
+         ontouchstart="startAdminTimer()" ontouchend="cancelAdminTimer()"
+         onclick="navigate('home')">
+ 
+        <!-- Logo Image -->
+        <div class="flex-shrink-0" style="width:42px;height:42px;">
+            <img src="https://i.ibb.co/5gXg0WTr/1774263119958.png"
+                 alt="OutfitKart"
+                 style="width:42px;height:42px;object-fit:contain;display:block;">
         </div>
-        <div class="hidden md:flex relative w-1/2 bg-gray-100 rounded-md items-center border border-transparent focus-within:border-rose-500 focus-within:bg-white transition-colors">
-            <i class="fas fa-search text-gray-400 ml-3"></i>
-            <input type="text" id="desktop-search" placeholder="Search for products..." class="w-full bg-transparent py-2 px-3 focus:outline-none text-sm" oninput="handleSearch(this.value)">
-            <div class="h-6 w-px bg-gray-300"></div>
-            <select id="price-sort-desktop" onchange="sortProducts(this.value)" class="bg-transparent text-sm text-gray-600 font-bold focus:outline-none py-2 pl-2 pr-3 cursor-pointer appearance-none">
-                <option value="default">Sort</option>
-                <option value="low">Price: Low-High</option>
-                <option value="high">Price: High-Low</option>
-            </select>
-            <div id="desktop-search-results" class="absolute top-11 left-0 w-full bg-white shadow-lg rounded-b-md hidden max-h-64 overflow-y-auto z-50"></div>
+ 
+        <!-- Brand Name — gold elegant style like photo 3 -->
+        <div style="display:flex;flex-direction:column;line-height:1;">
+            <span style="
+                font-family:'Playfair Display',Georgia,serif;
+                font-weight:700;
+                font-size:1.25rem;
+                letter-spacing:0.12em;
+                text-transform:uppercase;
+                background:linear-gradient(135deg,#B8860B 0%,#C9A84C 40%,#DAA520 60%,#B8860B 100%);
+                -webkit-background-clip:text;
+                -webkit-text-fill-color:transparent;
+                background-clip:text;
+                display:block;
+            ">OutfitKart</span>
+            <span style="font-size:8px;font-weight:600;letter-spacing:0.2em;color:#9ca3af;text-transform:uppercase;margin-top:1px;">Premium Fashion</span>
         </div>
-        <div class="flex items-center gap-3">
-            <button class="text-gray-600 hover:text-rose-600 relative" onclick="navigate('profile','wishlist')">
+    </div>
+        <!-- CENTER: Desktop Search -->
+    <div class="hidden md:flex relative w-1/2 bg-gray-100 rounded-md items-center border border-transparent focus-within:border-amber-500 focus-within:bg-white transition-colors">
+        <i class="fas fa-search text-gray-400 ml-3"></i>
+        <input type="text" id="desktop-search"
+               placeholder="Search for products..."
+               class="w-full bg-transparent py-2 px-3 focus:outline-none text-sm"
+               oninput="handleSearch(this.value)"
+               onkeydown="if(event.key==='Enter'&&this.value.trim().length>=2){handleSearch(this.value);document.querySelectorAll('.view-section').forEach(v=>v.classList.add('hidden'));var sv=document.getElementById('view-search');if(sv)sv.classList.remove('hidden');window.currentView='search';if(typeof updateBottomNav==='function')updateBottomNav();window.scrollTo(0,0);['desktop-search-results','mobile-search-results'].forEach(function(rid){var r=document.getElementById(rid);if(r)r.classList.add('hidden');});}">
+        <div class="h-6 w-px bg-gray-300"></div>
+        <select id="price-sort-desktop" onchange="sortProducts(this.value)"
+                class="bg-transparent text-sm text-gray-600 font-bold focus:outline-none py-2 pl-2 pr-3 cursor-pointer appearance-none">
+            <option value="default">Sort</option>
+            <option value="low">Price: Low-High</option>
+            <option value="high">Price: High-Low</option>
+        </select>
+        <div id="desktop-search-results"
+             class="absolute top-11 left-0 w-full bg-white shadow-lg rounded-b-md hidden max-h-64 overflow-y-auto z-50"></div>
+    </div>
+ 
+    <!-- RIGHT: Action icons -->
+    <div class="flex items-center gap-3">            <button class="text-gray-600 hover:text-rose-600 relative" onclick="navigate('profile','wishlist')">
                 <i class="far fa-heart text-xl"></i>
                 <span id="wishlist-count" class="absolute -top-2 -right-2 bg-rose-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
             </button>
@@ -156,12 +187,45 @@
                 <i class="fas fa-wallet text-blue-600 text-xs"></i>
                 <span id="header-wallet-display" class="text-xs font-black text-blue-700">₹0</span>
             </div>
-            <div class="flex flex-col items-center relative text-xs text-gray-500 group cursor-default">
-                <i class="fas fa-th-large text-lg"></i>
-                <span id="products-count" class="absolute -top-1 right-1 bg-blue-500 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center shadow-sm">?</span>
-                <span id="supabase-status-dot" class="w-2 h-2 bg-gray-400 rounded-full absolute bottom-0 left-0 shadow-sm" title="Checking..."></span>
+            <div id="header-user-avatar-btn"
+             onclick="navigate('profile')"
+             title="My Profile"
+             style="
+                width:36px;height:36px;border-radius:50%;
+                overflow:hidden;cursor:pointer;flex-shrink:0;
+                border:2.5px solid #e5e7eb;
+                box-shadow:0 2px 8px rgba(0,0,0,0.1);
+                transition:all 0.2s;
+                background:#f3f4f6;
+                display:flex;align-items:center;justify-content:center;
+                position:relative;
+             "
+             onmouseover="this.style.borderColor='#e11d48';this.style.boxShadow='0 3px 12px rgba(225,29,72,0.3)';"
+             onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">
+            <img id="header-profile-img"
+                 src="https://i.ibb.co/8DxtmN09/IMG-20260323-141417.png"
+                 alt="Profile"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 onerror="this.style.display='none';document.getElementById('header-profile-fallback').style.display='flex';">
+            <!-- Fallback icon when no profile pic -->
+            <div id="header-profile-fallback"
+                 style="display:none;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(135deg,#e11d48,#be123c);">
+                <i class="fas fa-user" style="color:white;font-size:14px;"></i>
             </div>
+            <!-- Online dot -->
+            <div id="header-online-dot"
+                 style="display:none;position:absolute;bottom:0;right:0;width:10px;height:10px;background:#22c55e;border-radius:50%;border:2px solid white;"></div>
         </div>
+ 
+        <!-- Supabase status dot (hidden, but kept for function) -->
+        <span id="supabase-status-dot"
+              style="display:none;"
+              title="Checking..."></span>
+ 
+        <!-- Products count (hidden, kept for JS references) -->
+        <span id="products-count" style="display:none;">0</span>
+ 
+    </div>
     </header>
 
     <!-- MAIN CONTENT -->
@@ -1111,7 +1175,6 @@
 
     <script src="script-core.js"></script>
     <script src="script-admin.js"></script>
-      <script src="script-fixes.js"></script>
     <script>
         // Supplier URL preview handler for Add Product form
         document.addEventListener('DOMContentLoaded', () => {
