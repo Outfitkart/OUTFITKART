@@ -3,8 +3,8 @@
    ⚠️  v6: Cache purge — logo fix, script-fixes.js removed
    ============================================================ */
 
-const STATIC_CACHE  = 'outfitkart-static-v6';
-const DYNAMIC_CACHE = 'outfitkart-dynamic-v6';
+const STATIC_CACHE  = 'outfitkart-static-v7';
+const DYNAMIC_CACHE = 'outfitkart-dynamic-v7';
 
 const PRECACHE_URLS = [
     './index.html',
