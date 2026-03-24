@@ -64,10 +64,10 @@ const CATEGORIES=[
      ]},
     {id:'women',name:'Women',
      photo:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=120&h=120&fit=crop&q=80',
-     subs:['Sarees','Kurtis','Salwar Suits','Lehengas','Tops','Straight Fit Jeans','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans','Palazzo','Tops & Tunics','Dresses','Skirts','Heels','Flats','Sandals','Sneakers','Wedges','Ethnic Set (Kurti+Pant+Dupatta)','Western Combo (Top+Straight Jeans+Belt)','Party Combo (Saree+Blouse+Belt)','Indo-Western (Top+Palazzo+Shrug)'],
+     subs:['Sarees','Kurtis','Lehengas','Tops','Straight Fit Jeans','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans','Palazzo','Tops & Tunics','Dresses','Skirts','Heels','Flats','Sandals','Sneakers','Wedges','Ethnic Set (Kurti+Pant+Dupatta)','Western Combo (Top+Straight Jeans+Belt)','Party Combo (Saree+Blouse+Belt)','Indo-Western (Top+Palazzo+Shrug)'],
      groups:[
          {label:'🥻 Ethnic',items:['Sarees','Kurtis','Salwar Suits','Lehengas']},
-         {label:'👖 Bottomwear',items:['Straight Fit Jeans','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans']},
+         {label:'👖 Bottomwear',items:['Straight Fit Jeans','Trousers','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans']},
          {label:'👗 Western',items:['Tops','Palazzo','Tops & Tunics','Dresses','Skirts']},
          {label:'👠 Footwear',items:['Heels','Flats','Sandals','Sneakers','Wedges']},
          {label:'🎁 Full Combos',items:['Ethnic Set (Kurti+Pant+Dupatta)','Western Combo (Top+Straight Jeans+Belt)','Party Combo (Saree+Blouse+Belt)','Indo-Western (Top+Palazzo+Shrug)']},
@@ -240,41 +240,6 @@ function _bindSearchEnterKeys(){
     });
 }
 
-/* ============================================================
-   10. EXIT INTENT PROMO POPUP
-   ============================================================ */
-const PROMO_ADS=[
-    {emoji:'🎁',title:'Dost ko Refer Karo, ₹50+ Pao!',body:'Har referral par 5% commission wallet mein.',cta:'Refer Now',action:'closePromoAd();navigate("profile","referrals");',bg:'linear-gradient(135deg,#0f0c29,#302b63)',accent:'#f9a825'},
-    {emoji:'⭐',title:'OutfitKart Gold — Premium Picks',body:'Curated luxury fashion at unbeatable prices.',cta:'Explore Gold',action:'closePromoAd();navigate("gold");',bg:'linear-gradient(135deg,#1a0800,#3d2c00)',accent:'#C9A84C'},
-    {emoji:'🚚',title:'COD Available — Zero Risk!',body:'Order karo, ghar par dekho, tab pay karo.',cta:'Shop Now',action:'closePromoAd();navigate("shop");',bg:'linear-gradient(135deg,#134e4a,#065f46)',accent:'#6ee7b7'},
-];
-let _promoIdx=0,_promoTimer=null,_promoInited=false;
-function _initExitIntentPromo(){
-    if(_promoInited)return;_promoInited=true;
-    document.addEventListener('mouseleave',e=>{if(e.clientY<5&&!sessionStorage.getItem('ok_promo_shown'))_showPromo();});
-    document.addEventListener('visibilitychange',()=>{
-        if(document.visibilityState==='hidden'){sessionStorage.setItem('ok_promo_return','1');}
-        else if(document.visibilityState==='visible'&&sessionStorage.getItem('ok_promo_return')&&!sessionStorage.getItem('ok_promo_shown')){sessionStorage.removeItem('ok_promo_return');setTimeout(_showPromo,800);}
-    });
-}
-function _showPromo(){if(sessionStorage.getItem('ok_promo_shown')||document.getElementById('ok-promo-overlay'))return;_buildPromoOverlay();_promoTimer=setInterval(_nextPromoSlide,5000);}
-function _buildPromoOverlay(){
-    if(document.getElementById('ok-promo-overlay'))return;
-    const s=document.createElement('style');s.textContent='@keyframes okSlideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes okSlideDown{from{transform:translateY(0);opacity:1}to{transform:translateY(110%);opacity:0}}';document.head.appendChild(s);
-    const div=document.createElement('div');div.id='ok-promo-overlay';
-    div.style.cssText='position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);';
-    div.innerHTML=`<div id="ok-promo-card" style="width:100%;max-width:480px;border-radius:28px 28px 0 0;padding:28px 24px 48px;position:relative;animation:okSlideUp 0.4s cubic-bezier(0.4,0,0.2,1) both;"><div style="width:44px;height:5px;background:rgba(255,255,255,0.3);border-radius:9999px;margin:0 auto 22px;"></div><button onclick="closePromoAd()" style="position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:white;font-size:16px;cursor:pointer;">✕</button><div id="ok-promo-body"></div><div id="ok-promo-dots" style="display:flex;justify-content:center;gap:6px;margin-top:20px;"></div></div>`;
-    document.body.appendChild(div);_renderPromoContent(0);
-}
-function _renderPromoContent(idx){
-    const ad=PROMO_ADS[idx];const card=document.getElementById('ok-promo-card');const body=document.getElementById('ok-promo-body');const dots=document.getElementById('ok-promo-dots');if(!body||!dots)return;
-    if(card)card.style.background=ad.bg;
-    body.innerHTML=`<div style="text-align:center;color:white;"><div style="font-size:3.5rem;margin-bottom:12px;">${ad.emoji}</div><h2 style="font-size:1.25rem;font-weight:900;margin:0 0 10px;">${ad.title}</h2><p style="font-size:13.5px;opacity:0.8;margin:0 0 22px;">${ad.body}</p><button onclick="${ad.action}" style="background:${ad.accent};color:#1a1a1a;font-weight:900;font-size:14px;padding:13px 36px;border-radius:9999px;border:none;cursor:pointer;">${ad.cta} →</button></div>`;
-    dots.innerHTML=PROMO_ADS.map((_,i)=>`<div onclick="window._goPromoSlide(${i})" style="width:${i===idx?'22px':'8px'};height:8px;border-radius:9999px;cursor:pointer;background:rgba(255,255,255,${i===idx?'1':'0.35'});transition:all 0.3s;"></div>`).join('');
-}
-window._goPromoSlide=idx=>{_promoIdx=idx;_renderPromoContent(idx);clearInterval(_promoTimer);_promoTimer=setInterval(_nextPromoSlide,5000);};
-function _nextPromoSlide(){_promoIdx=(_promoIdx+1)%PROMO_ADS.length;_renderPromoContent(_promoIdx);}
-function closePromoAd(){clearInterval(_promoTimer);const card=document.getElementById('ok-promo-card');if(card)card.style.animation='okSlideDown 0.35s cubic-bezier(0.4,0,0.2,1) both';setTimeout(()=>{document.getElementById('ok-promo-overlay')?.remove();},380);sessionStorage.setItem('ok_promo_shown','1');}
 
 /* ============================================================
    11. HOME — SUBCATEGORY STRIP + AI STRIP
