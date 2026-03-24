@@ -1,12 +1,5 @@
 'use strict';
-/* ============================================================
-   OutfitKart — script-core.js  (MERGED with script-fixes.js)
-   ALL FEATURES INLINE — no _waitFor polling needed
-   ============================================================ */
-
-/* ============================================================
-   1. CONFIG & SUPABASE
-   ============================================================ */
+    
 const SUPABASE_URL      = 'https://wlgytgwmmefwpljstque.supabase.co';
 const SUPABASE_KEY      = 'sb_publishable_fFampYvNGSn7TE0TOy56dQ_xXrer_P8';
 const RAZORPAY_KEY      = 'rzp_live_SRZMbmo0aTi8xs';
@@ -1204,6 +1197,31 @@ async function loadWalletTransactions(){if(!currentUser)return;const container=d
 async function submitInfluencerRequest(){if(!currentUser)return showToast('Login karein pehle!');const name=document.getElementById('inf-name')?.value.trim(),platform=document.getElementById('inf-platform')?.value;const profUrl=document.getElementById('inf-profile-url')?.value.trim(),videoUrl=document.getElementById('inf-video-url')?.value.trim();const views=parseInt(document.getElementById('inf-views')?.value)||0,desc=document.getElementById('inf-description')?.value.trim();if(!name||!platform||!videoUrl||!views)return showToast('Saare required fields bharein!');if(views<1000)return showToast('Minimum 1000 views chahiye!');const earning=Math.floor(views/1000)*50;try{const{error}=await dbClient.from('influencer_requests').insert([{mobile:currentUser.mobile,name,platform,profile_url:profUrl,video_url:videoUrl,views,description:desc,status:'Pending',earnings:earning,submitted_at:new Date().toISOString()}]);if(error)throw error;showToast(`✅ Request submitted! Potential earning: ₹${earning}`);['inf-name','inf-profile-url','inf-video-url','inf-views','inf-description'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const platEl=document.getElementById('inf-platform');if(platEl)platEl.value='';loadInfluencerRequests();}catch(err){showToast('❌ '+err.message);}}
 async function loadInfluencerRequests(){if(!currentUser)return;const container=document.getElementById('inf-requests-list'),totalEl=document.getElementById('inf-total-earned'),countEl=document.getElementById('inf-submissions-count');if(!container)return;try{const{data}=await dbClient.from('influencer_requests').select('*').eq('mobile',currentUser.mobile).order('id',{ascending:false});const all=data||[],approved=all.filter(r=>r.status==='Approved');const totalEarned=approved.reduce((s,r)=>s+(r.earnings||0),0);if(totalEl)totalEl.textContent=`₹${totalEarned}`;if(countEl)countEl.textContent=all.length;const BADGE={Pending:'bg-amber-100 text-amber-700',Approved:'bg-green-100 text-green-700',Rejected:'bg-red-100 text-red-600'};container.innerHTML=all.length?all.map(r=>`<div class="bg-white border rounded-xl p-3 mb-2 shadow-sm"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><div class="font-bold text-sm truncate">${r.platform} — ${r.views?.toLocaleString()} views</div><a href="${r.video_url}" target="_blank" class="text-xs text-blue-600 hover:underline truncate block">${r.video_url}</a></div><span class="text-[10px] font-bold px-2 py-0.5 rounded-full ml-2 flex-shrink-0 ${BADGE[r.status]||'bg-gray-100 text-gray-500'}">${r.status}</span></div>${r.status==='Approved'?`<div class="text-xs text-green-600 font-bold mt-1">✅ ₹${r.earnings} credited to wallet</div>`:''}${r.status==='Rejected'&&r.reject_reason?`<div class="text-xs text-red-500 mt-1">❌ ${r.reject_reason}</div>`:''}</div>`).join(''):'<div class="text-center text-gray-400 py-6 text-sm">Abhi tak koi submission nahi</div>';}catch{if(container)container.innerHTML='<div class="text-xs text-red-500">Error loading</div>';}}
 
+/* ── Profile Page Navigation ─────────────────────────── */
+function openProfilePage(page) {
+    // hide all profile pages
+    document.querySelectorAll('.profile-page').forEach(p => p.classList.add('hidden'));
+    const target = document.getElementById(`profile-page-${page}`);
+    if (!target) return;
+    target.classList.remove('hidden');
+    // load data
+    if (page === 'orders') renderOrdersList();
+    if (page === 'wallet') loadWalletTransactions();
+    if (page === 'wishlist') renderWishlist();
+    if (page === 'referrals') { loadReferrals(); }
+    if (page === 'influencer') loadInfluencerRequests();
+    if (page === 'info') {
+        setTimeout(() => { _fillProfileGender(); loadUserReferralCode(); }, 60);
+        // sync avatar
+        const img2 = document.getElementById('prof-avatar-img2');
+        if (img2 && currentUser?.profile_pic) img2.src = currentUser.profile_pic;
+    }
+    window.scrollTo(0, 0);
+}
+
+function closeProfilePage() {
+    document.querySelectorAll('.profile-page').forEach(p => p.classList.add('hidden'));
+}
 /* ============================================================
    GLOBAL EXPORTS
    ============================================================ */
@@ -1237,5 +1255,5 @@ Object.assign(window,{
     _onQuickMlInput,
     updateHeaderProfilePhoto,
     _updateUserLevel,_renderLevelBadge,
-    openGoldSection:()=>navigate('gold'),
+    openGoldSection:()=>navigate('gold'),openProfilePage, closeProfilePage,
 });
