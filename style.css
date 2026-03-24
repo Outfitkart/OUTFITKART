@@ -228,3 +228,349 @@ body.admin-active header{display:none!important;}
 body.admin-active main{padding-top:0!important;}
 body.admin-active #admin-sidebar{top:0!important;height:100vh!important;}
 .admin-content-tab.hidden{display:none!important;}
+
+/* ============================================================
+   OutfitKart — ADDITIONS v2
+   Append this to the bottom of your styles.css
+   ============================================================ */
+
+/* ── 3D Brand Name in Header ─────────────────────────────── */
+.outfitkart-brand-3d {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-weight: 900 !important;
+    font-size: 1.3rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #C9A84C !important;
+    -webkit-text-fill-color: unset !important;
+    background: none !important;
+    text-shadow:
+        0px 1px 0px #d4b85c,
+        0px 2px 0px #c9a84c,
+        0px 3px 0px #b8972c,
+        0px 4px 0px #a07820,
+        0px 5px 0px #8a6510,
+        0px 6px 8px rgba(0,0,0,0.4),
+        0px 10px 24px rgba(201,168,76,0.35);
+    display: block !important;
+    line-height: 1.1 !important;
+    transform: perspective(400px) rotateX(5deg);
+    transform-origin: bottom center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), text-shadow 0.3s ease;
+    cursor: pointer;
+    will-change: transform;
+}
+.outfitkart-brand-3d:hover {
+    transform: perspective(400px) rotateX(1deg) scale(1.05);
+    text-shadow:
+        0px 1px 0px #e8cc7a,
+        0px 2px 0px #d4b85c,
+        0px 3px 0px #c9a84c,
+        0px 4px 0px #b8860b,
+        0px 5px 0px #a07820,
+        0px 6px 0px #8a6510,
+        0px 8px 12px rgba(0,0,0,0.45),
+        0px 12px 35px rgba(201,168,76,0.55);
+}
+
+/* ── Admin Login Modal — Luxury Dark Theme ───────────────── */
+@keyframes adminModalReveal {
+    0%   { opacity: 0; transform: scale(0.82) translateY(50px) rotateX(10deg); filter: blur(8px); }
+    55%  { transform: scale(1.03) translateY(-5px) rotateX(-1deg); filter: blur(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); filter: blur(0); }
+}
+@keyframes adminShieldGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.6), 0 0 25px rgba(124,58,237,0.25); }
+    50%       { box-shadow: 0 0 0 16px rgba(124,58,237,0), 0 0 50px rgba(124,58,237,0.5); }
+}
+@keyframes adminScanLine {
+    0%   { transform: scaleX(0); opacity: 0; }
+    30%  { opacity: 1; }
+    100% { transform: scaleX(1); opacity: 0.5; }
+}
+@keyframes adminDriftUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatingOrb {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+    50%       { transform: translateY(-20px) scale(1.1); opacity: 0.65; }
+}
+
+#admin-login-modal {
+    backdrop-filter: blur(12px) !important;
+}
+
+#admin-login-modal > div {
+    animation: adminModalReveal 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) both !important;
+    background: linear-gradient(155deg, #0d0820 0%, #130a2e 35%, #0f0b22 70%, #1a0e35 100%) !important;
+    border: 1px solid rgba(124,58,237,0.45) !important;
+    border-radius: 24px !important;
+    box-shadow:
+        0 0 0 1px rgba(124,58,237,0.15),
+        0 40px 100px rgba(0,0,0,0.75),
+        0 0 80px rgba(124,58,237,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        inset 0 -1px 0 rgba(124,58,237,0.1) !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+/* Top scan line */
+#admin-login-modal > div::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.9) 30%, rgba(201,168,76,0.7) 70%, transparent 100%);
+    transform-origin: left;
+    animation: adminScanLine 1.5s ease 0.1s forwards;
+    transform: scaleX(0);
+}
+
+/* Background orbs */
+#admin-login-modal > div::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+    animation: floatingOrb 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Admin form label */
+#admin-login-modal label.block {
+    color: rgba(255,255,255,0.55) !important;
+    font-size: 10.5px !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+    animation: adminDriftUp 0.4s ease both;
+}
+
+/* Inputs */
+#admin-login-modal input[type="tel"],
+#admin-login-modal input[type="password"] {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1.5px solid rgba(124,58,237,0.3) !important;
+    border-radius: 14px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+    transition: all 0.3s ease !important;
+    letter-spacing: 0.02em;
+}
+#admin-login-modal input[type="tel"]:focus,
+#admin-login-modal input[type="password"]:focus {
+    background: rgba(124,58,237,0.1) !important;
+    border-color: rgba(124,58,237,0.75) !important;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.18), 0 0 25px rgba(124,58,237,0.12) !important;
+    outline: none !important;
+}
+#admin-login-modal input::placeholder {
+    color: rgba(255,255,255,0.22) !important;
+    font-weight: 400 !important;
+}
+
+/* Prefix +91 span */
+#admin-login-modal .bg-gray-100 {
+    background: rgba(124,58,237,0.15) !important;
+    border-color: rgba(124,58,237,0.3) !important;
+    border-right: none !important;
+    color: rgba(255,255,255,0.6) !important;
+    font-weight: 700 !important;
+    border-radius: 14px 0 0 14px !important;
+    font-size: 14px !important;
+}
+#admin-login-modal .border-l-0 {
+    border-left: none !important;
+    border-radius: 0 14px 14px 0 !important;
+}
+
+/* Submit button */
+#admin-login-modal button[type="submit"] {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%) !important;
+    border: none !important;
+    border-radius: 14px !important;
+    font-weight: 900 !important;
+    font-size: 14px !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    box-shadow:
+        0 4px 24px rgba(124,58,237,0.55),
+        0 0 50px rgba(124,58,237,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.15) !important;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+#admin-login-modal button[type="submit"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow:
+        0 8px 35px rgba(124,58,237,0.7),
+        0 0 70px rgba(124,58,237,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+#admin-login-modal button[type="submit"]:active {
+    transform: translateY(0) scale(0.98) !important;
+}
+/* Shimmer on submit button */
+#admin-login-modal button[type="submit"]::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 80%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transition: left 0.6s ease;
+}
+#admin-login-modal button[type="submit"]:hover::after { left: 130%; }
+
+/* Cancel button */
+#admin-login-modal button[type="button"] {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1.5px solid rgba(255,255,255,0.12) !important;
+    border-radius: 14px !important;
+    color: rgba(255,255,255,0.55) !important;
+    font-weight: 600 !important;
+    transition: all 0.25s ease !important;
+}
+#admin-login-modal button[type="button"]:hover {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: rgba(255,255,255,0.22) !important;
+    color: rgba(255,255,255,0.85) !important;
+}
+
+/* Shield icon wrapper */
+#admin-login-modal .w-16.h-16.bg-purple-100 {
+    background: linear-gradient(135deg, rgba(124,58,237,0.25), rgba(91,33,182,0.15)) !important;
+    border: 1px solid rgba(124,58,237,0.45) !important;
+    animation: adminShieldGlow 2.8s ease-in-out infinite !important;
+}
+#admin-login-modal .w-16.h-16 i {
+    color: #a78bfa !important;
+    filter: drop-shadow(0 0 8px rgba(167,139,250,0.7));
+}
+
+/* Title & subtitle */
+#admin-login-modal h2 {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-weight: 900 !important;
+    font-style: italic;
+    font-size: 1.65rem !important;
+    background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 50%, #7c3aed 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    letter-spacing: -0.02em !important;
+    animation: adminDriftUp 0.45s ease 0.15s both;
+    text-shadow: none !important;
+}
+#admin-login-modal .text-sm.text-gray-500 {
+    color: rgba(255,255,255,0.35) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    animation: adminDriftUp 0.45s ease 0.25s both;
+}
+
+/* ── SW Update Banner ────────────────────────────────────── */
+@keyframes swBannerSlideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+}
+#sw-update-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: white;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.5);
+    animation: swBannerSlideDown 0.4s ease both;
+}
+#sw-update-banner button {
+    background: white;
+    color: #7c3aed;
+    border: none;
+    border-radius: 9999px;
+    padding: 5px 14px;
+    font-weight: 900;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+/* ── Profile Pages (Admin panel jaisa) ──────────────────── */
+.profile-page {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: var(--smoke, #F7F5F2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeUp 0.28s cubic-bezier(0.4,0,0.2,1) both;
+}
+.profile-page.hidden { display: none !important; }
+
+.profile-page-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 56px;
+    border-bottom: 1px solid var(--border, #E5E2DC);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    flex-shrink: 0;
+}
+.profile-page-header h2 {
+    font-family: var(--font-display, 'Playfair Display', serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary, #1C1C1E);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+.profile-page-header .back-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--smoke, #F7F5F2);
+    border: 1px solid var(--border, #E5E2DC);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-primary, #1C1C1E);
+    font-size: 14px;
+}
+.profile-page-header .back-btn:hover { background: var(--mist, #EAE8E3); }
+.profile-page-header .action-btn {
+    background: var(--rose, #C8102E);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.profile-page-header .action-btn:hover { background: var(--rose-dark, #9B0D22); }
+
+.profile-page-body {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
