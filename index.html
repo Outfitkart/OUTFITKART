@@ -16,7 +16,7 @@
     <title>OutfitKart | Premium Fashion Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
@@ -322,7 +322,15 @@
                     <div class="col-span-full text-center py-10"><i class="fas fa-spinner fa-spin text-rose-500 text-3xl"></i><p class="mt-2 text-gray-500">Loading...</p></div>
                 </div>
             </div>
-
+            <div class="mt-4 mx-4 mb-4">
+                <a href="https://www.instagram.com/outfitkart_ecommers?igsh=MWUwNTNzczI4YjZsdw==" target="_blank" rel="noopener"
+                   class="flex items-center justify-center gap-3 w-full py-3 rounded-2xl font-bold text-white text-sm shadow-lg"
+                   style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);box-shadow:0 4px 20px rgba(253,29,29,0.3);">
+                    <i class="fab fa-instagram text-xl"></i>
+                    Follow OutfitKart on Instagram
+                    <i class="fas fa-external-link-alt text-xs opacity-70"></i>
+                </a>
+            </div>
         </div>
 
         <!-- GOLD VIEW -->
@@ -671,7 +679,7 @@
                             <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">Email Support</div></div>
                             <i class="fas fa-external-link-alt text-gray-300 text-xs"></i>
                         </button>
-                        <a href="https://www.instagram.com/outfitkart_official?igsh=MTdlaG1jem56YWRpeQ==" target="_blank" rel="noopener" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
+                        <a href="https://www.instagram.com/outfitkart_ecommers?igsh=MWUwNTNzczI4YjZsdw==" target="_blank" rel="noopener" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
                             <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#f5e6ff,#ffe4f0);"><i class="fab fa-instagram text-pink-500 text-sm"></i></div>
                             <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">Follow on Instagram</div></div>
                             <i class="fas fa-external-link-alt text-gray-300 text-xs"></i>
@@ -900,100 +908,6 @@
                                     <input type="password" id="sec-new-pass" placeholder="New Password (min 6 chars)" class="w-full border p-3 rounded-xl outline-none text-sm">
                                     <button onclick="changePassword()" class="w-full bg-gray-800 text-white py-3 rounded-xl font-bold hover:bg-gray-900">Change Password</button>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── ABOUT US PAGE ── -->
-                <div id="profile-page-about" class="profile-page hidden">
-                    <div class="profile-page-header">
-                        <button onclick="closeProfilePage()" class="back-btn"><i class="fas fa-arrow-left"></i></button>
-                        <h2>About Us</h2>
-                        <div class="w-9"></div>
-                    </div>
-                    <div class="profile-page-body">
-                        <div class="max-w-lg mx-auto p-4 space-y-4">
-                            <div class="bg-white rounded-2xl p-5 border shadow-sm text-center">
-                                <img src="https://i.ibb.co/8DxtmN09/IMG-20260323-141417.png" alt="OutfitKart" class="w-16 h-16 mx-auto mb-3 rounded-2xl object-contain">
-                                <h3 class="font-black text-xl text-gray-900 mb-1">OutfitKart</h3>
-                                <p class="text-xs text-gray-400 font-semibold tracking-widest uppercase mb-3">Premium Fashion at Best Prices</p>
-                                <p class="text-sm text-gray-600 leading-relaxed">OutfitKart ek premium Indian fashion brand hai jo Men, Women, Kids aur Perfumes ke liye best quality products affordable prices pe offer karta hai. Hamara mission hai ki har koi trendy aur stylish rahe bina budget tod ke.</p>
-                            </div>
-                            <div class="bg-white rounded-2xl p-5 border shadow-sm space-y-3">
-                                <h4 class="font-black text-sm text-gray-800 uppercase tracking-wide">Why OutfitKart?</h4>
-                                <div class="flex items-start gap-3"><div class="w-8 h-8 bg-rose-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-truck text-rose-500 text-xs"></i></div><div><div class="font-bold text-sm text-gray-800">Cash on Delivery</div><div class="text-xs text-gray-500">Ghar pe order aao, tab pay karo</div></div></div>
-                                <div class="flex items-start gap-3"><div class="w-8 h-8 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-star text-amber-500 text-xs"></i></div><div><div class="font-bold text-sm text-gray-800">Premium Quality</div><div class="text-xs text-gray-500">Carefully curated fashion collection</div></div></div>
-                                <div class="flex items-start gap-3"><div class="w-8 h-8 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-exchange-alt text-green-500 text-xs"></i></div><div><div class="font-bold text-sm text-gray-800">Easy Exchange</div><div class="text-xs text-gray-500">7 din ke andar hassle-free exchange</div></div></div>
-                                <div class="flex items-start gap-3"><div class="w-8 h-8 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-gift text-purple-500 text-xs"></i></div><div><div class="font-bold text-sm text-gray-800">Referral Rewards</div><div class="text-xs text-gray-500">Dosto ko refer karo, 5% commission pao</div></div></div>
-                            </div>
-                            <div class="bg-white rounded-2xl p-5 border shadow-sm">
-                                <h4 class="font-black text-sm text-gray-800 uppercase tracking-wide mb-3">Contact Us</h4>
-                                <div class="space-y-2 text-sm text-gray-600">
-                                    <div class="flex items-center gap-2"><i class="fas fa-envelope text-rose-400 w-4"></i><span>outfitkartbusiness@gmail.com</span></div>
-                                    <div class="flex items-center gap-2"><i class="fab fa-whatsapp text-green-500 w-4"></i><span>WhatsApp Support Available</span></div>
-                                </div>
-                            </div>
-                            <p class="text-center text-xs text-gray-400">© 2026 OutfitKart. Made with ❤️ in India 🇮🇳</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── TERMS PAGE ── -->
-                <div id="profile-page-terms" class="profile-page hidden">
-                    <div class="profile-page-header">
-                        <button onclick="closeProfilePage()" class="back-btn"><i class="fas fa-arrow-left"></i></button>
-                        <h2>Terms &amp; Conditions</h2>
-                        <div class="w-9"></div>
-                    </div>
-                    <div class="profile-page-body">
-                        <div class="max-w-lg mx-auto p-4 space-y-3">
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Return &amp; Refund Policy <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white text-sm text-gray-600 space-y-2 border-t"><p>• Unused items <strong>7 din ke andar</strong> return kar sakte hain.</p><p>• COD orders pe ₹9 convenience fee non-refundable hai.</p><p>• Items original packaging mein hone chahiye return ke time.</p><p>• Refund 3-5 working days mein process hota hai.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Referral Program <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Referral commission <strong>5%</strong> milta hai har order pe.</p><p>• Commission order ke <strong>30 din baad</strong> confirm hota hai.</p><p>• Fake referrals ya self-referrals pe account ban ho sakta hai.</p><p>• Commission tabhi milega jab order delivered ho aur return window khatam ho.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Wallet &amp; Withdrawal <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Minimum withdrawal amount: <strong>₹120</strong></p><p>• Processing time: <strong>24-48 hours</strong></p><p>• Wallet balance sirf OutfitKart purchases pe use hoga.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Delivery Terms <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Standard delivery: <strong>3-5 working days</strong></p><p>• Delivery charges: COD orders pe ₹9 extra.</p><p>• Remote areas mein delivery time zyada ho sakta hai.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">General Terms <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• OutfitKart apni prices aur policies kabhi bhi change kar sakta hai.</p><p>• Orders place karne par aap in terms se agree karte hain.</p><p>• Kisi bhi dispute ke liye Indore, MP ka jurisdiction applicable hoga.</p></div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── PRIVACY POLICY PAGE ── -->
-                <div id="profile-page-privacy" class="profile-page hidden">
-                    <div class="profile-page-header">
-                        <button onclick="closeProfilePage()" class="back-btn"><i class="fas fa-arrow-left"></i></button>
-                        <h2>Privacy Policy</h2>
-                        <div class="w-9"></div>
-                    </div>
-                    <div class="profile-page-body">
-                        <div class="max-w-lg mx-auto p-4 space-y-3">
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Data Collection <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white text-sm text-gray-600 space-y-2 border-t"><p>Hum sirf wahi data collect karte hain jo orders process karne ke liye zaroori hai:</p><p>• Naam, phone number, delivery address</p><p>• Order history aur transaction details</p><p>• Device information (PWA experience improve karne ke liye)</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Data Usage <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Order delivery aur tracking ke liye</p><p>• Push notifications (sirf aapki permission se)</p><p>• Customer support ke liye</p><p>• Hum aapka data kisi third party ko SELL nahi karte</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Data Security <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Aapka data Supabase encrypted servers pe store hota hai.</p><p>• Payments Razorpay ke through securely process hote hain.</p><p>• Hum kabhi bhi aapka complete card number store nahi karte.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Your Rights <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Aap apna account aur data delete karwa sakte hain.</p><p>• Push notifications kabhi bhi band kar sakte hain.</p><p>• Data access ya deletion ke liye humse contact karein.</p></div></div>
-                            <p class="text-xs text-gray-400 text-center px-2">Last updated: March 2026. Queries ke liye: outfitkartbusiness@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── EXCHANGE POLICY PAGE ── -->
-                <div id="profile-page-exchange-policy" class="profile-page hidden">
-                    <div class="profile-page-header">
-                        <button onclick="closeProfilePage()" class="back-btn"><i class="fas fa-arrow-left"></i></button>
-                        <h2>Exchange Policy</h2>
-                        <div class="w-9"></div>
-                    </div>
-                    <div class="profile-page-body">
-                        <div class="max-w-lg mx-auto p-4 space-y-3">
-                            <div class="bg-rose-50 border border-rose-100 rounded-2xl p-4 flex gap-3">
-                                <i class="fas fa-exchange-alt text-rose-500 mt-0.5 flex-shrink-0"></i>
-                                <div class="text-sm text-rose-700"><strong>7 Days Exchange Window</strong> — Delivery ke 7 din ke andar exchange request karo.</div>
-                            </div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Exchange Conditions <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white text-sm text-gray-600 space-y-2 border-t"><p>• Item <strong>unused</strong> aur original packaging mein hona chahiye.</p><p>• Tags attached hone chahiye.</p><p>• Washed, worn ya damaged items exchange nahi honge.</p><p>• Exchange sirf same or higher value ke item ke liye hoga.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Exchange Process <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p><strong>Step 1:</strong> My Orders mein jao → Order select karo → Exchange tap karo.</p><p><strong>Step 2:</strong> Naya product select karo jis se exchange karna hai.</p><p><strong>Step 3:</strong> Original item pickup scheduled hogi.</p><p><strong>Step 4:</strong> Naya item dispatch hoga pickup ke baad.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Exchange Value <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Original item ka value automatically naye order mein adjust ho jaata hai.</p><p>• Agar naya item zyada expensive hai to sirf difference pay karna hoga.</p><p>• Difference payment COD ya online dono se ho sakta hai.</p></div></div>
-                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Non-Exchangeable Items <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-2 border-t"><p>• Perfumes &amp; fragrances (hygiene reasons)</p><p>• Innerwear &amp; lingerie</p><p>• Sale/clearance items (clearly marked)</p><p>• Items damaged by customer</p></div></div>
-                            <div class="bg-amber-50 border border-amber-100 rounded-xl p-4 text-xs text-amber-700">
-                                <strong>Need Help?</strong> Exchange ke liye WhatsApp Support pe contact karo ya Email bhejo.
                             </div>
                         </div>
                     </div>
@@ -1404,6 +1318,7 @@
     <script src="mega-patch.js"></script>
     <script src="script-core-patch.js"></script>
     <script src="giveaway-patch.js"></script>
+    <script src="categories-nav-patch.js"></script>
     
     
     <script>
@@ -1442,4 +1357,4 @@
         }
     </script>
 </body>
-                                          </html>
+                        </html>
