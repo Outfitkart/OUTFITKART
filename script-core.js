@@ -21,7 +21,7 @@ function isAuthorizedAdmin(user){
     return AUTHORIZED_ADMINS.some(a=>a.mobile===String(user.mobile).trim());
 }
 
-const dbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const dbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);window.dbClient = dbClient;
 dbClient.from('products').select('count').limit(1)
     .then(({error})=>updateNetworkStatus(error?'error':'connected', error?.message||''))
     .catch(()=>updateNetworkStatus('offline'));
