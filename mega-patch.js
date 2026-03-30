@@ -986,84 +986,7 @@ window._showPWAPopup = function() {
           <span id="ok-pwa-btn-text"><i class="fas fa-download" style="margin-right:8px;"></i>Install OutfitKart</span>
         </button>
         <div id="ok-pwa-progress-wrap" style="display:none;padding:12px 0 0;">
-          <div id="ok-pwa-progress-track" style="height:6px;background:rgba(255,255,255,0.1);bord/* ═══════════════════════════════════════════════════════════════
-   FIXED SECTION 7 — INFLUENCER SUBMISSIONS
-   ═══════════════════════════════════════════════════════════════ */
-window.loadInfluencerRequests = async function() {
-  // Check both global and stored session
-  const user = window.currentUser || JSON.parse(localStorage.getItem('outfitkart_session') || '{}');
-  const mobile = user.mobile || user.phone;
-
-  if (!mobile) {
-    console.warn('[Influencer] No user mobile found');
-    return;
-  }
-
-  const container = document.getElementById('inf-requests-list');
-  const totalEl = document.getElementById('inf-total-earned');
-  const countEl = document.getElementById('inf-submissions-count');
-
-  if (!container) return;
-  
-  container.innerHTML = '<div class="text-center py-6"><i class="fas fa-spinner fa-spin text-2xl text-purple-500"></i><p class="text-xs mt-2">Records load ho rahe hain...</p></div>';
-
-  try {
-    const client = window.dbClient || window.supabase;
-    if (!client) throw new Error('Database connection ready nahi hai');
-
-    const { data, error } = await client
-      .from('influencer_requests')
-      .select('*')
-      .eq('mobile', mobile)
-      .order('id', { ascending: false });
-
-    if (error) throw error;
-
-    const all = data || [];
-    const approved = all.filter(r => r.status === 'Approved');
-    const totalEarned = approved.reduce((s, r) => s + (r.earnings || 0), 0);
-
-    if (totalEl) totalEl.textContent = `₹${totalEarned}`;
-    if (countEl) countEl.textContent = all.length;
-
-    if (!all.length) {
-      container.innerHTML = `
-        <div class="text-center py-10 text-gray-400">
-          <i class="fas fa-video text-4xl mb-3 block opacity-20"></i>
-          <p class="font-bold text-sm">Koi records nahi mile</p>
-          <p class="text-[11px] mt-1">Apne video ka link upar diye gaye form mein bharein.</p>
-        </div>`;
-      return;
-    }
-
-    const BADGE = { Pending:'bg-amber-100 text-amber-700', Approved:'bg-green-100 text-green-700', Rejected:'bg-red-100 text-red-600' };
-    
-    container.innerHTML = all.map(r => `
-      <div class="inf-submit-card" style="background:white; border-radius:12px; padding:12px; margin-bottom:10px; border:1px solid #eee;">
-        <div class="flex justify-between items-start">
-          <div style="flex:1; min-width:0;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-              <span style="font-weight:800; font-size:13px; color:#111827;">${r.platform || 'Social Media'}</span>
-              <span style="font-size:9px; font-weight:800; padding:2px 8px; border-radius:99px;" class="${BADGE[r.status] || 'bg-gray-100'}">
-                ${r.status}
-              </span>
-            </div>
-            <div style="font-size:11px; color:#6b7280;">👁 ${(r.views || 0).toLocaleString()} Views</div>
-            <a href="${r.video_url}" target="_blank" style="font-size:11px; color:#3b82f6; text-decoration:none; display:block; margin-top:4px;" class="truncate">${r.video_url}</a>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:14px; font-weight:900; color:${r.status === 'Approved' ? '#16a34a' : '#9ca3af'}">₹${r.earnings || 0}</div>
-          </div>
-        </div>
-        ${r.status === 'Rejected' && r.reject_reason ? `<div style="margin-top:8px; padding:8px; background:#fef2f2; border-radius:8px; font-size:10px; color:#b91c1c;"><strong>Reason:</strong> ${r.reject_reason}</div>` : ''}
-      </div>`).join('');
-
-  } catch (err) {
-    console.error('[Influencer Error]', err);
-    container.innerHTML = `<div class="text-center py-6 text-red-500 text-xs">Loading failed: ${err.message}</div>`;
-  }
-};
-er-radius:99px;overflow:hidden;margin-bottom:8px;"><div id="ok-pwa-progress-bar" style="height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#e11d48,#C9A84C);transition:width 0.3s ease;"></div></div>
+          <div id="ok-pwa-progress-track" style="height:6px;background:rgba(255,255,255,0.1);border-radius:99px;overflow:hidden;margin-bottom:8px;"><div id="ok-pwa-progress-bar" style="height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#e11d48,#C9A84C);transition:width 0.3s ease;"></div></div>
           <div id="ok-pwa-progress-label" style="font-size:11px;color:rgba(255,255,255,0.5);text-align:center;">Preparing...</div>
         </div>
         <p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.25);margin-top:12px;">No app store needed • Works on all devices</p>
@@ -1074,7 +997,55 @@ er-radius:99px;overflow:hidden;margin-bottom:8px;"><div id="ok-pwa-progress-bar"
 };
 
 
-/
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 7 — INFLUENCER SUBMISSIONS (Fixed)
+   ═══════════════════════════════════════════════════════════════ */
+window.loadInfluencerRequests = async function() {
+  if (!window.currentUser) return;
+  const container = document.getElementById('inf-requests-list');
+  const totalEl = document.getElementById('inf-total-earned');
+  const countEl = document.getElementById('inf-submissions-count');
+  if (!container) return;
+  container.innerHTML = '<div class="text-center py-6"><i class="fas fa-spinner fa-spin text-2xl text-purple-500"></i></div>';
+  try {
+    const client = window.dbClient || window.supabase;
+    if (!client) throw new Error('DB not ready');
+    const { data, error } = await client.from('influencer_requests').select('*').eq('mobile', window.currentUser.mobile).order('id', { ascending: false });
+    if (error) throw error;
+    const all = data || [];
+    const approved = all.filter(r => r.status === 'Approved');
+    const totalEarned = approved.reduce((s, r) => s + (r.earnings || 0), 0);
+    if (totalEl) totalEl.textContent = `₹${totalEarned}`;
+    if (countEl) countEl.textContent = all.length;
+    if (!all.length) {
+      container.innerHTML = `<div class="text-center py-10 text-gray-400"><i class="fas fa-video text-4xl mb-3 block opacity-40"></i><p class="font-semibold text-sm">Abhi tak koi submission nahi</p><p class="text-xs mt-1 text-gray-400">Upar form se request submit karo</p></div>`;
+      return;
+    }
+    const BADGE = { Pending:'bg-amber-100 text-amber-700', Approved:'bg-green-100 text-green-700', Rejected:'bg-red-100 text-red-600' };
+    const ICON = { Pending:'⏳', Approved:'✅', Rejected:'❌' };
+    container.innerHTML = all.map(r => `
+      <div class="inf-submit-card">
+        <div class="flex justify-between items-start gap-2">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <span class="font-bold text-sm text-gray-800">${r.platform || '—'}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${BADGE[r.status] || 'bg-gray-100 text-gray-500'}">${ICON[r.status] || ''} ${r.status}</span>
+            </div>
+            <div class="text-xs text-gray-500 mb-1">👁 ${(r.views || 0).toLocaleString()} views${r.submitted_at ? ' · ' + new Date(r.submitted_at).toLocaleDateString('en-IN') : ''}</div>
+            ${r.video_url ? `<a href="${r.video_url}" target="_blank" rel="noopener" class="text-xs text-blue-600 hover:underline block truncate">${r.video_url}</a>` : ''}
+            ${r.description ? `<p class="text-xs text-gray-500 mt-1 italic">"${r.description}"</p>` : ''}
+          </div>
+          <div class="text-right flex-shrink-0">
+            <div class="text-base font-black ${r.status === 'Approved' ? 'text-green-600' : 'text-gray-400'}">₹${r.earnings || 0}</div>
+          </div>
+        </div>
+        ${r.status === 'Approved' ? `<div class="text-xs text-green-600 font-semibold mt-2 bg-green-50 rounded-lg px-3 py-1.5">✅ ₹${r.earnings} wallet mein credit ho gaya</div>` : ''}
+        ${r.status === 'Rejected' && r.reject_reason ? `<div class="text-xs text-red-500 mt-2 bg-red-50 rounded-lg px-3 py-1.5">❌ ${r.reject_reason}</div>` : ''}
+      </div>`).join('');
+  } catch (err) {
+    container.innerHTML = `<div class="text-center py-6 text-red-400 text-sm"><i class="fas fa-exclamation-circle mb-2 block text-2xl"></i>${err.message}</div>`;
+  }
+};
 
 
 /* ═══════════════════════════════════════════════════════════════
