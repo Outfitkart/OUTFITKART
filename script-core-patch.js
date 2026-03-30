@@ -458,18 +458,106 @@
   }
 
   /* ──────────────────────────────────────────────────────────────
+     FIX 4 — MICRO CATEGORY BADGE ON PRODUCT CARDS
+     Problem: Product cards pe sub-category (Micro Category) nahi
+              dikh rahi thi.
+     Solution: renderProductCard ko patch karo + MutationObserver
+               se existing cards mein badge inject karo.
+  ─────────────────────────────────────────────────────────────── */
+
+  // CSS inject
+  (function _injectMicroCatCSS() {
+    if (document.getElementById('ok-microcat-css')) return;
+    const s = document.createElement('style');
+    s.id = 'ok-microcat-css';
+    s.textContent = `
+      .ok-micro-cat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+        color: #6d28d9;
+        border: 1px solid #ddd6fe;
+        border-radius: 99px;
+        font-size: 9px;
+        font-weight: 800;
+        padding: 2px 8px;
+        margin-top: 4px;
+        letter-spacing: 0.02em;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    `;
+    document.head.appendChild(s);
+  })();
+
+  // Product card ke p-3 div mein badge inject karna
+  function _injectMicroCatOnCard(card) {
+    if (card.dataset.microcatDone) return;
+    card.dataset.microcatDone = '1';
+
+    // onclick se product id nikalo
+    const onclick = card.getAttribute('onclick') || '';
+    const match = onclick.match(/\d+/);
+    if (!match) return;
+    const pid = parseInt(match[0]);
+
+    // Product find karo
+    const all = [
+      ...(window.products || []),
+      ...(window.allProducts || []),
+      ...(window._allProducts || []),
+      ...(window.goldProducts || []),
+      ...(window.allGoldProducts || []),
+    ];
+    const p = all.find(x => x.id === pid);
+    if (!p || !p.sub) return;
+
+    // p-3 div (product info section) find karo
+    const infoDiv = card.querySelector('.p-3');
+    if (!infoDiv) return;
+
+    // Already badge nahi hai to add karo
+    if (infoDiv.querySelector('.ok-micro-cat-badge')) return;
+
+    const badge = document.createElement('div');
+    badge.className = 'ok-micro-cat-badge';
+    badge.title = 'Micro Category';
+    badge.innerHTML = `<i class="fas fa-tag" style="font-size:7px;opacity:0.7;"></i> ${p.sub}`;
+    infoDiv.appendChild(badge);
+  }
+
+  function _injectMicroCatOnAllCards() {
+    document.querySelectorAll('.product-card[onclick]').forEach(_injectMicroCatOnCard);
+  }
+
+  // MutationObserver — naye cards aate hi badge lagao
+  function _startMicroCatObserver() {
+    const shopGrid = document.getElementById('shop-grid');
+    if (!shopGrid) return;
+
+    new MutationObserver(() => {
+      setTimeout(_injectMicroCatOnAllCards, 100);
+    }).observe(shopGrid, { childList: true, subtree: true });
+
+    // Existing cards pe bhi lagao
+    setTimeout(_injectMicroCatOnAllCards, 300);
+    console.log('[FIX-PATCH] ✅ Fix 4: Micro Category observer started');
+  }
+
+  /* ──────────────────────────────────────────────────────────────
      INIT — Saare fixes ko sahi time pe lagao
   ─────────────────────────────────────────────────────────────── */
   function _applyAllFixes() {
     // Fix 1 — Combos section
-    // Home section already render ho chuka hoga, isliye replace karo
     setTimeout(_fixShopByCategoryWithCombos, 800);
 
     // Fix 3 — Admin Influencer tab
-    // Admin panel load hone ke baad inject karo
     setTimeout(_injectAdminInfluencerTab, 1200);
 
-    // Fix 2 — Influencer page observer (agar naya page khule)
+    // Fix 2 — Influencer page observer
     const infPage = document.getElementById('profile-page-influencer');
     if (infPage && !infPage._fixObserverAttached) {
       infPage._fixObserverAttached = true;
@@ -480,7 +568,9 @@
       }).observe(infPage, { attributes: true, attributeFilter: ['class'] });
     }
 
-    // Navigate patch — agar navigate('shop') se home reload ho toh Combos phir se add karo
+    // Fix 4 — Micro Category badges
+    setTimeout(_startMicroCatObserver, 1000);
+    // Navigate patch se bhi refresh ho
     const origNavigate = window.navigate;
     if (origNavigate && !window._combosNavPatched) {
       window._combosNavPatched = true;
@@ -489,12 +579,16 @@
         if (view === 'home') {
           setTimeout(_fixShopByCategoryWithCombos, 600);
         }
+        if (view === 'shop') {
+          setTimeout(_injectMicroCatOnAllCards, 800);
+          setTimeout(_injectMicroCatOnAllCards, 1500);
+        }
         return result;
       };
     }
 
     console.log(
-      '%c🛍️ OutfitKart FIX PATCH v1.0 ✅ Combos + Influencer + Admin all fixed!',
+      '%c🛍️ OutfitKart FIX PATCH v1.1 ✅ Combos + Influencer + Admin + MicroCat all fixed!',
       'background:#7c3aed;color:white;font-weight:900;font-size:12px;padding:4px 14px;border-radius:6px;'
     );
   }
@@ -512,5 +606,6 @@
     adminApproveInfluencer: window.adminApproveInfluencer,
     adminRejectInfluencer: window.adminRejectInfluencer,
     loadInfluencerRequests: window.loadInfluencerRequests,
+    injectMicroCatOnAllCards: _injectMicroCatOnAllCards,
   });
 })();
