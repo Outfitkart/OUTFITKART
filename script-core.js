@@ -62,7 +62,8 @@ const CATEGORIES=[
          {label:'👕 Topwear',items:['T-Shirts','Casual Shirts','Formal Shirts','Oversized Tees','Oversized Shirts','Hoodies','Denim Jacket']},
          {label:'👖 Bottomwear',items:['Baggy Jeans','Straight Fit Jeans','Slim Fit Jeans','Cotton Trousers','Joggers','Cargo Pants','Formal Pant','Trousers']},
          {label:'👟 Footwear',items:['Sneakers','Formal Shoes','Sports Shoes','Sandals','Slippers']},
-         ]}, 
+         {label:'🎁 Full Combos',items:['Formal Combo (Shirt+Trouser+Belt+Tie)','Casual Combo (Tee+Baggy Jeans+Locket)','Streetwear Combo (Oversized Tee+Cargo+Chain)','Tracksuit (Full Upper & Lower)','Ethnic Combo (Kurta+Pant+Dupatta)','Sherwani Set (Sherwani+Pant+Dupatta)','Nehru Jacket Combo']},
+     ]},
     {id:'women',name:'Women',
      photo:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=120&h=120&fit=crop&q=80',
      subs:['Sarees','Kurtis','Lehengas','Tops','Straight Fit Jeans','Trousers','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans','Palazzo','Tops & Tunics','Dresses','Skirts','Heels','Flats','Sandals','Sneakers','Wedges','Ethnic Set (Kurti+Pant+Dupatta)','Western Combo (Top+Straight Jeans+Belt)','Party Combo (Saree+Blouse+Belt)','Indo-Western (Top+Palazzo+Shrug)'],
@@ -71,7 +72,8 @@ const CATEGORIES=[
          {label:'👖 Bottomwear',items:['Straight Fit Jeans','trousers','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans']},
          {label:'👗 Western',items:['Tops','Palazzo','Tops & Tunics','Dresses','Skirts']},
          {label:'👠 Footwear',items:['Heels','Flats','Sandals','Sneakers','Wedges']},
-         ]}, 
+         {label:'🎁 Full Combos',items:['Ethnic Set (Kurti+Pant+Dupatta)','Western Combo (Top+Straight Jeans+Belt)','Party Combo (Saree+Blouse+Belt)','Indo-Western (Top+Palazzo+Shrug)']},
+     ]},
     {id:'Perfumes',name:'Perfumes',
      photo:'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=120&h=120&fit=crop&q=80',
      subs:["Men's Perfume","Women's Perfume","Unisex Perfume","Luxury Perfume","Budget Perfume","Attar / Ittar","Body Mist","Deodorant Spray","Gift Set"],
@@ -295,12 +297,10 @@ const PROMO_ADS=[
 ];
 let _promoIdx=0,_promoTimer=null,_promoInited=false;
 function _initExitIntentPromo(){
+    // EXIT INTENT POPUP DISABLED — mouseleave aur visibilitychange triggers removed
     if(_promoInited)return;_promoInited=true;
-    document.addEventListener('mouseleave',e=>{if(e.clientY<5&&!sessionStorage.getItem('ok_promo_shown'))_showPromo();});
-    document.addEventListener('visibilitychange',()=>{
-        if(document.visibilityState==='hidden'){sessionStorage.setItem('ok_promo_return','1');}
-        else if(document.visibilityState==='visible'&&sessionStorage.getItem('ok_promo_return')&&!sessionStorage.getItem('ok_promo_shown')){sessionStorage.removeItem('ok_promo_return');setTimeout(_showPromo,800);}
-    });
+    // document.addEventListener('mouseleave',...) — DISABLED
+    // document.addEventListener('visibilitychange',...) — DISABLED
 }
 function _showPromo(){if(sessionStorage.getItem('ok_promo_shown')||document.getElementById('ok-promo-overlay'))return;_buildPromoOverlay();_promoTimer=setInterval(_nextPromoSlide,5000);}
 function _buildPromoOverlay(){
