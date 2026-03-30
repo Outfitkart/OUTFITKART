@@ -1,36 +1,37 @@
 'use strict';
 /* ================================================================
-   OUTFITKART MEGA-PATCH — COMPLETE MERGED VERSION (Giveaway Removed)
+   OUTFITKART MEGA-PATCH â€” COMPLETE MERGED VERSION
+   Includes: v5.1 + v6 + All Fixes
    
    FIXES INCLUDED:
-   ✅ 1. Profile back button z-index (visible above header)
-   ✅ 2. Influencer submissions showing correctly  
-   ✅ 3. AI Search bar working with real product search
-   ✅ 4. PDP product name/size properly sized
-   ✅ 5. PDP image fullscreen lightbox + thumbnail strip
-   ✅ 6. PWA install popup stays + header button works
-   ✅ 7. Ads Section (Supabase connected)
-   ✅ 8. User Level Badge
-   ✅ 9. Auto-login after signup
-   ✅ 10. Footer with Privacy/Policy pages
-   ✅ 11. Home sections (trust strip, categories, unbeatable)
-   ✅ 12. Cancel/Exchange with wallet refund
-   ✅ 13. Profile Social Card (after stats)
-   ✅ 14. Instagram link updated
-   ✅ 15. Profile stats fix
-   ✅ 16. Voice welcome (Indian girl voice)
+   âœ… 1. Profile back button z-index (visible above header)
+   âœ… 2. Influencer submissions showing correctly  
+   âœ… 3. AI Search bar working with real product search
+   âœ… 4. PDP product name/size properly sized
+   âœ… 5. PDP image fullscreen lightbox + thumbnail strip
+   âœ… 6. PWA install popup stays + header button works
+   âœ… 7. Ads Section (Supabase connected)
+   âœ… 8. User Level Badge
+   âœ… 9. Auto-login after signup
+   âœ… 10. Footer ivory background
+   âœ… 11. Home sections (trust strip, categories, unbeatable)
+   âœ… 12. Cancel/Exchange with wallet refund
+   âœ… 13. Referral channels UI
+   âœ… 14. Footer + Policy pages
+   âœ… 15. Profile stats fix
+   âœ… 16. Voice welcome (Indian girl voice)
    ================================================================ */
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 0 — CSS INJECTION (All styles merged)
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 0 â€” CSS INJECTION (All styles merged)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 (function _injectAllCSS() {
   if (document.getElementById('ok-merged-css')) return;
   const style = document.createElement('style');
   style.id = 'ok-merged-css';
   style.textContent = `
 
-    /* ── FIX 1: Profile page z-index ABOVE header (z-50) ── */
+    /* â”€â”€ FIX 1: Profile page z-index ABOVE header (z-50) â”€â”€ */
     .profile-page {
       position: fixed !important;
       inset: 0 !important;
@@ -83,64 +84,7 @@
     .profile-menu-item { transition: background 0.15s; }
     .profile-menu-item:active { background: #f3f4f6 !important; }
 
-    /* ── Profile Social Card (after stats) ── */
-    #ok-profile-social-card {
-      margin: 0 16px 16px;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 40%, #16213e 100%);
-      border: 1.5px solid rgba(255,255,255,0.08);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    #ok-profile-social-card .psc-header {
-      padding: 14px 16px 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    #ok-profile-social-card .psc-icon {
-      width: 36px; height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg,#e11d48,#7c3aed);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-      color: white;
-      flex-shrink: 0;
-    }
-    #ok-profile-social-card .psc-title {
-      font-size: 13px;
-      font-weight: 900;
-      color: white;
-    }
-    #ok-profile-social-card .psc-sub {
-      font-size: 10px;
-      color: rgba(255,255,255,0.5);
-      margin-top: 1px;
-    }
-    #ok-profile-social-card .psc-links {
-      display: flex;
-      gap: 8px;
-      padding: 12px 12px 16px;
-    }
-    #ok-profile-social-card .psc-link {
-      flex: 1;
-      padding: 9px 6px;
-      border-radius: 10px;
-      font-size: 10px;
-      font-weight: 800;
-      color: white;
-      text-decoration: none;
-      display: flex; align-items: center; justify-content: center; gap: 4px;
-      transition: opacity 0.2s, transform 0.15s;
-    }
-    #ok-profile-social-card .psc-link:active { transform: scale(0.96); }
-    #ok-profile-social-card .psc-link-ig  { background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); }
-    #ok-profile-social-card .psc-link-yt  { background: linear-gradient(135deg,#ff0000,#cc0000); }
-    #ok-profile-social-card .psc-link-tg  { background: linear-gradient(135deg,#0088cc,#00b0f4); }
-    #ok-profile-social-card .psc-link-wa  { background: linear-gradient(135deg,#25D366,#128C7E); }
-
-    /* ── FIX 4: PDP sizing ── */
+    /* â”€â”€ FIX 4: PDP sizing â”€â”€ */
     #pdp-container h1 {
       font-size: 1.15rem !important;
       font-weight: 900 !important;
@@ -149,7 +93,7 @@
     #pdp-container .text-3xl { font-size: 1.15rem !important; }
     #pdp-container .text-3xl.font-bold { font-size: 1.4rem !important; }
 
-    /* ── FIX 5: PDP Lightbox ── */
+    /* â”€â”€ FIX 5: PDP Lightbox â”€â”€ */
     #ok-lightbox-overlay {
       position: fixed; inset: 0; z-index: 9000;
       background: rgba(0,0,0,0.97);
@@ -209,7 +153,7 @@
       pointer-events: none; display: flex; align-items: center; gap: 5px; z-index: 5;
     }
 
-    /* ── Footer with Policy Links ── */
+    /* â”€â”€ Footer â”€â”€ */
     #ok-site-footer {
       background: #FDFCFA !important;
       border-top: 1px solid #E5E2DC !important;
@@ -221,22 +165,11 @@
       -webkit-text-fill-color: transparent !important;
       background-clip: text !important;
     }
-    #ok-site-footer .footer-links a { color: #6B6A68 !important; text-decoration: none; }
-    #ok-site-footer .footer-links a:hover { color: #1C1C1E !important; text-decoration: underline; }
+    #ok-site-footer .footer-links a { color: #6B6A68 !important; }
+    #ok-site-footer .footer-links a:hover { color: #1C1C1E !important; }
     #ok-site-footer .footer-copy { color: #A09D98 !important; }
 
-    /* ── Policy Page Styles ── */
-    .ok-policy-section { max-width:700px;margin:0 auto;padding:16px; }
-    .ok-policy-section h2 { font-size:1.3rem;font-weight:900;color:#111827;margin:24px 0 8px; }
-    .ok-policy-section h3 { font-size:1rem;font-weight:800;color:#374151;margin:16px 0 6px; }
-    .ok-policy-section p { font-size:13px;color:#4b5563;line-height:1.7;margin:6px 0; }
-    .ok-policy-section ul,ol { padding-left:18px;margin:6px 0; }
-    .ok-policy-section li { font-size:13px;color:#4b5563;line-height:1.7;margin:4px 0; }
-    .ok-policy-section .highlight-box { background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:14px;margin:12px 0; }
-    .ok-policy-section .warning-box { background:#fef2f2;border:1.5px solid #fca5a5;border-radius:12px;padding:14px;margin:12px 0; }
-    .ok-policy-section .info-box { background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:14px;margin:12px 0; }
-
-    /* ── Search Overlay ── */
+    /* â”€â”€ Search Overlay â”€â”€ */
     #ok-search-overlay {
       position: fixed; inset: 0; z-index: 9999;
       background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
@@ -289,7 +222,7 @@
     .ok-sr-cat  { font-size: 10px; color: #9ca3af; margin-top: 2px; }
     .ok-sr-price { font-weight: 900; font-size: 13px; color: #e11d48; margin-top: 3px; }
 
-    /* ── User Level Badge ── */
+    /* â”€â”€ User Level Badge â”€â”€ */
     #ok-user-level-badge {
       margin: 0 16px 12px;
       padding: 10px 14px;
@@ -310,7 +243,7 @@
     .ok-level-bar  { height: 4px; border-radius: 99px; background: #F3F4F6; margin-top: 6px; overflow: hidden; }
     .ok-level-fill { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
 
-    /* ── Mobile search trigger ── */
+    /* â”€â”€ Mobile search trigger â”€â”€ */
     #ok-mobile-search-trigger {
       display: flex; align-items: center; justify-content: center;
       width: 38px; height: 38px; border-radius: 50%;
@@ -323,7 +256,7 @@
     /* Hide old mobile search bar on home */
     #view-home .md\\:hidden.p-3.bg-white.z-20 { display: none !important; }
 
-    /* ── ADS Section ── */
+    /* â”€â”€ ADS Section â”€â”€ */
     #ok-ads-section {
       margin: 0 0 4px; background: #FDFCFA;
       border-top: 1px solid #E5E2DC; border-bottom: 1px solid #E5E2DC;
@@ -342,10 +275,10 @@
       border-radius: 99px; letter-spacing: 0.1em;
     }
 
-    /* ── Cancel/Exchange slide up ── */
+    /* â”€â”€ Cancel/Exchange slide up â”€â”€ */
     @keyframes okSlideUp { from{transform:translateY(100%);opacity:0} to{transform:translateY(0);opacity:1} }
 
-    /* ── Home sections ── */
+    /* â”€â”€ Home sections â”€â”€ */
     #view-home { background: #f8f8f8; }
     #ok-trust-strip { display:flex;align-items:center;justify-content:space-around;background:white;padding:14px 12px;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;flex-wrap:wrap;gap:8px; }
     .ok-trust-item { display:flex;align-items:center;gap:8px;font-size:11px;color:#374151;min-width:120px; }
@@ -370,10 +303,13 @@
     .ok-hscroll { display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:12px;padding-bottom:8px; }
     .ok-hscroll::-webkit-scrollbar { display:none; }
 
-    /* ── PWA popup ── */
+    /* â”€â”€ Referral channels â”€â”€ */
+    #ok-ref-channel-box { margin:16px;background:linear-gradient(135deg,#0d0821,#1a0e00);border-radius:18px;padding:16px; }
+
+    /* â”€â”€ PWA popup â”€â”€ */
     #ok-pwa-overlay { position:fixed;inset:0;z-index:9500;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);backdrop-filter:blur(10px); }
 
-    /* ── Get App button ── */
+    /* â”€â”€ Get App button â”€â”€ */
     #ok-get-app-btn {
       display:flex;align-items:center;gap:5px;
       background:linear-gradient(135deg,#e11d48,#be123c);
@@ -390,21 +326,35 @@
       transform:skewX(-20deg); animation:appShimmer 2.5s infinite;
     }
 
-    /* ── Share button ── */
+    /* â”€â”€ Share button â”€â”€ */
     .share-outfitkart-btn { background:linear-gradient(135deg,#e11d48,#be123c) !important; }
     @keyframes sharePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(225,29,72,0.4); } 50% { box-shadow: 0 0 0 8px rgba(225,29,72,0); } }
 
-    /* ── Level card in profile ── */
+    /* â”€â”€ Level card in profile â”€â”€ */
     #ok-profile-level-card { border-radius:16px;padding:16px;margin:12px 16px;border:2px solid;position:relative;overflow:hidden; }
 
-    /* ── Influencer card ── */
+    /* â”€â”€ Influencer card â”€â”€ */
     .inf-submit-card {
       background: white; border: 1px solid #e5e7eb;
       border-radius: 14px; padding: 14px; margin-bottom: 10px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
 
-    /* ── Admin Ads tab ── */
+    /* â”€â”€ Policy pages â”€â”€ */
+    .ok-policy-section { max-width:700px;margin:0 auto;padding:16px; }
+    .ok-policy-section h2 { font-size:1.3rem;font-weight:900;color:#111827;margin:24px 0 8px; }
+    .ok-policy-section h3 { font-size:1rem;font-weight:800;color:#374151;margin:16px 0 6px; }
+    .ok-policy-section p { font-size:13px;color:#4b5563;line-height:1.7;margin:6px 0; }
+    .ok-policy-section ul,ol { padding-left:18px;margin:6px 0; }
+    .ok-policy-section li { font-size:13px;color:#4b5563;line-height:1.7;margin:4px 0; }
+    .ok-policy-section .highlight-box { background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:14px;margin:12px 0; }
+    .ok-policy-section .warning-box { background:#fef2f2;border:1.5px solid #fca5a5;border-radius:12px;padding:14px;margin:12px 0; }
+    .ok-policy-section .info-box { background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:14px;margin:12px 0; }
+
+    /* â”€â”€ Supplier ID row â”€â”€ */
+    .supplier-id-row.saved { transition:all 0.3s ease; }
+
+    /* â”€â”€ Admin Ads tab â”€â”€ */
     #admin-tab-ads .ad-card-admin {
       background: white; border: 1px solid #E5E2DC;
       border-radius: 14px; padding: 14px; margin-bottom: 12px;
@@ -415,9 +365,9 @@
 })();
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 1 — PRODUCTS ACCESSOR
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 1 â€” PRODUCTS ACCESSOR
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _getAllProducts() {
   const c = [window.products, window.allProducts, window._allProducts, window.shopProducts, window.productList];
   for (const x of c) { if (Array.isArray(x) && x.length > 0) return x; }
@@ -450,9 +400,9 @@ function _openProduct(p, isGold) {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 2 — PROFILE PAGE SYSTEM (Fixed z-index)
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 2 â€” PROFILE PAGE SYSTEM (Fixed z-index)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 window.openProfilePage = function(pageName) {
   document.querySelectorAll('.profile-page').forEach(p => p.classList.add('hidden'));
   const page = document.getElementById('profile-page-' + pageName);
@@ -467,10 +417,6 @@ window.openProfilePage = function(pageName) {
     referrals:  () => _loadProfileReferrals(),
     influencer: () => _loadProfileInfluencer(),
     info:       () => _loadProfileInfo(),
-    about:      () => _renderPolicyPage('about'),
-    terms:      () => _renderPolicyPage('terms'),
-    privacy:    () => _renderPolicyPage('privacy'),
-    'exchange-policy': () => _renderPolicyPage('exchange'),
   };
   if (loaders[pageName]) loaders[pageName]();
   window.scrollTo(0, 0);
@@ -479,69 +425,6 @@ window.openProfilePage = function(pageName) {
 window.closeProfilePage = function() {
   document.querySelectorAll('.profile-page').forEach(p => p.classList.add('hidden'));
 };
-
-function _renderPolicyPage(type) {
-  const container = document.getElementById('profile-page-policy');
-  if (!container) return;
-  const content = _getPolicyContent(type);
-  container.innerHTML = `
-    <div class="profile-page-header">
-      <button class="back-btn" onclick="closeProfilePage()"><i class="fas fa-arrow-left"></i></button>
-      <h2>${content.title}</h2>
-      <div style="width:36px;"></div>
-    </div>
-    <div class="profile-page-body ok-policy-section">${content.html}</div>
-  `;
-}
-
-function _getPolicyContent(type) {
-  const pages = {
-    about: {
-      title: 'About OutfitKart',
-      html: `<h2>About OutfitKart</h2>
-        <p>OutfitKart is India's fastest growing premium fashion destination. We bring you the latest trends in men's and women's fashion at unbeatable prices.</p>
-        <div class="highlight-box"><i class="fas fa-truck mr-2"></i> <strong>Free Shipping</strong> on orders above ₹500</div>
-        <div class="info-box"><i class="fas fa-exchange-alt mr-2"></i> <strong>Easy Exchange</strong> within 7 days of delivery</div>
-        <h3>Our Mission</h3>
-        <p>To make premium fashion accessible to every Indian with hassle-free shopping experience.</p>
-        <h3>Contact Us</h3>
-        <p>Email: outfitkartpremiumfashion@gmail.com<br>WhatsApp: +91 8982296773</p>`
-    },
-    terms: {
-      title: 'Terms & Conditions',
-      html: `<h2>Terms & Conditions</h2>
-        <p>Welcome to OutfitKart. By using our website, you agree to these terms.</p>
-        <h3>1. Orders & Payments</h3>
-        <p>All orders are subject to availability. We accept COD, UPI, Card, and Wallet payments.</p>
-        <h3>2. Shipping & Delivery</h3>
-        <p>Orders are processed within 24-48 hours. Delivery takes 3-7 business days.</p>
-        <h3>3. Cancellation & Returns</h3>
-        <p>Orders can be cancelled before shipping. Exchange available within 7 days for delivered orders.</p>
-        <div class="warning-box"><i class="fas fa-exclamation-triangle mr-2"></i> Exchange is only applicable for size/color issues, not for usage damage.</div>`
-    },
-    privacy: {
-      title: 'Privacy Policy',
-      html: `<h2>Privacy Policy</h2>
-        <p>Your privacy matters to us. We collect only necessary information to process your orders.</p>
-        <h3>Information We Collect</h3>
-        <ul><li>Name, mobile number, email, address</li><li>Order history</li><li>Device information (for app functionality)</li></ul>
-        <h3>How We Use Your Data</h3>
-        <ul><li>Process and deliver orders</li><li>Send order updates and promotions (with consent)</li><li>Improve our services</li></ul>
-        <div class="info-box"><i class="fas fa-shield-alt mr-2"></i> We never share your personal data with third parties for marketing.</div>`
-    },
-    exchange: {
-      title: 'Exchange Policy',
-      html: `<h2>Exchange Policy</h2>
-        <div class="highlight-box"><i class="fas fa-clock mr-2"></i> Exchange Window: <strong>7 days from delivery</strong></div>
-        <h3>Eligibility</h3>
-        <ul><li>Product must be unused, unwashed, with original tags</li><li>Size/color issues only (not for damage due to usage)</li><li>Original packaging required</li></ul>
-        <h3>How to Exchange</h3>
-        <ol><li>Go to Orders → Click "Exchange" on delivered order</li><li>Select new items of equal or higher value</li><li>Pay difference if any (old value applied)</li><li>We ship new items after pickup of old product</li></ol>
-        <div class="warning-box"><i class="fas fa-info-circle mr-2"></i> Exchange value = original order total. Shipping charges may apply.</div>`
-    }
-  };
-  return pages[type] || pages.about;
-}
 
 function _loadProfileOrders() {
   const fns = ['loadUserOrders', 'renderUserOrders', 'renderOrdersList', 'fetchUserOrders'];
@@ -561,6 +444,7 @@ function _loadProfileReferrals() {
   for (const fn of fns) { if (typeof window[fn] === 'function') { window[fn](); return; } }
 }
 function _loadProfileInfluencer() {
+  // Use the patched version
   if (typeof window.loadInfluencerRequests === 'function') window.loadInfluencerRequests();
 }
 function _loadProfileInfo() {
@@ -601,10 +485,10 @@ async function _fallbackLoadOrders() {
           <div class="text-right"><span class="text-xs font-black px-2.5 py-1 rounded-full ${sc}">${order.status || 'Processing'}</span><div class="text-xs text-gray-400 mt-1">${new Date(order.created_at || Date.now()).toLocaleDateString('en-IN')}</div></div>
         </div>
         <div class="px-4 py-3">
-          ${items.slice(0,2).map(item => `<div class="flex gap-3 mb-2"><img src="${item.img || item.imgs?.[0] || 'https://placehold.co/48x60/f3f4f6/9ca3af?text=?'}" class="w-12 h-14 object-cover rounded-lg border flex-shrink-0"><div class="flex-1 min-w-0"><div class="font-semibold text-xs text-gray-800 truncate">${item.name || 'Product'}</div><div class="text-xs text-gray-500">Qty: ${item.qty || 1}${item.size ? ' · ' + item.size : ''}</div><div class="font-bold text-xs text-rose-600">₹${(item.price || 0).toLocaleString('en-IN')}</div></div></div>`).join('')}
+          ${items.slice(0,2).map(item => `<div class="flex gap-3 mb-2"><img src="${item.img || item.imgs?.[0] || 'https://placehold.co/48x60/f3f4f6/9ca3af?text=?'}" class="w-12 h-14 object-cover rounded-lg border flex-shrink-0"><div class="flex-1 min-w-0"><div class="font-semibold text-xs text-gray-800 truncate">${item.name || 'Product'}</div><div class="text-xs text-gray-500">Qty: ${item.qty || 1}${item.size ? ' Â· ' + item.size : ''}</div><div class="font-bold text-xs text-rose-600">â‚¹${(item.price || 0).toLocaleString('en-IN')}</div></div></div>`).join('')}
           ${items.length > 2 ? `<div class="text-xs text-gray-400">+${items.length-2} more</div>` : ''}
           <div class="flex items-center justify-between mt-3 pt-3 border-t">
-            <span class="font-black text-sm text-gray-800">₹${(order.total || order.amount || 0).toLocaleString('en-IN')}</span>
+            <span class="font-black text-sm text-gray-800">â‚¹${(order.total || order.amount || 0).toLocaleString('en-IN')}</span>
             <button onclick="openTrackingModal && openTrackingModal('${oidStr}')" class="text-xs bg-rose-50 text-rose-600 px-3 py-1.5 rounded-lg font-bold border border-rose-200">Track</button>
           </div>
         </div>
@@ -618,15 +502,15 @@ async function _fallbackLoadOrders() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 3 — USER LEVEL BADGE
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 3 â€” USER LEVEL BADGE
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const OK_LEVELS = [
-  { name:'Bronze', emoji:'🥉', min:0,  max:2,  color:'#92400e', bg:'#fffbeb', fill:'#d97706' },
-  { name:'Silver', emoji:'🥈', min:3,  max:5,  color:'#374151', bg:'#f9fafb', fill:'#9ca3af' },
-  { name:'Gold ⭐', emoji:'🥇', min:6,  max:10, color:'#92400e', bg:'#fffbeb', fill:'#C9A84C' },
-  { name:'Platinum', emoji:'💎', min:11, max:20, color:'#1e3a5f', bg:'#eff6ff', fill:'#3b82f6' },
-  { name:'Diamond 💎', emoji:'✨', min:21, max:999, color:'#5b21b6', bg:'#faf5ff', fill:'#8b5cf6' },
+  { name:'Bronze', emoji:'ðŸ¥‰', min:0,  max:2,  color:'#92400e', bg:'#fffbeb', fill:'#d97706' },
+  { name:'Silver', emoji:'ðŸ¥ˆ', min:3,  max:5,  color:'#374151', bg:'#f9fafb', fill:'#9ca3af' },
+  { name:'Gold â­', emoji:'ðŸ¥‡', min:6,  max:10, color:'#92400e', bg:'#fffbeb', fill:'#C9A84C' },
+  { name:'Platinum', emoji:'ðŸ’Ž', min:11, max:20, color:'#1e3a5f', bg:'#eff6ff', fill:'#3b82f6' },
+  { name:'Diamond ðŸ’Ž', emoji:'âœ¨', min:21, max:999, color:'#5b21b6', bg:'#faf5ff', fill:'#8b5cf6' },
 ];
 function _getUserLevel(orderCount) {
   let lvl = OK_LEVELS[0];
@@ -647,7 +531,7 @@ function _injectLevelBadge(orderCount) {
     <div class="ok-level-icon" style="background:${lvl.bg};">${lvl.emoji}</div>
     <div class="ok-level-text">
       <div class="ok-level-name" style="color:${lvl.color};">${lvl.name}</div>
-      <div class="ok-level-sub">${needMore > 0 ? needMore + ' orders → next level' : '🏆 Top Member!'}</div>
+      <div class="ok-level-sub">${needMore > 0 ? needMore + ' orders â†’ next level' : 'ðŸ† Top Member!'}</div>
       <div class="ok-level-bar"><div class="ok-level-fill" style="width:${progressPct}%;background:${lvl.fill};"></div></div>
     </div>
     <div style="text-align:right;flex-shrink:0;">
@@ -666,9 +550,9 @@ function _watchOrderCount() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 4 — SMART AI SEARCH (Fixed & Working)
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 4 â€” SMART AI SEARCH (Fixed & Working)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const HINGLISH_MAP = {
   kurta:['kurta','kurtis','ethnic'], kurti:['kurtis','kurta'],
   shirt:['shirt','t-shirt'], tshirt:['t-shirt','shirt'],
@@ -756,18 +640,18 @@ function _renderSearchResults(hits, query) {
         <div class="ok-sr-item" onclick="_openProduct({id:${JSON.stringify(p.id)}},${isGold})">
           <img src="${img}" class="ok-sr-img" onerror="this.src='https://placehold.co/46x56/f3f4f6/9ca3af?text=?'" alt="${p.name||''}">
           <div style="flex:1;min-width:0;">
-            ${isGold ? '<div style="font-size:9px;font-weight:900;color:#B8860B;margin-bottom:1px;">⭐ GOLD</div>' : ''}
+            ${isGold ? '<div style="font-size:9px;font-weight:900;color:#B8860B;margin-bottom:1px;">â­ GOLD</div>' : ''}
             <div class="ok-sr-name">${p.name || 'Product'}</div>
-            <div class="ok-sr-cat">${p.brand ? p.brand + ' · ' : ''}${p.category || ''}${p.sub ? ' › ' + p.sub : ''}</div>
-            <div class="ok-sr-price">₹${(p.price||0).toLocaleString('en-IN')}
-              ${p.oldprice && p.oldprice > p.price ? `<span style="text-decoration:line-through;font-size:11px;color:#aaa;font-weight:500;margin-left:4px;">₹${p.oldprice}</span>` : ''}
+            <div class="ok-sr-cat">${p.brand ? p.brand + ' Â· ' : ''}${p.category || ''}${p.sub ? ' â€º ' + p.sub : ''}</div>
+            <div class="ok-sr-price">â‚¹${(p.price||0).toLocaleString('en-IN')}
+              ${p.oldprice && p.oldprice > p.price ? `<span style="text-decoration:line-through;font-size:11px;color:#aaa;font-weight:500;margin-left:4px;">â‚¹${p.oldprice}</span>` : ''}
               ${disc >= 10 ? `<span style="margin-left:4px;font-size:9px;font-weight:800;color:#16a34a;background:#f0fdf4;padding:1px 5px;border-radius:99px;">${disc}% OFF</span>` : ''}
             </div>
           </div>
           <i class="fas fa-chevron-right" style="color:#E5E2DC;font-size:11px;flex-shrink:0;"></i>
         </div>`;
     }).join('')}
-    ${hits.length > 15 ? `<button onclick="_okSearchFullPage('${query}')" style="width:100%;padding:14px;text-align:center;background:none;border:none;border-top:1px solid #F3F4F6;font-size:12px;font-weight:800;color:#e11d48;cursor:pointer;">View All ${hits.length} Results →</button>` : ''}
+    ${hits.length > 15 ? `<button onclick="_okSearchFullPage('${query}')" style="width:100%;padding:14px;text-align:center;background:none;border:none;border-top:1px solid #F3F4F6;font-size:12px;font-weight:800;color:#e11d48;cursor:pointer;">View All ${hits.length} Results â†’</button>` : ''}
   `;
 }
 
@@ -777,7 +661,7 @@ function _okSearchHandler(e) {
   const panel = document.getElementById('ok-search-results-panel');
   if (!panel) return;
   if (q.length < 2) {
-    panel.innerHTML = `<div style="text-align:center;padding:40px 16px;color:#A09D98;"><i class="fas fa-magic" style="font-size:2.5rem;color:#FECDD3;display:block;margin-bottom:10px;"></i>Search karo — kurta, jeans, perfume, shirt...</div>`;
+    panel.innerHTML = `<div style="text-align:center;padding:40px 16px;color:#A09D98;"><i class="fas fa-magic" style="font-size:2.5rem;color:#FECDD3;display:block;margin-bottom:10px;"></i>Search karo â€” kurta, jeans, perfume, shirt...</div>`;
     return;
   }
   clearTimeout(_searchDebounce);
@@ -809,7 +693,7 @@ function _okVoiceSearch() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) { typeof showToast === 'function' && showToast('Voice not supported'); return; }
   const r = new SR(); r.lang = 'hi-IN'; r.interimResults = false;
-  typeof showToast === 'function' && showToast('🎙️ Bol rahe hain...');
+  typeof showToast === 'function' && showToast('ðŸŽ™ï¸ Bol rahe hain...');
   r.start();
   r.onresult = e => {
     const q = e.results[0][0].transcript;
@@ -837,7 +721,7 @@ function _initSearchOverlay() {
       </div>
     </div>
     <div id="ok-search-results-panel">
-      <div style="text-align:center;padding:40px 16px;color:#A09D98;"><i class="fas fa-magic" style="font-size:2.5rem;color:#FECDD3;display:block;margin-bottom:10px;"></i>Search karo — kurta, jeans, perfume, shirt...</div>
+      <div style="text-align:center;padding:40px 16px;color:#A09D98;"><i class="fas fa-magic" style="font-size:2.5rem;color:#FECDD3;display:block;margin-bottom:10px;"></i>Search karo â€” kurta, jeans, perfume, shirt...</div>
     </div>`;
   document.body.appendChild(overlay);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeSearchOverlay(); });
@@ -882,9 +766,9 @@ function _injectMobileSearchTrigger() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 5 — PDP LIGHTBOX
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 5 â€” PDP LIGHTBOX
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 let _lbImages = [], _lbIdx = 0;
 
 function _initLightbox() {
@@ -989,9 +873,9 @@ function _attachLightboxToPDP(id) {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 6 — PWA INSTALL (Real install)
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 6 â€” PWA INSTALL (Real install)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _fixPWAInstall() {
   if (!window._pwaEventCaptured) {
     window._pwaEventCaptured = true;
@@ -1003,7 +887,7 @@ function _fixPWAInstall() {
       window.deferredPrompt = null;
       localStorage.setItem('ok_pwa_installed', '1');
       document.getElementById('ok-get-app-btn')?.remove();
-      typeof showToast === 'function' && showToast('🎉 OutfitKart installed!');
+      typeof showToast === 'function' && showToast('ðŸŽ‰ OutfitKart installed!');
     });
   }
 
@@ -1015,7 +899,7 @@ function _fixPWAInstall() {
         if (window.deferredPrompt) {
           window.deferredPrompt.prompt();
           window.deferredPrompt.userChoice.then(c => {
-            if (c.outcome === 'accepted') { window.deferredPrompt = null; btn.remove(); typeof showToast === 'function' && showToast('✅ Installing...'); }
+            if (c.outcome === 'accepted') { window.deferredPrompt = null; btn.remove(); typeof showToast === 'function' && showToast('âœ… Installing...'); }
           }).catch(() => {});
         } else {
           window._showPWAPopup();
@@ -1041,14 +925,14 @@ function _fixPWAInstall() {
         const { outcome } = await window.deferredPrompt.userChoice;
         if (outcome === 'accepted') {
           if (progressBar) progressBar.style.width = '100%';
-          if (progressLabel) progressLabel.textContent = '✅ Installing!';
-          if (btnText) btnText.innerHTML = '✅ Installing! Use APP10';
+          if (progressLabel) progressLabel.textContent = 'âœ… Installing!';
+          if (btnText) btnText.innerHTML = 'âœ… Installing! Use APP10';
           if (btn) { btn.style.background = 'linear-gradient(135deg,#16a34a,#15803d)'; btn.style.opacity = '1'; }
           window.deferredPrompt = null;
           setTimeout(() => {
             document.getElementById('ok-pwa-overlay')?.remove();
             document.getElementById('ok-get-app-btn')?.remove();
-            typeof showToast === 'function' && showToast('🎉 App installed! Use APP10 for 10% off!');
+            typeof showToast === 'function' && showToast('ðŸŽ‰ App installed! Use APP10 for 10% off!');
           }, 1500);
         } else {
           // Keep popup open, just reset button
@@ -1063,14 +947,14 @@ function _fixPWAInstall() {
         if (progressWrap) progressWrap.style.display = 'none';
       }
     } else {
-      // No prompt — show manual instructions
+      // No prompt â€” show manual instructions
       const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
       if (progressBar) {
         let pct = 0;
         const iv = setInterval(() => { pct = Math.min(pct + 10, 100); progressBar.style.width = pct + '%'; if (pct >= 100) clearInterval(iv); }, 80);
       }
-      if (progressLabel) progressLabel.innerHTML = isIOS ? '📱 Safari → Share → "Add to Home Screen"' : '⚙️ Browser menu → "Add to Home Screen"';
-      if (btnText) btnText.innerHTML = '📱 Add to Home Screen';
+      if (progressLabel) progressLabel.innerHTML = isIOS ? 'ðŸ“± Safari â†’ Share â†’ "Add to Home Screen"' : 'âš™ï¸ Browser menu â†’ "Add to Home Screen"';
+      if (btnText) btnText.innerHTML = 'ðŸ“± Add to Home Screen';
       if (btn) { btn.disabled = false; }
     }
   };
@@ -1082,19 +966,19 @@ window._showPWAPopup = function() {
   overlay.id = 'ok-pwa-overlay';
   overlay.innerHTML = `
     <div id="ok-pwa-card" style="width:calc(100%-32px);max-width:400px;background:linear-gradient(145deg,#0a0a0f,#12001a,#001020);border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 40px 80px rgba(0,0,0,0.8);position:relative;animation:fadeIn 0.35s ease both;">
-      <button onclick="document.getElementById('ok-pwa-overlay').remove()" style="position:absolute;top:16px;right:16px;z-index:10;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+      <button onclick="document.getElementById('ok-pwa-overlay').remove()" style="position:absolute;top:16px;right:16px;z-index:10;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">âœ•</button>
       <div style="background:linear-gradient(135deg,#1a0010,#0a0030,#001a10);padding:36px 28px 24px;text-align:center;">
         <div style="width:80px;height:80px;margin:0 auto 18px;border-radius:22px;background:linear-gradient(135deg,#e11d48,#be123c);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(225,29,72,0.5);"><i class="fas fa-shopping-bag" style="color:white;font-size:32px;"></i></div>
         <h2 style="color:white;font-size:1.4rem;font-weight:900;margin:0 0 6px;">OutfitKart</h2>
         <p style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 16px;">Premium Fashion App</p>
         <div style="display:flex;justify-content:center;gap:12px;">
-          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);">🚀 Fast</div>
-          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);">📦 COD</div>
-          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);">🔔 Alerts</div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);">ðŸš€ Fast</div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);">ðŸ“¦ COD</div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 10px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);">ðŸ”” Alerts</div>
         </div>
       </div>
       <div style="background:linear-gradient(135deg,#1a0800,#2d0a00);padding:12px 28px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.05);">
-        <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#C9A84C,#B8860B);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🎁</div>
+        <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#C9A84C,#B8860B);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">ðŸŽ</div>
         <div><div style="font-size:12px;font-weight:900;color:#C9A84C;">Install karo, 10% OFF pao!</div><div style="font-size:10px;color:rgba(255,255,255,0.4);">Code <span style="font-family:monospace;color:#F5E6C0;font-weight:800;">APP10</span> first order pe</div></div>
       </div>
       <div style="padding:20px 28px 28px;">
@@ -1105,7 +989,7 @@ window._showPWAPopup = function() {
           <div id="ok-pwa-progress-track" style="height:6px;background:rgba(255,255,255,0.1);border-radius:99px;overflow:hidden;margin-bottom:8px;"><div id="ok-pwa-progress-bar" style="height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#e11d48,#C9A84C);transition:width 0.3s ease;"></div></div>
           <div id="ok-pwa-progress-label" style="font-size:11px;color:rgba(255,255,255,0.5);text-align:center;">Preparing...</div>
         </div>
-        <p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.25);margin-top:12px;">No app store needed • Works on all devices</p>
+        <p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.25);margin-top:12px;">No app store needed â€¢ Works on all devices</p>
       </div>
     </div>`;
   document.body.appendChild(overlay);
@@ -1113,9 +997,9 @@ window._showPWAPopup = function() {
 };
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 7 — INFLUENCER SUBMISSIONS (Fixed)
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 7 â€” INFLUENCER SUBMISSIONS (Fixed)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 window.loadInfluencerRequests = async function() {
   if (!window.currentUser) return;
   const container = document.getElementById('inf-requests-list');
@@ -1131,32 +1015,32 @@ window.loadInfluencerRequests = async function() {
     const all = data || [];
     const approved = all.filter(r => r.status === 'Approved');
     const totalEarned = approved.reduce((s, r) => s + (r.earnings || 0), 0);
-    if (totalEl) totalEl.textContent = `₹${totalEarned}`;
+    if (totalEl) totalEl.textContent = `â‚¹${totalEarned}`;
     if (countEl) countEl.textContent = all.length;
     if (!all.length) {
       container.innerHTML = `<div class="text-center py-10 text-gray-400"><i class="fas fa-video text-4xl mb-3 block opacity-40"></i><p class="font-semibold text-sm">Abhi tak koi submission nahi</p><p class="text-xs mt-1 text-gray-400">Upar form se request submit karo</p></div>`;
       return;
     }
     const BADGE = { Pending:'bg-amber-100 text-amber-700', Approved:'bg-green-100 text-green-700', Rejected:'bg-red-100 text-red-600' };
-    const ICON = { Pending:'⏳', Approved:'✅', Rejected:'❌' };
+    const ICON = { Pending:'â³', Approved:'âœ…', Rejected:'âŒ' };
     container.innerHTML = all.map(r => `
       <div class="inf-submit-card">
         <div class="flex justify-between items-start gap-2">
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap mb-1">
-              <span class="font-bold text-sm text-gray-800">${r.platform || '—'}</span>
+              <span class="font-bold text-sm text-gray-800">${r.platform || 'â€”'}</span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${BADGE[r.status] || 'bg-gray-100 text-gray-500'}">${ICON[r.status] || ''} ${r.status}</span>
             </div>
-            <div class="text-xs text-gray-500 mb-1">👁 ${(r.views || 0).toLocaleString()} views${r.submitted_at ? ' · ' + new Date(r.submitted_at).toLocaleDateString('en-IN') : ''}</div>
+            <div class="text-xs text-gray-500 mb-1">ðŸ‘ ${(r.views || 0).toLocaleString()} views${r.submitted_at ? ' Â· ' + new Date(r.submitted_at).toLocaleDateString('en-IN') : ''}</div>
             ${r.video_url ? `<a href="${r.video_url}" target="_blank" rel="noopener" class="text-xs text-blue-600 hover:underline block truncate">${r.video_url}</a>` : ''}
             ${r.description ? `<p class="text-xs text-gray-500 mt-1 italic">"${r.description}"</p>` : ''}
           </div>
           <div class="text-right flex-shrink-0">
-            <div class="text-base font-black ${r.status === 'Approved' ? 'text-green-600' : 'text-gray-400'}">₹${r.earnings || 0}</div>
+            <div class="text-base font-black ${r.status === 'Approved' ? 'text-green-600' : 'text-gray-400'}">â‚¹${r.earnings || 0}</div>
           </div>
         </div>
-        ${r.status === 'Approved' ? `<div class="text-xs text-green-600 font-semibold mt-2 bg-green-50 rounded-lg px-3 py-1.5">✅ ₹${r.earnings} wallet mein credit ho gaya</div>` : ''}
-        ${r.status === 'Rejected' && r.reject_reason ? `<div class="text-xs text-red-500 mt-2 bg-red-50 rounded-lg px-3 py-1.5">❌ ${r.reject_reason}</div>` : ''}
+        ${r.status === 'Approved' ? `<div class="text-xs text-green-600 font-semibold mt-2 bg-green-50 rounded-lg px-3 py-1.5">âœ… â‚¹${r.earnings} wallet mein credit ho gaya</div>` : ''}
+        ${r.status === 'Rejected' && r.reject_reason ? `<div class="text-xs text-red-500 mt-2 bg-red-50 rounded-lg px-3 py-1.5">âŒ ${r.reject_reason}</div>` : ''}
       </div>`).join('');
   } catch (err) {
     container.innerHTML = `<div class="text-center py-6 text-red-400 text-sm"><i class="fas fa-exclamation-circle mb-2 block text-2xl"></i>${err.message}</div>`;
@@ -1164,9 +1048,9 @@ window.loadInfluencerRequests = async function() {
 };
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 8 — AUTH / STORED USER
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 8 â€” AUTH / STORED USER
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _getStoredUser() {
   try {
     const keys = ['outfitkart_user', 'ok_user', 'user_data', 'currentUser', 'outfitkart_session'];
@@ -1194,51 +1078,11 @@ function _showProfileDashboard(userData) {
   if (navEl) navEl.textContent = name.split(' ')[0];
   const walletBal = userData.wallet || 0;
   const statWal = document.getElementById('stat-wallet-bal');
-  if (statWal) statWal.textContent = '₹' + walletBal;
+  if (statWal) statWal.textContent = 'â‚¹' + walletBal;
   const menuWalletBadge = document.getElementById('menu-wallet-badge');
-  if (menuWalletBadge && walletBal > 0) { menuWalletBadge.textContent = '₹' + walletBal; menuWalletBadge.classList.remove('hidden'); }
+  if (menuWalletBadge && walletBal > 0) { menuWalletBadge.textContent = 'â‚¹' + walletBal; menuWalletBadge.classList.remove('hidden'); }
   const orderCount = parseInt(document.getElementById('stat-orders-count')?.textContent) || 0;
   setTimeout(() => _injectLevelBadge(orderCount), 300);
-  // Inject Profile Social Card after stats
-  setTimeout(() => _injectProfileSocialCard(), 400);
-}
-
-// PROFILE SOCIAL CARD (after stats)
-function _injectProfileSocialCard() {
-  if (document.getElementById('ok-profile-social-card')) return;
-  const profileHome = document.getElementById('profile-home');
-  if (!profileHome) return;
-
-  const statsSection = profileHome.querySelector('.grid.grid-cols-2.gap-4.mb-4');
-  if (!statsSection) return;
-
-  const card = document.createElement('div');
-  card.id = 'ok-profile-social-card';
-  card.innerHTML = `
-    <div class="psc-header">
-      <div class="psc-icon"><i class="fas fa-share-alt"></i></div>
-      <div>
-        <div class="psc-title">Follow & Subscribe 🔔</div>
-        <div class="psc-sub">Hamare saath connect raho — offers & deals pao!</div>
-      </div>
-    </div>
-    <div class="psc-links">
-      <a href="https://www.instagram.com/outfitkart_official?igsh=MTdlaG1jem56YWRpeQ==" target="_blank" rel="noopener" class="psc-link psc-link-ig">
-        <i class="fab fa-instagram"></i> Instagram
-      </a>
-      <a href="https://youtube.com/@outfitkart-official?si=SJOr76KDH_H99JDt" target="_blank" rel="noopener" class="psc-link psc-link-yt">
-        <i class="fab fa-youtube"></i> YouTube
-      </a>
-      <a href="https://t.me/outfitkart" target="_blank" rel="noopener" class="psc-link psc-link-tg">
-        <i class="fab fa-telegram"></i> Telegram
-      </a>
-      <a href="https://whatsapp.com/channel/0029VbCiSs06GcGJpToxKd3z" target="_blank" rel="noopener" class="psc-link psc-link-wa">
-        <i class="fab fa-whatsapp"></i> WhatsApp
-      </a>
-    </div>
-  `;
-
-  statsSection.insertAdjacentElement('afterend', card);
 }
 
 function _patchAuthFunctions() {
@@ -1276,9 +1120,9 @@ function _patchAuthFunctions() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 9 — ADS SYSTEM
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 9 â€” ADS SYSTEM
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 window.loadAdsForHome = async function() {
   try {
     const client = window.dbClient || window.supabase;
@@ -1299,7 +1143,7 @@ function _renderFrontendAds(ads) {
   section.innerHTML = `
     <div style="padding:16px 16px 12px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <h3 style="font-size:1rem;font-weight:900;color:#1C1C1E;margin:0;">💳 Offers & Partnerships</h3>
+        <h3 style="font-size:1rem;font-weight:900;color:#1C1C1E;margin:0;">ðŸ’³ Offers & Partnerships</h3>
         <span style="font-size:9px;font-weight:800;color:#9ca3af;background:#F7F5F2;padding:3px 8px;border-radius:99px;letter-spacing:0.08em;text-transform:uppercase;border:1px solid #E5E2DC;">AD</span>
       </div>
       <div class="ok-hscroll">
@@ -1313,7 +1157,7 @@ function _renderFrontendAds(ads) {
             <div style="padding:9px 12px 11px;">
               <div style="font-weight:800;font-size:12px;color:#1C1C1E;">${ad.title}</div>
               ${ad.subtitle ? `<div style="font-size:10px;color:#6B6A68;margin-top:2px;">${ad.subtitle}</div>` : ''}
-              <div style="margin-top:7px;font-size:10px;font-weight:700;color:#e11d48;">Learn More →</div>
+              <div style="margin-top:7px;font-size:10px;font-weight:700;color:#e11d48;">Learn More â†’</div>
             </div>
           </a>`).join('')}
       </div>
@@ -1334,7 +1178,7 @@ window._trackAdClick = async function(id) {
 
 window.copyAdsSQLv6 = function() {
   const sql = `CREATE TABLE IF NOT EXISTS public.ads (id BIGSERIAL PRIMARY KEY, title TEXT NOT NULL, subtitle TEXT, img TEXT NOT NULL, link TEXT, badge TEXT, position TEXT DEFAULT 'home', is_active BOOLEAN DEFAULT true, clicks INTEGER DEFAULT 0, created_by TEXT, created_at TIMESTAMPTZ DEFAULT NOW());\nALTER TABLE public.ads ENABLE ROW LEVEL SECURITY;\nCREATE POLICY "public_read" ON public.ads FOR SELECT USING (true);\nCREATE POLICY "admin_write" ON public.ads FOR ALL USING (true) WITH CHECK (true);`;
-  navigator.clipboard?.writeText(sql).then(() => typeof showToast === 'function' && showToast('✅ SQL copied!')).catch(() => {});
+  navigator.clipboard?.writeText(sql).then(() => typeof showToast === 'function' && showToast('âœ… SQL copied!')).catch(() => {});
 };
 
 window.loadAdminAds = async function() {
@@ -1353,8 +1197,8 @@ window.loadAdminAds = async function() {
         <div class="flex gap-3">
           <img src="${ad.img}" onerror="this.src='https://placehold.co/80x60/f3f4f6/9ca3af?text=Ad'" style="width:80px;height:60px;object-fit:cover;border-radius:8px;border:1px solid #E5E2DC;flex-shrink:0;">
           <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 flex-wrap mb-1"><span class="font-bold text-sm truncate">${ad.title}</span><span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${ad.is_active ? 'text-green-700 bg-green-50 border-green-200' : 'text-gray-400 bg-gray-50 border-gray-200'}">${ad.is_active ? '● Active' : '○ Inactive'}</span></div>
-            <div class="text-[10px] text-gray-400">Position: <strong>${ad.position}</strong> · Clicks: <strong>${ad.clicks||0}</strong></div>
+            <div class="flex items-center gap-2 flex-wrap mb-1"><span class="font-bold text-sm truncate">${ad.title}</span><span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${ad.is_active ? 'text-green-700 bg-green-50 border-green-200' : 'text-gray-400 bg-gray-50 border-gray-200'}">${ad.is_active ? 'â— Active' : 'â—‹ Inactive'}</span></div>
+            <div class="text-[10px] text-gray-400">Position: <strong>${ad.position}</strong> Â· Clicks: <strong>${ad.clicks||0}</strong></div>
           </div>
         </div>
         <div class="flex gap-2 mt-3">
@@ -1362,15 +1206,15 @@ window.loadAdminAds = async function() {
           <button onclick="window.deleteAdV6 && window.deleteAdV6(${ad.id})" class="flex-1 text-xs py-2 rounded-lg font-bold bg-gray-50 text-gray-600 border border-gray-200">Delete</button>
         </div>
       </div>`).join('');
-  } catch (err) { container.innerHTML = `<div class="text-center text-red-500 py-6"><p>${err.message}</p><button onclick="copyAdsSQLv6()" class="mt-3 text-xs bg-rose-600 text-white px-4 py-2 rounded-lg font-bold">📋 SQL Copy karo</button></div>`; }
+  } catch (err) { container.innerHTML = `<div class="text-center text-red-500 py-6"><p>${err.message}</p><button onclick="copyAdsSQLv6()" class="mt-3 text-xs bg-rose-600 text-white px-4 py-2 rounded-lg font-bold">ðŸ“‹ SQL Copy karo</button></div>`; }
 };
 
 window.toggleAdActiveV6 = async function(id, isActive) {
-  try { await (window.dbClient||window.supabase).from('ads').update({is_active:isActive}).eq('id',id); typeof showToast === 'function' && showToast(isActive ? '✅ Ad activated' : '🔴 Ad deactivated'); window.loadAdminAds(); window.loadAdsForHome(); } catch (err) { typeof showToast === 'function' && showToast('❌ ' + err.message); }
+  try { await (window.dbClient||window.supabase).from('ads').update({is_active:isActive}).eq('id',id); typeof showToast === 'function' && showToast(isActive ? 'âœ… Ad activated' : 'ðŸ”´ Ad deactivated'); window.loadAdminAds(); window.loadAdsForHome(); } catch (err) { typeof showToast === 'function' && showToast('âŒ ' + err.message); }
 };
 window.deleteAdV6 = async function(id) {
   if (!confirm('Delete this ad?')) return;
-  try { await (window.dbClient||window.supabase).from('ads').delete().eq('id',id); typeof showToast === 'function' && showToast('🗑️ Deleted'); window.loadAdminAds(); window.loadAdsForHome(); } catch (err) { typeof showToast === 'function' && showToast('❌ ' + err.message); }
+  try { await (window.dbClient||window.supabase).from('ads').delete().eq('id',id); typeof showToast === 'function' && showToast('ðŸ—‘ï¸ Deleted'); window.loadAdminAds(); window.loadAdsForHome(); } catch (err) { typeof showToast === 'function' && showToast('âŒ ' + err.message); }
 };
 window.adminCreateAdV6 = async function() {
   const title = document.getElementById('new-ad-title')?.value.trim();
@@ -1380,10 +1224,10 @@ window.adminCreateAdV6 = async function() {
   try {
     const { error } = await (window.dbClient||window.supabase).from('ads').insert([payload]);
     if (error) throw error;
-    typeof showToast === 'function' && showToast('✅ Ad created!');
+    typeof showToast === 'function' && showToast('âœ… Ad created!');
     ['new-ad-title','new-ad-subtitle','new-ad-img','new-ad-link','new-ad-badge'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
     window.loadAdminAds(); window.loadAdsForHome();
-  } catch (err) { typeof showToast === 'function' && showToast('❌ ' + err.message); }
+  } catch (err) { typeof showToast === 'function' && showToast('âŒ ' + err.message); }
 };
 window.uploadAdImageV6 = async function(event) {
   const file = event.target.files[0]; if (!file) return;
@@ -1393,20 +1237,20 @@ window.uploadAdImageV6 = async function(event) {
   try {
     const res = await fetch(`https://api.imgbb.com/1/upload?key=${window.IMGBB_KEY || '3949e4873d8510691ee63026d22eeb75'}`, { method:'POST', body:fd });
     const json = await res.json();
-    if (json.success) { const inp = document.getElementById('new-ad-img'); if (inp) inp.value = json.data.url; typeof showToast === 'function' && showToast('✅ Uploaded!'); }
+    if (json.success) { const inp = document.getElementById('new-ad-img'); if (inp) inp.value = json.data.url; typeof showToast === 'function' && showToast('âœ… Uploaded!'); }
   } catch {} finally { if (statusEl) statusEl.classList.add('hidden'); event.target.value = ''; }
 };
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 10 — HOME SECTIONS (v5 features)
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 10 â€” HOME SECTIONS (v5 features)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _renderHomePromoBanner() {
   if (document.getElementById('ok-promo-banner-strip')) return;
   const homeView = document.getElementById('view-home'); if (!homeView) return;
   const banner = document.createElement('div');
   banner.id = 'ok-promo-banner-strip';
-  banner.innerHTML = `<strong>FREE SHIPPING</strong> ON ORDERS OVER <strong>₹500</strong> &nbsp;•&nbsp; NEW STYLES JUST ARRIVED! &nbsp;•&nbsp; <strong>COD AVAILABLE</strong>`;
+  banner.innerHTML = `<strong>FREE SHIPPING</strong> ON ORDERS OVER <strong>â‚¹500</strong> &nbsp;â€¢&nbsp; NEW STYLES JUST ARRIVED! &nbsp;â€¢&nbsp; <strong>COD AVAILABLE</strong>`;
   homeView.insertBefore(banner, homeView.firstChild);
 }
 
@@ -1415,7 +1259,7 @@ function _renderTrustStrip() {
   const homeView = document.getElementById('view-home'); if (!homeView) return;
   const strip = document.createElement('div');
   strip.id = 'ok-trust-strip';
-  strip.innerHTML = `<div class="ok-trust-item"><i class="fas fa-truck"></i><div><strong>Free Shipping</strong><span>Orders over ₹500</span></div></div><div class="ok-trust-item"><i class="fas fa-undo-alt"></i><div><strong>Easy Exchange</strong><span>7 day policy</span></div></div><div class="ok-trust-item"><i class="fas fa-tag"></i><div><strong>Daily Deals</strong><span>Save up to 60% off</span></div></div><div class="ok-trust-item"><i class="fas fa-headset"></i><div><strong>24/7 Support</strong><span>We're here to help</span></div></div>`;
+  strip.innerHTML = `<div class="ok-trust-item"><i class="fas fa-truck"></i><div><strong>Free Shipping</strong><span>Orders over â‚¹500</span></div></div><div class="ok-trust-item"><i class="fas fa-undo-alt"></i><div><strong>Easy Exchange</strong><span>7 day policy</span></div></div><div class="ok-trust-item"><i class="fas fa-tag"></i><div><strong>Daily Deals</strong><span>Save up to 60% off</span></div></div><div class="ok-trust-item"><i class="fas fa-headset"></i><div><strong>24/7 Support</strong><span>We're here to help</span></div></div>`;
   const carousel = document.getElementById('banner-carousel');
   if (carousel) carousel.insertAdjacentElement('afterend', strip);
 }
@@ -1446,15 +1290,15 @@ function _renderUnbeatableSection() {
   section.style.cssText = 'background:linear-gradient(135deg,#0a0a0a,#1a1200,#0a0a0a);';
   section.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-      <div><div style="font-size:10px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.7);margin-bottom:4px;">AI Curated</div><h3 style="font-size:1.2rem;font-weight:900;color:white;margin:0;line-height:1.15;">🔥 Unbeatable Low Prices</h3></div>
-      <button onclick="navigate('shop')" style="background:linear-gradient(135deg,#C9A84C,#B8860B);color:#1a0800;border:none;padding:8px 16px;border-radius:99px;font-size:11px;font-weight:900;cursor:pointer;">View All →</button>
+      <div><div style="font-size:10px;font-weight:800;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.7);margin-bottom:4px;">AI Curated</div><h3 style="font-size:1.2rem;font-weight:900;color:white;margin:0;line-height:1.15;">ðŸ”¥ Unbeatable Low Prices</h3></div>
+      <button onclick="navigate('shop')" style="background:linear-gradient(135deg,#C9A84C,#B8860B);color:#1a0800;border:none;padding:8px 16px;border-radius:99px;font-size:11px;font-weight:900;cursor:pointer;">View All â†’</button>
     </div>
     <div class="ok-hscroll">
       ${cheap.map(p => {
         const img = p.imgs?.[0]||p.img||'https://placehold.co/145x175/1a1200/C9A84C?text=OK';
         const oldP = p.oldprice||Math.round(p.price*1.4);
         const disc = Math.round(((oldP-p.price)/oldP)*100);
-        return `<div class="ok-unbeat-card" onclick="openProductPage(${p.id})"><div class="ok-unbeat-card-img-wrap"><img src="${img}" loading="lazy" onerror="this.src='https://placehold.co/145x175'"><div style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#e11d48,#be123c);color:white;font-size:9px;font-weight:900;padding:3px 7px;border-radius:99px;">${disc}% OFF</div></div><div style="padding:8px 4px;"><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div><div style="display:flex;align-items:center;gap:5px;margin-top:3px;"><span style="font-size:13px;font-weight:900;color:#C9A84C;">₹${p.price}</span><span style="font-size:10px;text-decoration:line-through;color:rgba(255,255,255,0.35);">₹${oldP}</span></div></div></div>`;
+        return `<div class="ok-unbeat-card" onclick="openProductPage(${p.id})"><div class="ok-unbeat-card-img-wrap"><img src="${img}" loading="lazy" onerror="this.src='https://placehold.co/145x175'"><div style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#e11d48,#be123c);color:white;font-size:9px;font-weight:900;padding:3px 7px;border-radius:99px;">${disc}% OFF</div></div><div style="padding:8px 4px;"><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div><div style="display:flex;align-items:center;gap:5px;margin-top:3px;"><span style="font-size:13px;font-weight:900;color:#C9A84C;">â‚¹${p.price}</span><span style="font-size:10px;text-decoration:line-through;color:rgba(255,255,255,0.35);">â‚¹${oldP}</span></div></div></div>`;
       }).join('')}
     </div>`;
   const trending = homeView.querySelector('.mt-4.bg-white.p-4');
@@ -1468,35 +1312,20 @@ function _renderFooter() {
   const footer = document.createElement('div');
   footer.id = 'ok-site-footer';
   footer.style.cssText = 'padding:28px 20px 120px;text-align:center;';
-  footer.innerHTML = `
-    <span class="footer-brand" style="font-size:1.1rem;font-weight:900;display:block;margin-bottom:8px;">OutfitKart</span>
-    <p style="font-size:11px;color:#9ca3af;margin:0 0 8px;">Premium Fashion at Best Prices</p>
-    <div class="footer-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:12px 0;">
-      <a href="#" onclick="openProfilePage('about');return false;">About Us</a>
-      <a href="#" onclick="openProfilePage('terms');return false;">Terms</a>
-      <a href="#" onclick="openProfilePage('privacy');return false;">Privacy</a>
-      <a href="#" onclick="openProfilePage('exchange-policy');return false;">Exchange Policy</a>
-      <a href="#" onclick="openWhatsAppSupport&&openWhatsAppSupport();return false;">Support</a>
-    </div>
-    <div style="display:flex;justify-content:center;gap:16px;margin:12px 0;">
-      <a href="https://www.instagram.com/outfitkart_official?igsh=MTdlaG1jem56YWRpeQ==" target="_blank" style="color:#e1306c;font-size:20px;"><i class="fab fa-instagram"></i></a>
-      <a href="https://t.me/outfitkart" target="_blank" style="color:#0088cc;font-size:20px;"><i class="fab fa-telegram"></i></a>
-      <a href="https://youtube.com/@outfitkart-official?si=SJOr76KDH_H99JDt" target="_blank" style="color:#ff0000;font-size:20px;"><i class="fab fa-youtube"></i></a>
-    </div>
-    <div class="footer-copy" style="font-size:10px;margin-top:10px;">© 2026 OutfitKart. All rights reserved. Made with ❤️ in India 🇮🇳</div>`;
+  footer.innerHTML = `<span class="footer-brand" style="font-size:1.1rem;font-weight:900;display:block;margin-bottom:8px;">OutfitKart</span><p style="font-size:11px;color:#9ca3af;margin:0 0 8px;">Premium Fashion at Best Prices</p><div class="footer-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:12px 0;"><a href="#" onclick="openProfilePage('about');return false;">About Us</a><a href="#" onclick="openProfilePage('terms');return false;">Terms</a><a href="#" onclick="openProfilePage('privacy');return false;">Privacy</a><a href="#" onclick="openProfilePage('exchange-policy');return false;">Exchange Policy</a><a href="#" onclick="openWhatsAppSupport&&openWhatsAppSupport();return false;">Support</a></div><div style="display:flex;justify-content:center;gap:16px;margin:12px 0;"><a href="https://www.instagram.com/outfitkart_ecommers" target="_blank" style="color:#e1306c;font-size:20px;"><i class="fab fa-instagram"></i></a><a href="https://t.me/outfitkart" target="_blank" style="color:#0088cc;font-size:20px;"><i class="fab fa-telegram"></i></a><a href="https://youtube.com/@outfitkart-official?si=SJOr76KDH_H99JDt" target="_blank" style="color:#ff0000;font-size:20px;"><i class="fab fa-youtube"></i></a></div><div class="footer-copy" style="font-size:10px;margin-top:10px;">Â© 2026 OutfitKart. All rights reserved. Made with â¤ï¸ in India ðŸ‡®ðŸ‡³</div>`;
   main.appendChild(footer);
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 11 — CANCEL/EXCHANGE (v5 patched versions)
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 11 â€” CANCEL/EXCHANGE (v5 patched versions)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const CANCEL_REASONS_V = ['Product ki zarurat nahi rahi','Galat product order ho gaya','Better price mili kahin aur','Delivery time zyada lag rahi','Duplicate order ho gaya','Address galat daal diya','Kuch aur reason'];
 const EXCHANGE_REASONS_V = ['Size theek nahi tha','Color pasand nahi aaya','Quality expectations se alag','Product damaged tha','Galat product mila','Kuch aur reason'];
 
 window.cancelOrder = async function(orderId) {
   orderId = String(orderId || '').trim();
-  if (!orderId) { typeof showToast === 'function' && showToast('❌ Invalid order'); return; }
+  if (!orderId) { typeof showToast === 'function' && showToast('âŒ Invalid order'); return; }
   const order = (window.ordersDb || []).find(o => String(o.id) === orderId);
   if (!order) return typeof showToast === 'function' && showToast('Order not found.');
   if (order.status !== 'Processing') return typeof showToast === 'function' && showToast('Only Processing orders can be cancelled.');
@@ -1507,7 +1336,7 @@ function _showCancelReasonModalV(orderId, order) {
   document.getElementById('ok-cancel-v-modal')?.remove();
   const paymode = (order.paymentmode || '').toUpperCase();
   const isPaid = ['UPI','CARD','WALLET','WALLET-PAY'].includes(paymode);
-  const refundInfo = isPaid ? `<div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:#1e40af;"><i class="fas fa-wallet" style="margin-right:4px;"></i>Aapka <strong>₹${order.total}</strong> refund <strong>OutfitKart Wallet</strong> mein credit hoga (24-48 hrs).</div>` : '';
+  const refundInfo = isPaid ? `<div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:#1e40af;"><i class="fas fa-wallet" style="margin-right:4px;"></i>Aapka <strong>â‚¹${order.total}</strong> refund <strong>OutfitKart Wallet</strong> mein credit hoga (24-48 hrs).</div>` : '';
   const modal = document.createElement('div');
   modal.id = 'ok-cancel-v-modal';
   modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);';
@@ -1539,7 +1368,7 @@ window._submitCancelV = async function(orderId) {
   const SUPABASE_KEY = window.SUPABASE_KEY || '';
   const order = (window.ordersDb || []).find(o => String(o.id) === orderId);
   if (!order) return;
-  typeof showToast === 'function' && showToast('⏳ Cancelling...');
+  typeof showToast === 'function' && showToast('â³ Cancelling...');
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${encodeURIComponent(orderId)}`, {
       method: 'PATCH',
@@ -1550,10 +1379,10 @@ window._submitCancelV = async function(orderId) {
     if (typeof cancelReferralForOrder === 'function') await cancelReferralForOrder(orderId);
     const cancelModal = document.getElementById('order-cancel-modal');
     const refundEl = document.getElementById('cancel-refund-msg');
-    if (refundEl) { refundEl.textContent = `💰 ₹${order.total} aapke OutfitKart Wallet mein credit hoga (24-48 hrs).`; refundEl.classList.remove('hidden'); }
+    if (refundEl) { refundEl.textContent = `ðŸ’° â‚¹${order.total} aapke OutfitKart Wallet mein credit hoga (24-48 hrs).`; refundEl.classList.remove('hidden'); }
     if (cancelModal) { cancelModal.classList.remove('hidden'); cancelModal.classList.add('flex'); }
     if (typeof renderOrdersList === 'function') renderOrdersList();
-  } catch (err) { typeof showToast === 'function' && showToast('❌ ' + err.message); }
+  } catch (err) { typeof showToast === 'function' && showToast('âŒ ' + err.message); }
 };
 
 window.startExchange = function(orderId) {
@@ -1565,14 +1394,14 @@ window.startExchange = function(orderId) {
   window._pendingExchangeOldPrice = oldPrice;
   const modal = document.getElementById('exchange-confirm-modal');
   const infoEl = document.getElementById('exchange-confirm-info');
-  if (infoEl) infoEl.textContent = `Order #${orderId} · Exchange Value: ₹${oldPrice}`;
+  if (infoEl) infoEl.textContent = `Order #${orderId} Â· Exchange Value: â‚¹${oldPrice}`;
   if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
 };
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 12 — PROFILE STATS FIX
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 12 â€” PROFILE STATS FIX
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _refreshProfileStats() {
   try {
     const user = window.currentUser || _getStoredUser();
@@ -1583,20 +1412,20 @@ function _refreshProfileStats() {
     if (elOrders) elOrders.textContent = orderCount;
     const wallet = user.wallet != null ? user.wallet : (window.walletBalance || 0);
     const elWallet = document.getElementById('stat-wallet-bal');
-    if (elWallet) { elWallet.textContent = '₹' + wallet; elWallet.style.color = '#2563eb'; }
+    if (elWallet) { elWallet.textContent = 'â‚¹' + wallet; elWallet.style.color = '#2563eb'; }
     const profWallet = document.getElementById('prof-wallet');
-    if (profWallet) profWallet.textContent = '₹' + wallet;
+    if (profWallet) profWallet.textContent = 'â‚¹' + wallet;
     const menuWalletBadge = document.getElementById('menu-wallet-badge');
-    if (menuWalletBadge) { menuWalletBadge.textContent = '₹' + wallet; if (wallet > 0) menuWalletBadge.classList.remove('hidden'); }
+    if (menuWalletBadge) { menuWalletBadge.textContent = 'â‚¹' + wallet; if (wallet > 0) menuWalletBadge.classList.remove('hidden'); }
     const checkoutWallet = document.getElementById('checkout-wallet-balance');
-    if (checkoutWallet) checkoutWallet.textContent = '₹' + wallet;
+    if (checkoutWallet) checkoutWallet.textContent = 'â‚¹' + wallet;
     let refEarnings = 0;
     if (window.referralsDb?.length) refEarnings = window.referralsDb.filter(r => r.status === 'confirmed').reduce((s, r) => s + (r.commission || 0), 0);
     else refEarnings = user.referral_earnings || 0;
     const elRef = document.getElementById('stat-referral-earn');
-    if (elRef) { elRef.textContent = '₹' + refEarnings; elRef.style.color = '#16a34a'; }
+    if (elRef) { elRef.textContent = 'â‚¹' + refEarnings; elRef.style.color = '#16a34a'; }
     const refBadge = document.getElementById('referral-earnings-badge');
-    if (refBadge) refBadge.textContent = '₹' + refEarnings;
+    if (refBadge) refBadge.textContent = 'â‚¹' + refEarnings;
   } catch {}
 }
 window._refreshProfileStats = _refreshProfileStats;
@@ -1619,9 +1448,25 @@ window._refreshProfileStats = _refreshProfileStats;
 })();
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 13 — VOICE WELCOME
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 13 â€” REFERRAL CHANNELS IN PROFILE
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+function _injectChannelsInProfile() {
+  const profileHome = document.getElementById('profile-home');
+  if (!profileHome || document.getElementById('ok-profile-channels')) return;
+  const channelDiv = document.createElement('div');
+  channelDiv.id = 'ok-profile-channels';
+  channelDiv.style.cssText = 'margin: 0 16px 16px;';
+  channelDiv.innerHTML = `<div id="ok-ref-channel-box"><div style="font-size:10px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.7);margin-bottom:8px;">ðŸ”” Exclusive Deals & Codes</div><p style="font-size:12px;color:rgba(255,255,255,0.7);margin:0 0 12px;line-height:1.5;">Hamare channels join karo â€” flash sales, promo codes & early access pao!</p><div style="display:flex;gap:10px;"><a href="https://t.me/outfitkart" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;text-decoration:none;font-weight:800;font-size:11px;color:white;background:linear-gradient(135deg,#0088cc,#00b0f4);"><i class="fab fa-telegram"></i> Telegram</a><a href="https://whatsapp.com/channel/0029VbCiSs06GcGJpToxKd3z" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;text-decoration:none;font-weight:800;font-size:11px;color:white;background:linear-gradient(135deg,#25D366,#128C7E);"><i class="fab fa-whatsapp"></i> WhatsApp</a></div><div style="display:flex;gap:10px;margin-top:10px;"><a href="https://www.instagram.com/outfitkart_ecommers?igsh=MWUwNTNzczI4YjZsdw==" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;text-decoration:none;font-weight:800;font-size:11px;color:white;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);"><i class="fab fa-instagram"></i> Instagram</a><a href="https://youtube.com/@outfitkart-official?si=SJOr76KDH_H99JDt" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;text-decoration:none;font-weight:800;font-size:11px;color:white;background:linear-gradient(135deg,#ff0000,#cc0000);"><i class="fab fa-youtube"></i> YouTube</a></div></div></div>`;
+  const lastSection = profileHome.querySelectorAll('.bg-white.rounded-2xl.shadow-sm.border.overflow-hidden.mb-4')[2];
+  if (lastSection) lastSection.insertAdjacentElement('beforebegin', channelDiv);
+  else profileHome.appendChild(channelDiv);
+}
+
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 14 â€” VOICE WELCOME
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 (function _setupVoiceWelcome() {
   if (window._voiceWelcomeReady) return;
   window._voiceWelcomeReady = true;
@@ -1674,9 +1519,9 @@ window._refreshProfileStats = _refreshProfileStats;
 })();
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 14 — ADMIN ADS TAB INJECTION
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 15 â€” ADMIN ADS TAB INJECTION
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _injectAdminAdsTab() {
   if (!document.getElementById('btn-admin-ads')) {
     const payoutBtn = document.getElementById('btn-admin-payout');
@@ -1708,7 +1553,7 @@ function _injectAdminAdsTab() {
           <h4 class="font-bold text-sm mb-3 flex items-center gap-2"><i class="fas fa-plus-circle text-blue-500"></i> New Advertisement</h4>
           <div class="grid grid-cols-2 gap-3 mb-3">
             <div><label class="block text-[10px] font-black text-gray-500 uppercase mb-1">Title *</label><input type="text" id="new-ad-title" placeholder="e.g. HDFC Card" class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-300"></div>
-            <div><label class="block text-[10px] font-black text-gray-500 uppercase mb-1">Subtitle</label><input type="text" id="new-ad-subtitle" placeholder="₹500 cashback" class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-300"></div>
+            <div><label class="block text-[10px] font-black text-gray-500 uppercase mb-1">Subtitle</label><input type="text" id="new-ad-subtitle" placeholder="â‚¹500 cashback" class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-300"></div>
             <div><label class="block text-[10px] font-black text-gray-500 uppercase mb-1">Image URL *</label><input type="url" id="new-ad-img" placeholder="https://..." class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-300"></div>
             <div><label class="block text-[10px] font-black text-gray-500 uppercase mb-1">Link URL</label><input type="url" id="new-ad-link" placeholder="https://..." class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-300"></div>
             <div><label class="block text-[10px] font-black text-gray-500 uppercase mb-1">Badge</label><input type="text" id="new-ad-badge" placeholder="2% Cashback" class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-300"></div>
@@ -1742,17 +1587,16 @@ function _injectAdminAdsTab() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 15 — MUTATION OBSERVER & NAVIGATE PATCHES
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 16 â€” MUTATION OBSERVER & NAVIGATE PATCHES
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _initObservers() {
   const obs = new MutationObserver(mutations => {
     mutations.forEach(m => {
       if (m.type !== 'attributes' || m.attributeName !== 'class') return;
       const el = m.target;
       if (el.id === 'user-dashboard' && !el.classList.contains('hidden')) {
-        setTimeout(() => _injectLevelBadge(parseInt(document.getElementById('stat-orders-count')?.textContent)||0), 200);
-        setTimeout(() => _injectProfileSocialCard(), 300);
+        setTimeout(() => { _injectChannelsInProfile(); _injectLevelBadge(parseInt(document.getElementById('stat-orders-count')?.textContent)||0); }, 200);
       }
       if (el.id === 'view-home' && !el.classList.contains('hidden')) {
         setTimeout(() => { _renderHomePromoBanner(); _renderTrustStrip(); _renderShopByCategorySection(); }, 200);
@@ -1783,7 +1627,7 @@ function _patchNavigateForAll() {
     if (view === 'profile') {
       setTimeout(() => { const u = _getStoredUser(); if (u) _showProfileDashboard(u); }, 200);
       setTimeout(() => _injectLevelBadge(parseInt(document.getElementById('stat-orders-count')?.textContent)||0), 400);
-      setTimeout(() => _injectProfileSocialCard(), 500);
+      setTimeout(_injectChannelsInProfile, 300);
       setTimeout(_refreshProfileStats, 500);
       setTimeout(_refreshProfileStats, 1500);
     }
@@ -1795,9 +1639,9 @@ function _patchNavigateForAll() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   MASTER INIT — EXIT INTENT PROMO REMOVED, GIVEAWAY REMOVED
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   MASTER INIT
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function _initMergedPatch() {
   // 1. Profile z-index fix
   document.querySelectorAll('.profile-page').forEach(p => { p.style.zIndex = '200'; });
@@ -1865,7 +1709,7 @@ function _initMergedPatch() {
     };
   }
 
-  console.log('%c🛍️ OutfitKart MegaPatch MERGED v5+v6+Fixes ✅ (Giveaway & Exit Intent Removed)', 'background:#e11d48;color:white;font-weight:900;font-size:12px;padding:4px 12px;border-radius:6px;');
+  console.log('%cðŸ›ï¸ OutfitKart MegaPatch MERGED v5+v6+Fixes âœ… ALL SYSTEMS GO', 'background:#e11d48;color:white;font-weight:900;font-size:12px;padding:4px 12px;border-radius:6px;');
 }
 
 /* Boot */
