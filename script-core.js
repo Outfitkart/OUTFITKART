@@ -1339,6 +1339,12 @@ async function loadInfluencerRequests(){if(!currentUser)return;const container=d
 
 /* ── Profile Page Navigation ─────────────────────────── */
 function openProfilePage(page) {
+    // ✅ Pehle profile view pe navigate karo
+    const profileView = document.getElementById('view-profile');
+    if (profileView && profileView.classList.contains('hidden')) {
+        navigate('profile'); // yeh view-profile ko show karega
+    }
+
     // hide all profile pages
     document.querySelectorAll('.profile-page').forEach(p => p.classList.add('hidden'));
     const target = document.getElementById(`profile-page-${page}`);
@@ -1352,7 +1358,6 @@ function openProfilePage(page) {
     if (page === 'influencer') loadInfluencerRequests();
     if (page === 'info') {
         setTimeout(() => { _fillProfileGender(); loadUserReferralCode(); }, 60);
-        // sync avatar
         const img2 = document.getElementById('prof-avatar-img2');
         if (img2 && currentUser?.profile_pic) img2.src = currentUser.profile_pic;
     }
