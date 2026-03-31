@@ -1,10 +1,13 @@
+R,
+});
+
+})();
 'use strict';
 /* ================================================================
    OutfitKart — CATEGORIES NAV PATCH v5.0
    - Bottom nav "Categories" already set in index.html
    - Har subcat ka real Unsplash image hardcoded hai
    - Products load hone pe real product images replace kar denge
-   - Cart page Flipkart style (empty bug fixed)
    ================================================================ */
 
 (function _okCatPatch() {
@@ -20,7 +23,7 @@
   #ok-cph{background:white;height:56px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 6px rgba(0,0,0,.08);flex-shrink:0;}
   #ok-cph h2{font-size:1.05rem;font-weight:900;color:#111827;margin:0;}
   #ok-cpbody{display:flex;flex:1;overflow:hidden;}
-  #ok-csb{width:90px;flex-shrink:0;background:#efefef;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  #ok-csb{width:90px;flex-shrink:0;background:#efefef;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:80px;}
   #ok-csb::-webkit-scrollbar{display:none;}
   .ok-si{display:flex;flex-direction:column;align-items:center;padding:12px 6px;cursor:pointer;border-left:3px solid transparent;text-align:center;gap:5px;}
   .ok-si.active{background:white;border-left-color:#e11d48;}
@@ -28,7 +31,7 @@
   .ok-si.active img{border-color:#e11d48;}
   .ok-si span{font-size:9.5px;font-weight:700;color:#4b5563;line-height:1.2;word-break:break-word;}
   .ok-si.active span{color:#e11d48;}
-  #ok-crp{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:white;padding:10px;}
+  #ok-crp{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:white;padding:10px;padding-bottom:80px;}
   .ok-vabtn{display:flex;align-items:center;justify-content:space-between;background:#fff1f2;border:1.5px solid #fecdd3;border-radius:12px;padding:11px 14px;cursor:pointer;margin-bottom:10px;}
   .ok-vabtn:active{background:#ffe4e6;}
   .ok-vabtn span{font-size:12px;font-weight:800;color:#e11d48;}
@@ -44,51 +47,6 @@
   .ok-adc img{width:100%;height:76px;object-fit:cover;display:block;}
   .ok-adbg{position:absolute;top:5px;right:5px;background:rgba(0,0,0,.5);color:white;font-size:7px;font-weight:800;padding:2px 5px;border-radius:99px;}
 
-  /* Cart */
-  #view-cart-page{position:fixed;inset:0;z-index:53;background:#f5f5f5;display:flex;flex-direction:column;overflow:hidden;}
-  #view-cart-page.hidden{display:none!important;}
-  #ok-ch{background:white;height:56px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 6px rgba(0,0,0,.08);flex-shrink:0;}
-  #ok-ch h2{font-size:1.05rem;font-weight:900;color:#111827;margin:0;}
-  .ok-chc{font-size:.9rem;font-weight:600;color:#6b7280;margin-left:5px;}
-  #ok-cbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px;}
-  #ok-addr{background:white;padding:12px 16px;border-bottom:1px solid #e5e7eb;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-  .ok-al{flex:1;min-width:0;}
-  .ok-al-lbl{font-size:10px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;}
-  .ok-al-main{font-size:13px;font-weight:700;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;}
-  .ok-al-sub{font-size:11px;color:#6b7280;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .ok-addr-chg{font-size:13px;font-weight:800;color:#2563eb;cursor:pointer;flex-shrink:0;background:none;border:none;padding:0;}
-  .ok-ci{background:white;margin-bottom:8px;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;padding:14px 16px;display:flex;gap:14px;}
-  .ok-ci-img{width:80px;height:100px;object-fit:cover;border-radius:6px;border:1px solid #e5e7eb;flex-shrink:0;background:#f3f4f6;}
-  .ok-ci-info{flex:1;min-width:0;}
-  .ok-ci-name{font-size:13px;font-weight:600;color:#111827;line-height:1.4;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-  .ok-ci-meta{font-size:11px;color:#6b7280;margin-bottom:6px;}
-  .ok-ci-pr{display:flex;align-items:baseline;gap:6px;margin-bottom:8px;flex-wrap:wrap;}
-  .ok-ci-disc{font-size:12px;font-weight:800;color:#388e3c;}
-  .ok-ci-mrp{font-size:11px;color:#9ca3af;text-decoration:line-through;}
-  .ok-ci-final{font-size:14px;font-weight:900;color:#111827;}
-  .ok-qrow{display:inline-flex;align-items:center;border:1px solid #e5e7eb;border-radius:4px;overflow:hidden;margin-bottom:10px;}
-  .ok-qbtn{width:30px;height:28px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#374151;cursor:pointer;background:none;border:none;}
-  .ok-qbtn:active{background:#f3f4f6;}
-  .ok-qnum{width:30px;text-align:center;font-size:13px;font-weight:700;color:#111827;border-left:1px solid #e5e7eb;border-right:1px solid #e5e7eb;height:28px;display:flex;align-items:center;justify-content:center;}
-  .ok-ci-acts{display:flex;border-top:1px solid #e5e7eb;padding-top:10px;}
-  .ok-ci-ab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;font-weight:700;color:#374151;cursor:pointer;padding:6px 0;background:none;border:none;}
-  .ok-ci-ab:first-child{border-right:1px solid #e5e7eb;}
-  #ok-csum{background:white;margin-bottom:8px;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;padding:14px 16px;display:none;}
-  #ok-csum h4{font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin:0 0 12px;}
-  .ok-pr{display:flex;justify-content:space-between;font-size:13px;color:#374151;margin-bottom:8px;}
-  .ok-pr.ok-tot{font-weight:900;color:#111827;font-size:14px;border-top:1px dashed #e5e7eb;padding-top:10px;margin-top:4px;}
-  .ok-savbox{margin-top:10px;background:#e8f5e9;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;color:#388e3c;}
-  #ok-cempty{display:none;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center;}
-  #ok-cempty.show{display:flex!important;}
-  #ok-cempty i{font-size:64px;color:#e5e7eb;margin-bottom:16px;display:block;}
-  #ok-cempty h3{font-size:1.1rem;font-weight:800;color:#374151;margin:0 0 6px;}
-  #ok-cempty p{font-size:13px;color:#9ca3af;margin:0 0 20px;}
-  #ok-cempty button{background:#2874f0;color:white;font-size:13px;font-weight:800;padding:12px 28px;border-radius:4px;border:none;cursor:pointer;}
-  #ok-cbar{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;z-index:60;box-shadow:0 -4px 16px rgba(0,0,0,.08);}
-  #ok-cbar.hidden{display:none!important;}
-  .ok-bamt{display:block;font-size:18px;font-weight:900;color:#111827;}
-  .ok-bsav{font-size:10px;color:#388e3c;font-weight:700;}
-  #ok-cpbtn{background:#2874f0;color:white;font-size:14px;font-weight:900;padding:12px 24px;border-radius:4px;border:none;cursor:pointer;}
   #ok-nav-categories.ok-nav-active{color:#e11d48!important;}
   `;
   document.head.appendChild(s);
@@ -119,7 +77,7 @@ const CATS = [
         {n:'Slim Fit Jeans',      img:'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80'},
         {n:'Cotton Trousers',     img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80'},
         {n:'Joggers',             img:'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=200&h=220&fit=crop&q=80'},
-        {n:'Cargo Pants',         img:'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=220&fit=crop&q=80'},
+        {n:'Cargo Pants',         img:'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=200&h=220&fit=crop&q=80'},
         {n:'Formal Pant',         img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=200&h=220&fit=crop&q=80'},
         {n:'Trousers',            img:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80'},
       ]},
@@ -138,20 +96,20 @@ const CATS = [
     groups:[
       { label:'🥻 Ethnic', subs:[
         {n:'Sarees',   img:'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=200&h=220&fit=crop&q=80'},
-        {n:'Kurtis',   img:'https://images.unsplash.com/photo-1610189352649-ff58ea8ffe71?w=200&h=220&fit=crop&q=80'},
+        {n:'Kurtis',   img:'https://images.unsplash.com/photo-1582718560869-01152e38cfd4?w=200&h=220&fit=crop&q=80'},
         {n:'Lehengas', img:'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=200&h=220&fit=crop&q=80'},
       ]},
       { label:'👖 Bottomwear', subs:[
         {n:'Straight Fit Jeans', img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=220&fit=crop&q=80'},
         {n:'Trousers',           img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=200&h=220&fit=crop&q=80'},
         {n:'Baggy Jeans',        img:'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80'},
-        {n:'Cargo Jeans',        img:'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=220&fit=crop&q=80'},
+        {n:'Cargo Jeans',        img:'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=200&h=220&fit=crop&q=80'},
         {n:'Skinny Fit Jeans',   img:'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80'},
         {n:'Slim Fit Jeans',     img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80'},
       ]},
       { label:'👗 Western', subs:[
         {n:'Tops',          img:'https://images.unsplash.com/photo-1598554747436-c9293d6a588f?w=200&h=220&fit=crop&q=80'},
-        {n:'Palazzo',       img:'https://images.unsplash.com/photo-1594938374182-a57f7f80b9d9?w=200&h=220&fit=crop&q=80'},
+        {n:'Palazzo',       img:'https://images.unsplash.com/photo-1583496661160-fb5886a773ec?w=200&h=220&fit=crop&q=80'},
         {n:'Tops & Tunics', img:'https://images.unsplash.com/photo-1564257577049-b26d2ee15f21?w=200&h=220&fit=crop&q=80'},
         {n:'Dresses',       img:'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=200&h=220&fit=crop&q=80'},
         {n:'Skirts',        img:'https://images.unsplash.com/photo-1583496661160-fb5886a773ec?w=200&h=220&fit=crop&q=80'},
@@ -342,17 +300,29 @@ function _renderRight(i){
     groupsHtml+=`<div class="ok-glbl">${grp.label}</div><div class="ok-scg">${cards}</div>`;
   });
 
+  const promoHtml=`<div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;">
+    <div onclick="if(typeof _closeCategories==='function')_closeCategories();if(typeof openProfilePage==='function')openProfilePage('referrals');" style="background:linear-gradient(135deg,#064e3b,#065f46);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+      <div style="width:38px;height:38px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">🎁</div>
+      <div style="flex:1;min-width:0;"><div style="font-size:11px;font-weight:900;color:white;">Refer &amp; Earn ₹50+</div><div style="font-size:9.5px;color:rgba(255,255,255,.7);margin-top:2px;">Dost ko refer karo, 5% commission pao</div></div>
+      <i class="fas fa-chevron-right" style="color:rgba(255,255,255,.5);font-size:10px;"></i>
+    </div>
+    <div onclick="if(typeof _closeCategories==='function')_closeCategories();if(typeof openProfilePage==='function')openProfilePage('influencer');" style="background:linear-gradient(135deg,#4c1d95,#6d28d9);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+      <div style="width:38px;height:38px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">🎬</div>
+      <div style="flex:1;min-width:0;"><div style="font-size:11px;font-weight:900;color:white;">Influencer Program</div><div style="font-size:9.5px;color:rgba(255,255,255,.7);margin-top:2px;">Video banao, ₹50 per 1K views kamao</div></div>
+      <i class="fas fa-chevron-right" style="color:rgba(255,255,255,.5);font-size:10px;"></i>
+    </div>
+  </div>`;
+
   right.innerHTML=`${adsHtml}
     <div class="ok-vabtn" onclick="${vaAct}">
       <span><i class="fas fa-th-large" style="margin-right:6px;"></i>View All ${cleanLabel}</span>
       <i class="fas fa-chevron-right"></i>
-    </div>${groupsHtml}`;
+    </div>${groupsHtml}${promoHtml}`;
   right.scrollTop=0;
 }
 
 window._openCategories=function(){
   document.querySelectorAll('.view-section').forEach(v=>v.classList.add('hidden'));
-  document.getElementById('view-cart-page')?.classList.add('hidden');
   document.getElementById('view-categories')?.classList.remove('hidden');
   _navActive(true);window.currentView='categories';
 };
@@ -373,184 +343,9 @@ function _watchProducts(){
 }
 
 
-/* ── CART PAGE ── */
-function _buildCartPage(){
-  if(document.getElementById('view-cart-page'))return;
-  const page=document.createElement('div');
-  page.id='view-cart-page';page.className='hidden';
-  page.innerHTML=`
-    <div id="ok-ch"><h2>My Cart<span class="ok-chc" id="ok-chc"></span></h2></div>
-    <div id="ok-cbody">
-      <div id="ok-addr">
-        <div class="ok-al">
-          <div class="ok-al-lbl">Deliver to</div>
-          <div class="ok-al-main" id="ok-al-main">Select address</div>
-          <div class="ok-al-sub" id="ok-al-sub"></div>
-        </div>
-        <button class="ok-addr-chg" onclick="_closeCartPage();proceedToCheckout&&proceedToCheckout()">Change</button>
-      </div>
-      <div id="ok-citems"></div>
-      <div id="ok-csum">
-        <h4>Price Details</h4>
-        <div class="ok-pr"><span id="ok-ps-lbl">Price</span><span id="ok-ps-mrp">₹0</span></div>
-        <div class="ok-pr" id="ok-ps-dr"><span>Discount</span><span style="color:#388e3c;font-weight:800;" id="ok-ps-d">-₹0</span></div>
-        <div class="ok-pr ok-tot"><span>Total Amount</span><span id="ok-ps-tot">₹0</span></div>
-        <div class="ok-savbox">🎉 You will save <span id="ok-ps-sv">₹0</span> on this order</div>
-      </div>
-      <div id="ok-cempty">
-        <i class="fas fa-shopping-cart"></i>
-        <h3>Your cart is empty!</h3>
-        <p>Add items to get started</p>
-        <button onclick="_closeCartPage();navigate('home')">Shop Now</button>
-      </div>
-    </div>
-    <div id="ok-cbar" class="hidden">
-      <div>
-        <span class="ok-bamt" id="ok-bamt">₹0</span>
-        <span class="ok-bsav" id="ok-bsav"></span>
-      </div>
-      <button id="ok-cpbtn" onclick="_closeCartPage();proceedToCheckout&&proceedToCheckout()">PLACE ORDER</button>
-    </div>`;
-  (document.getElementById('app-content')||document.querySelector('main')||document.body).appendChild(page);
-}
-
-function _getCart(){
-  for(const k of['outfitkart_cart','ok_cart','cart']){
-    try{const r=localStorage.getItem(k);if(r){const p=JSON.parse(r);if(Array.isArray(p)&&p.length)return p;}}catch{}
-  }
-  return Array.isArray(window.cart)&&window.cart.length?[...window.cart]:[];
-}
-function _saveCart(c){
-  try{localStorage.setItem('outfitkart_cart',JSON.stringify(c));}catch{}
-  try{localStorage.setItem('ok_cart',JSON.stringify(c));}catch{}
-  window.cart=c;window.cartItems=c;
-}
-function _getUser(){
-  for(const k of['outfitkart_user','ok_user','user_data','currentUser','outfitkart_session']){
-    try{const r=localStorage.getItem(k);if(r){const u=JSON.parse(r);if(u&&(u.name||u.mobile))return u;}}catch{}
-  }
-  return window.currentUser||null;
-}
-
-window._openCartPage=function(){
-  document.querySelectorAll('.view-section').forEach(v=>v.classList.add('hidden'));
-  document.getElementById('view-categories')?.classList.add('hidden');
-  const sb=document.getElementById('cart-sidebar');
-  if(sb)sb.style.transform='translateX(100%)';
-  document.getElementById('cart-overlay')?.classList.add('hidden');
-  document.getElementById('view-cart-page')?.classList.remove('hidden');
-  window.currentView='cart';_navActive(false);_renderCart();
-};
-window._closeCartPage=function(){
-  document.getElementById('view-cart-page')?.classList.add('hidden');
-};
-
-function _renderCart(){
-  const cart=_getCart();
-  const citems=document.getElementById('ok-citems');
-  const csum=document.getElementById('ok-csum');
-  const cempty=document.getElementById('ok-cempty');
-  const cbar=document.getElementById('ok-cbar');
-  const chc=document.getElementById('ok-chc');
-  if(!citems)return;
-
-  /* Address */
-  const u=_getUser();
-  const am=document.getElementById('ok-al-main');
-  const as=document.getElementById('ok-al-sub');
-  if(am){
-    if(u&&(u.name||u.full_name)){
-      am.textContent=`${u.name||u.full_name}${u.city?', '+u.city:''}${u.pincode?' '+u.pincode:''}`;
-      if(as)as.textContent=u.road||u.house||u.address||'';
-    }else{am.textContent='Select delivery address';if(as)as.textContent='';}
-  }
-
-  if(!cart.length){
-    /* EMPTY */
-    citems.innerHTML='';
-    if(csum)csum.style.display='none';
-    if(cbar)cbar.classList.add('hidden');
-    if(chc)chc.textContent='';
-    if(cempty)cempty.classList.add('show');
-    return;
-  }
-  /* HAS ITEMS */
-  if(cempty)cempty.classList.remove('show');
-  if(csum)csum.style.display='block';
-  if(cbar)cbar.classList.remove('hidden');
-  if(chc)chc.textContent=` (${cart.length})`;
-
-  let mrpT=0,finT=0;
-  citems.innerHTML=cart.map((item,idx)=>{
-    const img=item.img||(item.imgs&&item.imgs[0])||'https://placehold.co/80x100/f3f4f6/9ca3af?text=?';
-    const name=item.name||'Product';
-    const size=item.size||item.selectedSize||'';
-    const qty=item.qty||item.quantity||1;
-    const pr=item.price||0;
-    const op=item.oldprice||item.mrp||Math.round(pr*1.4);
-    const disc=op>pr?Math.round(((op-pr)/op)*100):0;
-    const fin=pr*qty,mrp=op*qty;
-    mrpT+=mrp;finT+=fin;
-    return `<div class="ok-ci">
-      <img class="ok-ci-img" src="${img}" alt="${name}" onerror="this.src='https://placehold.co/80x100/f3f4f6/9ca3af?text=?'">
-      <div class="ok-ci-info">
-        <div class="ok-ci-name">${name}</div>
-        <div class="ok-ci-meta">${size?'Size: '+size+' · ':''}Seller: OutfitKart</div>
-        <div class="ok-ci-pr">
-          ${disc>0?`<span class="ok-ci-disc">${disc}% off</span>`:''}
-          ${op>pr?`<span class="ok-ci-mrp">₹${op.toLocaleString('en-IN')}</span>`:''}
-          <span class="ok-ci-final">₹${fin.toLocaleString('en-IN')}</span>
-        </div>
-        <div class="ok-qrow">
-          <button class="ok-qbtn" onclick="_okQ(${idx},-1)">−</button>
-          <span class="ok-qnum">${qty}</span>
-          <button class="ok-qbtn" onclick="_okQ(${idx},1)">+</button>
-        </div>
-        <div class="ok-ci-acts">
-          <button class="ok-ci-ab" onclick="_okR(${idx})"><i class="fas fa-trash-alt" style="font-size:10px;"></i> REMOVE</button>
-          <button class="ok-ci-ab" onclick="_closeCartPage();navigate('profile','wishlist')"><i class="far fa-heart" style="font-size:10px;"></i> SAVE FOR LATER</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-
-  const saved=mrpT-finT;
-  const _e=id=>document.getElementById(id);
-  if(_e('ok-ps-lbl'))_e('ok-ps-lbl').textContent=`Price (${cart.length} item${cart.length>1?'s':''})`;
-  if(_e('ok-ps-mrp'))_e('ok-ps-mrp').textContent=`₹${mrpT.toLocaleString('en-IN')}`;
-  if(_e('ok-ps-d'))_e('ok-ps-d').textContent=`-₹${saved.toLocaleString('en-IN')}`;
-  if(_e('ok-ps-dr'))_e('ok-ps-dr').style.display=saved>0?'flex':'none';
-  if(_e('ok-ps-tot'))_e('ok-ps-tot').textContent=`₹${finT.toLocaleString('en-IN')}`;
-  if(_e('ok-ps-sv'))_e('ok-ps-sv').textContent=`₹${saved.toLocaleString('en-IN')}`;
-  if(_e('ok-bamt'))_e('ok-bamt').textContent=`₹${finT.toLocaleString('en-IN')}`;
-  if(_e('ok-bsav')&&saved>0)_e('ok-bsav').textContent=`You save ₹${saved.toLocaleString('en-IN')}`;
-}
-
-window._okQ=function(idx,d){
-  const c=_getCart();if(!c[idx])return;
-  c[idx].qty=Math.max(1,(c[idx].qty||c[idx].quantity||1)+d);c[idx].quantity=c[idx].qty;
-  _saveCart(c);_renderCart();
-  typeof updateCartCount==='function'&&updateCartCount();
-  typeof renderCart==='function'&&renderCart();
-};
-window._okR=function(idx){
-  const c=_getCart();c.splice(idx,1);_saveCart(c);_renderCart();
-  typeof updateCartCount==='function'&&updateCartCount();
-  typeof renderCart==='function'&&renderCart();
-};
 
 
 /* ── NAV PATCHES ── */
-function _patchCartTriggers(){
-  if(window._okTCP)return;window._okTCP=true;
-  window.toggleCart=function(){
-    const cp=document.getElementById('view-cart-page');
-    if(cp&&!cp.classList.contains('hidden'))_closeCartPage();else _openCartPage();
-  };
-  document.querySelectorAll('[onclick*="toggleCart"]').forEach(el=>{
-    if(!el.closest('nav.fixed.bottom-0'))el.setAttribute('onclick','_openCartPage()');
-  });
-}
 
 function _navActive(on){
   const btn=document.getElementById('ok-nav-categories');
@@ -564,7 +359,6 @@ function _patchNavigate(){
   const orig=window.navigate;
   window.navigate=function(view,...args){
     if(view!=='categories'){_closeCategories();_navActive(false);}
-    if(view!=='cart')_closeCartPage();
     return orig(view,...args);
   };
 }
@@ -573,12 +367,9 @@ function _patchNavigate(){
 /* ── INIT ── */
 function _init(){
   _buildCatPage();
-  _buildCartPage();
   _watchProducts();
 
   const wn=setInterval(()=>{if(typeof window.navigate==='function'){clearInterval(wn);_patchNavigate();}},300);
-  setTimeout(_patchCartTriggers,1200);
-  setTimeout(_patchCartTriggers,3000);
 
   /* Ads watch */
   let aa=0;
@@ -592,8 +383,6 @@ else setTimeout(_init,500);
 
 Object.assign(window,{
   _openCategories,_closeCategories,_okCatSel:window._okCatSel,
-  _openCartPage:window._openCartPage,_closeCartPage:window._closeCartPage,
-  _okQ:window._okQ,_okR:window._okR,
 });
 
 })();
