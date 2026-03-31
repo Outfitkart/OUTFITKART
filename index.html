@@ -19,7 +19,164 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <!-- Styles moved to style.css -->
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; -webkit-tap-highlight-color: transparent; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tab-btn.active { border-left: 4px solid #e11d48; background-color: #fff1f2; color: #e11d48; font-weight: bold; }
+        .admin-nav-btn { color: #6b7280; background-color: transparent; transition: all 0.18s ease; }
+        .admin-nav-btn:hover { background-color: #f5f3ff; color: #7c3aed; }
+        .admin-nav-btn.active { background: linear-gradient(90deg, #ede9fe 0%, #f5f3ff 100%); color: #7c3aed; border-left: 3px solid #7c3aed; font-weight: 700; }
+        .admin-nav-btn .nav-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: background 0.18s; flex-shrink: 0; }
+        .admin-nav-btn.active .nav-icon { background: #7c3aed; color: white; }
+        .admin-nav-btn:not(.active) .nav-icon { background: #f3f4f6; color: #6b7280; }
+        .admin-nav-btn:hover:not(.active) .nav-icon { background: #ede9fe; color: #7c3aed; }
+        #btn-admin-gold.active { background: linear-gradient(90deg,#fffbeb,#fef3c7) !important; border-left: 3px solid #C9A84C !important; }
+        #btn-admin-gold.active .nav-icon { background: linear-gradient(135deg,#C9A84C,#B8860B) !important; color: #1a0800 !important; }
+        #btn-admin-promo.active { background: linear-gradient(90deg,#fff1f2,#ffe4e6) !important; border-left: 3px solid #e11d48 !important; }
+        #btn-admin-promo.active .nav-icon { background: linear-gradient(135deg,#e11d48,#be123c) !important; color: white !important; }
+        .size-btn.selected { border-color: #e11d48; background-color: #e11d48; color: white; }
+        #tracking-modal { backdrop-filter: blur(8px); }
+        .step-circle { width: 2rem; height: 2rem; border-radius: 9999px; border: 2px solid #d1d5db; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; transition: all 0.3s; }
+        .pdp-img-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 0; border-radius: 0.5rem; border: 1px solid #e5e7eb; }
+        .pdp-img-slider img { scroll-snap-align: start; min-width: 100%; height: 420px; object-fit: cover; flex-shrink: 0; }
+        .pdp-thumb-strip { display: flex; gap: 8px; overflow-x: auto; padding: 8px 0; }
+        .pdp-thumb-strip::-webkit-scrollbar { display: none; }
+        .pdp-thumb { min-width: 60px; width: 60px; height: 72px; object-fit: cover; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: border-color 0.2s, transform 0.2s; flex-shrink: 0; }
+        .pdp-thumb.active { border-color: #e11d48; transform: scale(1.05); }
+        .avatar-upload-wrapper { position: relative; display: inline-block; }
+        .avatar-upload-btn { position: absolute; bottom: 2px; right: 2px; background: #1f2937; color: white; border-radius: 9999px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; border: 2px solid white; transition: background 0.2s; }
+        .avatar-upload-btn:hover { background: #e11d48; }
+        .admin-order-items { display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto; padding-right: 4px; }
+        .admin-order-item { display: flex; gap: 10px; align-items: center; background: #f9fafb; border-radius: 8px; padding: 8px; border: 1px solid #e5e7eb; }
+        .admin-order-item img { width: 48px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0; border: 1px solid #e5e7eb; }
+        .admin-order-item-info { flex: 1; min-width: 0; }
+        .admin-order-item-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #111827; }
+        .admin-order-item-meta { font-size: 11px; color: #6b7280; margin-top: 2px; }
+        .admin-order-item-price { font-size: 12px; font-weight: 700; color: #e11d48; margin-top: 2px; }
+        @keyframes sharePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(225,29,72,0.4); } 50% { box-shadow: 0 0 0 8px rgba(225,29,72,0); } }
+        .share-outfitkart-btn { animation: sharePulse 2.5s infinite; }
+        #shop-header-bar { position: sticky !important; top: 5px !important; z-index: 40 !important; background: #ffffff !important; border-bottom: 1px solid #f3f4f6 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important; margin: 0 !important; padding-bottom: 8px !important; }
+        #view-shop { padding-top: 0; }
+        #shop-grid { padding-top: 0.5rem; position: relative; z-index: 1; }
+        .product-card { position: relative; z-index: 1; }
+        #subcategory-filters { display: flex; flex-direction: row; align-items: center; gap: 6px; overflow-x: auto; overflow-y: hidden; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 6px; max-height: none; opacity: 1; transition: opacity 0.3s ease, max-height 0.3s ease; }
+        #subcategory-filters::-webkit-scrollbar { display: none; }
+        #subcategory-filters.subcat-hidden { max-height: 0; opacity: 0; overflow: hidden; padding: 0 !important; }
+        body.admin-active > nav { display: none !important; }
+        body.admin-active { padding-bottom: 0 !important; }
+        *, *::before, *::after { box-sizing: border-box; }
+        img { max-width: 100%; height: auto; }
+        body, main, .view-section { overflow-x: hidden; max-width: 100vw; }
+        .product-card { height: 100%; }
+        .product-card img { height: 180px; width: 100%; object-fit: cover; }
+        @media (min-width: 640px)  { .product-card img { height: 200px; } }
+        @media (min-width: 1024px) { .product-card img { height: 220px; } }
+        .pdp-img-slider img { height: 320px; }
+        @media (min-width: 768px) { .pdp-img-slider img { height: 420px; } }
+        #view-checkout { overflow-x: hidden; }
+        #checkout-steps-container { padding: 0.75rem; overflow-x: hidden; }
+        @media (max-width: 768px) {
+            #checkout-step-2 > div, #checkout-step-3 > div { display: flex; flex-direction: column; gap: 1rem; }
+            #checkout-step-2 > div > div, #checkout-step-3 > div > div { width: 100% !important; }
+        }
+        @media (max-width: 640px) {
+            #admin-tab-products, #admin-tab-inventory, #admin-tab-order, #admin-tab-users, #admin-tab-payout, #admin-tab-referrals, #admin-tab-influencer, #admin-tab-dashboard, #admin-tab-gold, #admin-tab-promo { padding: 0.75rem; }
+            .admin-order-items { max-height: 240px; }
+        }
+        #cart-sidebar { display: flex; flex-direction: column; }
+        #cart-items { flex: 1 1 0; min-height: 0; overflow-y: auto; }
+        #banner-carousel { height: 300px; }
+        @media (min-width: 640px)  { #banner-carousel { height: 340px; } }
+        @media (min-width: 1024px) { #banner-carousel { height: 400px; } }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        button, a, [onclick] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        nav { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+        @supports (padding-bottom: env(safe-area-inset-bottom)) { body { padding-bottom: max(5rem, calc(4rem + env(safe-area-inset-bottom))); } }
+        body.admin-active header { display: none !important; }
+        body.admin-active main { padding-top: 0 !important; }
+        body.admin-active #admin-sidebar { top: 0 !important; height: 100vh !important; }
+        body.admin-active .flex-1 { padding-top: 0 !important; }
+        .admin-content-tab.hidden { display: none !important; }
+        @media (max-width: 768px) {
+            body.admin-active #view-admin > div:first-child { top: 0 !important; }
+            body.admin-active #admin-sidebar { top: 0 !important; height: 100vh !important; }
+            #admin-sidebar { height: calc(100vh - 4rem); top: 4rem; }
+        }
+        input, select, textarea, button { font-size: 16px; }
+        @media (max-width: 640px) { input[type="text"], input[type="number"], input[type="tel"], input[type="email"], input[type="password"], select, textarea { font-size: 16px !important; } }
+        #admin-sidebar { background: #ffffff; }
+        .admin-sidebar-logo { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
+        .admin-nav-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #9ca3af; padding: 0 16px; margin: 12px 0 4px; }
+        #view-category .sticky { top: 8px !important; z-index: 0 !important; background: white; }
+        #cat-view-all-btn { display: flex !important; visibility: visible !important; }
+        #admin-user-name-pill { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 9999px; padding: 4px 12px; font-size: 12px; font-weight: 700; color: white; backdrop-filter: blur(4px); }
+        #view-gold { background: #fdfcfa; min-height: 100vh; }
+        #gold-filter-bar { position: sticky; top: 64px; z-index: 30; }
+
+        /* ── Profile Pages (Admin panel jaisa) ── */
+        .profile-page {
+            position: fixed;
+            inset: 0;
+            z-index: 55;
+            background: #F7F5F2;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 0.25s ease both;
+        }
+        .profile-page.hidden { display: none !important; }
+        .profile-page-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            height: 56px;
+            border-bottom: 1px solid #E5E2DC;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            flex-shrink: 0;
+        }
+        .profile-page-header h2 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #1C1C1E;
+            margin: 0;
+        }
+        .profile-page-header .back-btn {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: #F7F5F2;
+            border: 1px solid #E5E2DC;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: #1C1C1E;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .profile-page-header .action-btn {
+            background: #C8102E;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .profile-page-body {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .profile-menu-item { transition: background 0.15s; }
+        .profile-menu-item:active { background: #f3f4f6 !important; }
+    </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800 pb-20 flex flex-col min-h-screen overflow-x-hidden">
@@ -757,55 +914,8 @@
                     </div>
                     <div class="profile-page-body">
                         <div class="max-w-lg mx-auto p-4 space-y-3">
-
-                            <!-- Contact Support -->
-                            <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
-                                <button onclick="openWhatsAppSupport()" class="w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#F0FDF4;"><i class="fab fa-whatsapp text-green-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">WhatsApp Support</div><div class="text-xs text-gray-500">Mon-Sat 10am-7pm</div></div>
-                                    <i class="fas fa-external-link-alt text-gray-300 text-xs"></i>
-                                </button>
-                                <button onclick="openEmailSupport()" class="w-full flex items-center gap-4 px-4 py-3.5 hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#EFF6FF;"><i class="fas fa-envelope text-blue-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">Email Support</div><div class="text-xs text-gray-500">outfitkart@gmail.com</div></div>
-                                    <i class="fas fa-external-link-alt text-gray-300 text-xs"></i>
-                                </button>
-                            </div>
-
-                            <!-- Policy menu items -->
-                            <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
-                                <button onclick="openFooterPolicy('faq')" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#FFFBEB;"><i class="fas fa-question-circle text-amber-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">FAQs</div><div class="text-xs text-gray-500">Frequently asked questions</div></div>
-                                    <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                </button>
-                                <button onclick="openFooterPolicy('refund')" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#FFF1F2;"><i class="fas fa-undo-alt text-rose-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">Return &amp; Refund Policy</div><div class="text-xs text-gray-500">7-day return window</div></div>
-                                    <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                </button>
-                                <button onclick="openFooterPolicy('shipping')" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#F0FDF4;"><i class="fas fa-truck text-green-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">Shipping Policy</div><div class="text-xs text-gray-500">Delivery info &amp; timelines</div></div>
-                                    <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                </button>
-                                <button onclick="openFooterPolicy('terms')" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#F8FAFC;"><i class="fas fa-file-contract text-gray-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">Terms &amp; Conditions</div><div class="text-xs text-gray-500">Usage &amp; purchase terms</div></div>
-                                    <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                </button>
-                                <button onclick="openFooterPolicy('privacy')" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 border-b hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#F0F9FF;"><i class="fas fa-shield-alt text-blue-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">Privacy Policy</div><div class="text-xs text-gray-500">How we use your data</div></div>
-                                    <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                </button>
-                                <button onclick="openFooterPolicy('about')" class="profile-menu-item w-full flex items-center gap-4 px-4 py-3.5 hover:bg-gray-50 transition-all">
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#FAF5FF;"><i class="fas fa-info-circle text-purple-500 text-sm"></i></div>
-                                    <div class="flex-1 text-left"><div class="font-semibold text-sm text-gray-800">About OutfitKart</div><div class="text-xs text-gray-500">Our story &amp; mission</div></div>
-                                    <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-                                </button>
-                            </div>
-
+                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">FAQs <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-3 border-t"><p><strong>Q: Delivery kitne din mein hogi?</strong><br>A: Standard delivery 3-5 working days mein hogi.</p><p><strong>Q: COD available hai?</strong><br>A: Haan, Cash on Delivery available hai.</p><p><strong>Q: Exchange kaise karein?</strong><br>A: Unused items 7 days ke andar exchange kar sakte hain.</p><p><strong>Q: Wallet balance kaise earn karein?</strong><br>A: Referral links share karke 5% commission earn kar sakte hain.</p><p><strong>Q: Referral commission kab milega?</strong><br>A: Order ke 30 din baad commission confirm hota hai — delivery + return window complete hone ke baad.</p></div></div>
+                            <div class="border rounded-xl overflow-hidden"><button class="w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 font-bold flex justify-between text-sm" onclick="this.nextElementSibling.classList.toggle('hidden')">Terms &amp; Conditions <i class="fas fa-chevron-down text-gray-500"></i></button><div class="p-4 bg-white hidden text-sm text-gray-600 space-y-3 border-t"><p><strong>Return &amp; Refund:</strong> Unused items 7 days ke andar return. COD ₹9 fee non-refundable.</p><p><strong>Referral:</strong> Commission 5%, 30 days baad confirm. Fake referrals pe ban.</p><p><strong>Wallet:</strong> Min withdrawal ₹120. 24-48 hours processing.</p></div></div>
                         </div>
                     </div>
                 </div>
@@ -1201,6 +1311,7 @@
     <script src="script-core-patch.js"></script>
     <script src="giveaway-patch.js"></script>
     <script src="categories-nav-patch.js"></script>
+    <script src="mega-fix-patch.js"></script>
     
     
     <script>
@@ -1238,233 +1349,5 @@
             });
         }
     </script>
-
-    <!-- SITE FOOTER -->
-    <footer id="site-footer" class="hidden">
-        <div style="max-width:900px;margin:0 auto;padding:36px 20px 20px;">
-            <!-- Top section -->
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;padding-bottom:24px;border-bottom:1px solid #1f2937;">
-                <!-- Brand -->
-                <div>
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-                        <img src="https://i.ibb.co/5gXg0WTr/1774263119958.png" alt="OutfitKart" style="width:36px;height:36px;object-fit:contain;">
-                        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,#C9A84C,#DAA520);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">OutfitKart</span>
-                    </div>
-                    <p style="font-size:12px;color:#9ca3af;line-height:1.6;margin-bottom:12px;">Premium Fashion at Best Prices. Men, Women, Kids &amp; Perfumes. Cash on Delivery available across India.</p>
-                    <div style="display:flex;gap:10px;">
-                        <a href="https://www.instagram.com/outfitkart_ecommers" target="_blank" rel="noopener" style="width:32px;height:32px;border-radius:50%;background:#1f2937;display:flex;align-items:center;justify-content:center;color:#e1306c;font-size:14px;"><i class="fab fa-instagram"></i></a>
-                        <a href="https://t.me/outfitkart" target="_blank" rel="noopener" style="width:32px;height:32px;border-radius:50%;background:#1f2937;display:flex;align-items:center;justify-content:center;color:#0088cc;font-size:14px;"><i class="fab fa-telegram"></i></a>
-                        <a href="https://whatsapp.com/channel/0029VbCiSs06GcGJpToxKd3z" target="_blank" rel="noopener" style="width:32px;height:32px;border-radius:50%;background:#1f2937;display:flex;align-items:center;justify-content:center;color:#25D366;font-size:14px;"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <!-- Quick Links -->
-                <div>
-                    <div class="footer-heading">Quick Links</div>
-                    <ul style="list-style:none;padding:0;margin:0;space-y:6px;display:flex;flex-direction:column;gap:7px;">
-                        <li><a href="#" onclick="navigate('home');return false;">🏠 Home</a></li>
-                        <li><a href="#" onclick="navigate('shop');return false;">🛍️ Shop All</a></li>
-                        <li><a href="#" onclick="navigate('gold');return false;">⭐ OutfitKart Gold</a></li>
-                        <li><a href="#" onclick="navigate('profile');return false;">👤 My Account</a></li>
-                        <li><a href="#" onclick="openFooterPolicy('contact');return false;">📞 Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Policy Links -->
-            <div style="padding:18px 0 12px;border-bottom:1px solid #1f2937;">
-                <div class="footer-heading">Policies &amp; Help</div>
-                <div style="display:flex;flex-wrap:wrap;gap:10px 20px;">
-                    <a href="#" onclick="openFooterPolicy('privacy');return false;">Privacy Policy</a>
-                    <a href="#" onclick="openFooterPolicy('terms');return false;">Terms &amp; Conditions</a>
-                    <a href="#" onclick="openFooterPolicy('refund');return false;">Return &amp; Refund Policy</a>
-                    <a href="#" onclick="openFooterPolicy('shipping');return false;">Shipping Policy</a>
-                    <a href="#" onclick="openFooterPolicy('faq');return false;">FAQs</a>
-                    <a href="#" onclick="openFooterPolicy('about');return false;">About Us</a>
-                </div>
-            </div>
-            <!-- Bottom bar -->
-            <div style="padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;">
-                <p style="margin:0;font-size:11px;color:#6b7280;">© 2025 OutfitKart. All rights reserved.</p>
-                <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#6b7280;">
-                    <span>🔒 Secure Payments</span>
-                    <span>·</span>
-                    <span>🚚 Free Delivery</span>
-                    <span>·</span>
-                    <span>💚 COD Available</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- POLICY PAGES (Footer se open honge) -->
-    <div id="footer-policy-page" class="footer-policy-page hidden">
-        <div class="fpp-header">
-            <button onclick="closeFooterPolicy()" style="width:36px;height:36px;border-radius:50%;background:#f3f4f6;border:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#111827;font-size:14px;margin-right:12px;"><i class="fas fa-arrow-left"></i></button>
-            <h2 id="fpp-title" style="font-size:1.05rem;font-weight:800;color:#111827;margin:0;"></h2>
-        </div>
-        <div class="fpp-body" id="fpp-body"></div>
-    </div>
-
-
-    <script>
-    /* ── Footer Show/Hide ── */
-    (function(){
-        function toggleFooter(){
-            var f=document.getElementById('site-footer');
-            if(!f)return;
-            var v=window.currentView||'home';
-            var showOn=['home','shop','gold'];
-            if(showOn.indexOf(v)>=0){f.classList.remove('hidden');}
-            else{f.classList.add('hidden');}
-        }
-        var _origNav=window.navigate;
-        if(typeof _origNav==='function'){
-            window.navigate=function(v){
-                _origNav.apply(this,arguments);
-                setTimeout(toggleFooter,100);
-            };
-        }
-        document.addEventListener('DOMContentLoaded',function(){setTimeout(toggleFooter,800);});
-    })();
-
-    /* ── Policy Pages Content ── */
-    var _policyContent = {
-        privacy: {
-            title: 'Privacy Policy',
-            body: `<p style="color:#6b7280;font-size:12px;margin-bottom:16px;">Last updated: March 2025</p>
-                <h3>Information We Collect</h3>
-                <p>Jab aap OutfitKart use karte hain, hum yeh information collect karte hain:</p>
-                <ul><li>Name, mobile number, email address</li><li>Delivery address aur pincode</li><li>Order history aur purchase data</li><li>Device information aur browsing activity</li></ul>
-                <h3>How We Use Your Information</h3>
-                <ul><li>Orders process karne aur delivery ke liye</li><li>Customer support provide karne ke liye</li><li>Offers aur notifications bhejne ke liye (opt-out available)</li><li>App experience improve karne ke liye</li></ul>
-                <h3>Data Security</h3>
-                <p>Aapka data secure servers pe store hota hai. Hum kabhi aapka personal data third parties ko sell nahi karte. Payments Razorpay ke through secure hain (PCI-DSS compliant).</p>
-                <h3>Contact</h3>
-                <p>Privacy concerns ke liye: <strong>outfitkart@gmail.com</strong></p>`
-        },
-        terms: {
-            title: 'Terms & Conditions',
-            body: `<p style="color:#6b7280;font-size:12px;margin-bottom:16px;">Last updated: March 2025</p>
-                <h3>1. General</h3>
-                <p>OutfitKart use karke aap in terms se agree karte hain. Yeh terms change ho sakti hain — latest version yahan available rahega.</p>
-                <h3>2. Products & Pricing</h3>
-                <ul><li>All prices INR mein hain aur GST inclusive hain</li><li>Hum pricing errors ke case mein order cancel karne ka right rakhte hain</li><li>Product images representative hain — actual color thoda vary kar sakta hai</li></ul>
-                <h3>3. Orders & Payment</h3>
-                <ul><li>Order place karne ke baad confirmation email/SMS milega</li><li>COD orders pe ₹9 handling fee applicable hai</li><li>UPI/online payment pe koi extra charge nahi</li></ul>
-                <h3>4. Referral Program</h3>
-                <ul><li>Referral commission 5% per successful order</li><li>Commission 30 days baad confirm hota hai</li><li>Fake/fraudulent referrals pe account ban ho sakta hai</li></ul>
-                <h3>5. Wallet</h3>
-                <ul><li>Minimum withdrawal amount: ₹120</li><li>Processing time: 24-48 hours</li><li>Wallet balance non-transferable hai</li></ul>
-                <h3>6. Account Termination</h3>
-                <p>Fraud, abuse ya terms violation pe OutfitKart account suspend/terminate kar sakta hai.</p>`
-        },
-        refund: {
-            title: 'Return & Refund Policy',
-            body: `<p style="color:#6b7280;font-size:12px;margin-bottom:16px;">Last updated: March 2025</p>
-                <h3>Return Window</h3>
-                <p>Aap delivery ke <strong>7 days ke andar</strong> unused aur unwashed items return kar sakte hain.</p>
-                <h3>Return Conditions</h3>
-                <ul><li>Item unused aur original condition mein hona chahiye</li><li>Tags attached hone chahiye</li><li>Original packaging mein return karein</li><li>Damaged, washed ya worn items return nahi honge</li></ul>
-                <h3>Non-Returnable Items</h3>
-                <ul><li>Innerwear aur swimwear</li><li>Perfumes (agar seal toot gayi ho)</li><li>Customized/personalized items</li></ul>
-                <h3>Refund Process</h3>
-                <ul><li><strong>Online Payment:</strong> Original payment method pe 5-7 business days mein refund</li><li><strong>COD Orders:</strong> UPI ya bank account pe 5-7 business days mein refund. COD ₹9 fee non-refundable.</li><li><strong>Wallet Refund:</strong> Instantly credited</li></ul>
-                <h3>Exchange</h3>
-                <p>Size ya product exchange ke liye WhatsApp support pe contact karein within 7 days of delivery.</p>
-                <h3>Contact for Returns</h3>
-                <p>WhatsApp: <strong>+91 (Support Number)</strong><br>Email: <strong>outfitkart@gmail.com</strong></p>`
-        },
-        shipping: {
-            title: 'Shipping Policy',
-            body: `<p style="color:#6b7280;font-size:12px;margin-bottom:16px;">Last updated: March 2025</p>
-                <h3>Delivery Charges</h3>
-                <ul><li><strong>Free Delivery</strong> on all orders</li><li>COD orders pe ₹9 handling fee additional</li></ul>
-                <h3>Delivery Timeline</h3>
-                <ul><li>Metro cities: 2-4 business days</li><li>Tier 2/3 cities: 3-5 business days</li><li>Remote areas: 5-7 business days</li></ul>
-                <h3>Order Processing</h3>
-                <p>Order confirm hone ke baad 24-48 hours mein dispatch kiya jaata hai. Sunday aur public holidays pe processing nahi hoti.</p>
-                <h3>Tracking</h3>
-                <p>Order dispatch hone ke baad tracking link SMS/WhatsApp pe bheja jaata hai. Aap apna order "My Orders" section mein bhi track kar sakte hain.</p>
-                <h3>Delivery Issues</h3>
-                <p>Agar parcel nahi mila ya damaged mila, toh delivery ke 48 hours ke andar WhatsApp support pe contact karein unboxing video ke saath.</p>
-                <h3>Pincode Coverage</h3>
-                <p>Hum India ke 27,000+ pincodes pe deliver karte hain. Checkout pe pincode enter karne pe availability check ho jaati hai.</p>`
-        },
-        faq: {
-            title: 'Frequently Asked Questions',
-            body: `<h3>Orders & Delivery</h3>
-                <p><strong>Q: Delivery kitne din mein hogi?</strong><br>A: Standard delivery 3-5 working days. Metro cities mein 2-3 din.</p>
-                <p><strong>Q: COD available hai?</strong><br>A: Haan, Cash on Delivery available hai with ₹9 handling fee.</p>
-                <p><strong>Q: Order track kaise karein?</strong><br>A: My Orders section mein jaayein ya dispatch ke baad SMS mein tracking link milega.</p>
-                <p><strong>Q: Order cancel ho sakta hai?</strong><br>A: Dispatch se pehle cancel kar sakte hain My Orders page se.</p>
-                <h3>Returns & Refunds</h3>
-                <p><strong>Q: Return kaise karein?</strong><br>A: Delivery ke 7 din ke andar WhatsApp pe contact karein pickup arrange karne ke liye.</p>
-                <p><strong>Q: Refund kab milega?</strong><br>A: Return pick-up ke 5-7 business days mein original payment method pe.</p>
-                <p><strong>Q: COD ka refund kaise milega?</strong><br>A: UPI ya bank transfer ke through. COD ₹9 fee non-refundable hai.</p>
-                <h3>Account & Wallet</h3>
-                <p><strong>Q: Wallet balance kaise earn karein?</strong><br>A: Referral link share karke 5% commission earn hota hai har successful order pe.</p>
-                <p><strong>Q: Minimum withdrawal amount?</strong><br>A: ₹120. 24-48 hours mein process hota hai.</p>
-                <p><strong>Q: Referral commission kab milega?</strong><br>A: Order ke 30 din baad confirm hota hai.</p>
-                <h3>Products</h3>
-                <p><strong>Q: Size guide kahan hai?</strong><br>A: Har product page pe size chart available hai.</p>
-                <p><strong>Q: Product authentic hai?</strong><br>A: Haan, hum only genuine products sell karte hain verified suppliers se.</p>
-                <h3>Contact</h3>
-                <p><strong>Q: Support se kaise contact karein?</strong><br>A: WhatsApp: Profile → WhatsApp Support. Email: outfitkart@gmail.com</p>`
-        },
-        about: {
-            title: 'About OutfitKart',
-            body: `<div style="text-align:center;padding:20px 0 28px;">
-                <img src="https://i.ibb.co/5gXg0WTr/1774263119958.png" alt="OutfitKart" style="width:72px;height:72px;object-fit:contain;margin:0 auto 12px;display:block;">
-                <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#C9A84C,#DAA520);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 6px;">OutfitKart</h2>
-                <p style="color:#6b7280;font-size:13px;">Premium Fashion Store</p>
-            </div>
-            <h3>Our Story</h3>
-            <p>OutfitKart ek Indian fashion e-commerce brand hai jo premium quality fashion items best prices pe provide karta hai. Hamaara mission hai ki har koi trendy aur stylish kapde afford kar sake.</p>
-            <h3>What We Offer</h3>
-            <ul><li>👔 Men's Fashion — Topwear, Bottomwear, Footwear</li><li>👗 Women's Fashion — Ethnic, Western, Footwear</li><li>🌸 Perfumes — Men, Women &amp; Unisex</li><li>🎁 Combo Deals — Best value bundles</li><li>⭐ OutfitKart Gold — Premium curated collection</li></ul>
-            <h3>Why OutfitKart?</h3>
-            <ul><li>✅ Cash on Delivery available</li><li>✅ Free delivery on all orders</li><li>✅ 7-day easy return policy</li><li>✅ Secure payments via Razorpay</li><li>✅ 5% referral commission program</li><li>✅ Earn with Influencer Program</li></ul>
-            <h3>Connect With Us</h3>
-            <p>📸 Instagram: <a href="https://www.instagram.com/outfitkart_ecommers" target="_blank">@outfitkart_ecommers</a><br>
-            📢 Telegram: <a href="https://t.me/outfitkart" target="_blank">t.me/outfitkart</a><br>
-            💬 WhatsApp Channel: <a href="https://whatsapp.com/channel/0029VbCiSs06GcGJpToxKd3z" target="_blank">Join Channel</a><br>
-            📧 Email: outfitkart@gmail.com</p>`,
-        },
-        contact: {
-            title: 'Contact Us',
-            body: `<div style="display:flex;flex-direction:column;gap:14px;margin-top:8px;">
-                <a href="https://wa.me/+919999999999?text=Hi OutfitKart, I need help" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:16px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:14px;text-decoration:none;">
-                    <div style="width:44px;height:44px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fab fa-whatsapp" style="color:white;font-size:20px;"></i></div>
-                    <div><div style="font-weight:800;font-size:14px;color:#111827;">WhatsApp Support</div><div style="font-size:12px;color:#6b7280;">Mon-Sat, 10am - 7pm</div></div>
-                </a>
-                <a href="mailto:outfitkart@gmail.com" style="display:flex;align-items:center;gap:14px;padding:16px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:14px;text-decoration:none;">
-                    <div style="width:44px;height:44px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-envelope" style="color:white;font-size:18px;"></i></div>
-                    <div><div style="font-weight:800;font-size:14px;color:#111827;">Email Support</div><div style="font-size:12px;color:#6b7280;">outfitkart@gmail.com</div></div>
-                </a>
-                <a href="https://www.instagram.com/outfitkart_ecommers" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:16px;background:#fdf4ff;border:1.5px solid #e9d5ff;border-radius:14px;text-decoration:none;">
-                    <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#f43f5e,#ec4899,#a855f7);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fab fa-instagram" style="color:white;font-size:20px;"></i></div>
-                    <div><div style="font-weight:800;font-size:14px;color:#111827;">Instagram</div><div style="font-size:12px;color:#6b7280;">@outfitkart_ecommers</div></div>
-                </a>
-                <a href="https://t.me/outfitkart" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:16px;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:14px;text-decoration:none;">
-                    <div style="width:44px;height:44px;border-radius:50%;background:#0088cc;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fab fa-telegram" style="color:white;font-size:20px;"></i></div>
-                    <div><div style="font-weight:800;font-size:14px;color:#111827;">Telegram Channel</div><div style="font-size:12px;color:#6b7280;">Deals &amp; offers pe updates</div></div>
-                </a>
-            </div>`
-        }
-    };
-
-    window.openFooterPolicy = function(key) {
-        var data = _policyContent[key];
-        if(!data) return;
-        document.getElementById('fpp-title').textContent = data.title;
-        document.getElementById('fpp-body').innerHTML = data.body;
-        document.getElementById('footer-policy-page').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    };
-    window.closeFooterPolicy = function() {
-        document.getElementById('footer-policy-page').classList.add('hidden');
-        document.body.style.overflow = '';
-    };
-    </script>
-
 </body>
-                                                                                                                                  </html>
+                                                                                </html>
