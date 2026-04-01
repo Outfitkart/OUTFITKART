@@ -17,8 +17,10 @@
   s.textContent = `
   #view-categories{position:fixed;inset:0;z-index:52;background:#f5f5f5;display:flex;flex-direction:column;overflow:hidden;}
   #view-categories.hidden{display:none!important;}
-  #ok-cph{background:white;height:56px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 6px rgba(0,0,0,.08);flex-shrink:0;}
-  #ok-cph h2{font-size:1.05rem;font-weight:900;color:#111827;margin:0;}
+  #ok-cph{background:white;height:56px;display:flex;align-items:center;padding:0 16px;gap:12px;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 6px rgba(0,0,0,.08);flex-shrink:0;}
+  #ok-cph h2{font-size:1.05rem;font-weight:900;color:#111827;margin:0;flex:1;}
+  #ok-back-btn{width:36px;height:36px;border-radius:50%;background:#f3f4f6;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#374151;font-size:15px;flex-shrink:0;transition:background 0.2s;}
+  #ok-back-btn:active{background:#e5e7eb;}
   #ok-cpbody{display:flex;flex:1;overflow:hidden;}
   #ok-csb{width:90px;flex-shrink:0;background:#efefef;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   #ok-csb::-webkit-scrollbar{display:none;}
@@ -110,10 +112,10 @@ const CATS = [
       ]},
       { label:'👠 Footwear', subs:[
         {n:'Heels',   img:'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200&h=220&fit=crop&q=80'},
-        {n:'Flats',   img:'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=200&h=220&fit=crop&q=80'},
+        {n:'Flats',   img:'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=200&h=220&fit=crop&q=80'},
         {n:'Sandals', img:'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=200&h=220&fit=crop&q=80'},
         {n:'Sneakers',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&h=220&fit=crop&q=80'},
-        {n:'Wedges',  img:'https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=200&h=220&fit=crop&q=80'},
+        {n:'Wedges',  img:'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=200&h=220&fit=crop&q=80'},
       ]},
     ]
   },
@@ -183,12 +185,12 @@ const CATS = [
         {n:'Clutches',         img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200&h=220&fit=crop&q=80'},
         {n:'Earrings',         img:'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=200&h=220&fit=crop&q=80'},
         {n:'Necklace Sets',    img:'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=200&h=220&fit=crop&q=80'},
-        {n:'Bangles',          img:'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=200&h=220&fit=crop&q=80'},
+        {n:'Bangles',          img:'https://images.unsplash.com/photo-1573408301185-9519f94816b5?w=200&h=220&fit=crop&q=80'},
         {n:'Hair Accessories', img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&h=220&fit=crop&q=80'},
-        {n:'Scrunchies',       img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&h=220&fit=crop&q=80'},
+        {n:'Scrunchies',       img:'https://images.unsplash.com/photo-1617369120004-4fc70312c5e6?w=200&h=220&fit=crop&q=80'},
       ]},
       { label:'✨ Unisex & Tech', subs:[
-        {n:'Unisex Sunglasses',img:'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200&h=220&fit=crop&q=80'},
+        {n:'Unisex Sunglasses',img:'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=200&h=220&fit=crop&q=80'},
         {n:'Earbuds',          img:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200&h=220&fit=crop&q=80'},
         {n:'Power Banks',      img:'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=200&h=220&fit=crop&q=80'},
         {n:'Phone Cases',      img:'https://images.unsplash.com/photo-1601593346740-925612772716?w=200&h=220&fit=crop&q=80'},
@@ -229,7 +231,10 @@ function _buildCatPage(){
   const page=document.createElement('div');
   page.id='view-categories';page.className='hidden';
   page.innerHTML=`
-    <div id="ok-cph"><h2>Categories</h2></div>
+    <div id="ok-cph">
+      <button id="ok-back-btn" onclick="_closeCategories();navigate('home');" aria-label="Back"><i class="fas fa-arrow-left"></i></button>
+      <h2>Categories</h2>
+    </div>
     <div id="ok-cpbody">
       <div id="ok-csb">
         ${CATS.map((c,i)=>`
@@ -300,22 +305,6 @@ window._closeCategories=function(){
   document.getElementById('view-categories')?.classList.add('hidden');
 };
 
-/* When products load, re-render to get real images */
-function _watchProducts(){
-  let att=0;
-  const iv=setInterval(()=>{
-    att++;
-    if((window.products||window.allProducts||[]).length||att>40){
-      clearInterval(iv);
-      if((window.products||window.allProducts||[]).length)_renderRight(_activeCat);
-    }
-  },800);
-}
-
-
-
-  
-
 function _navActive(on){
   const btn=document.getElementById('ok-nav-categories');
   if(btn)btn.style.color=on?'#e11d48':'';
@@ -333,20 +322,14 @@ function _patchNavigate(){
   };
 }
 
-
 /* ── INIT ── */
 function _init(){
-  _buildCatPage() ;
-  _watchProducts();
+  _buildCatPage();
 
   const wn=setInterval(()=>{if(typeof window.navigate==='function'){clearInterval(wn);_patchNavigate();}},300);
   
 
-  /* Ads watch */
-  let aa=0;
-  const wa=setInterval(()=>{aa++;if(window._okAdsData||aa>20){clearInterval(wa);if(window._okAdsData)_renderRight(_activeCat);}},1000);
-
-  console.log('%c🗂️ CatNav v5.0 ✅ Real images loaded','background:#e11d48;color:white;font-weight:900;font-size:11px;padding:3px 10px;border-radius:5px;');
+  console.log('%c🗂️ CatNav v5.1 ✅','background:#e11d48;color:white;font-weight:900;font-size:11px;padding:3px 10px;border-radius:5px;');
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(_init,500));
