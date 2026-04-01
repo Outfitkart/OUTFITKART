@@ -317,7 +317,6 @@ function _patchNavigate(){
   const orig=window.navigate;
   window.navigate=function(view,...args){
     if(view!=='categories'){_closeCategories();_navActive(false);}
-    if(view!=='cart')_closeCartPage();
     return orig(view,...args);
   };
 }
