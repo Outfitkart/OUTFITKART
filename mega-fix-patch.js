@@ -191,7 +191,7 @@ function _fixProfilePageZIndex() {
     .profile-page {
       position: fixed !important;
       inset: 0 !important;
-      z-index: 65 !important;
+      z-index: 200 !important; /* mega-patch ke saath consistent */
       background: #F7F5F2 !important;
       display: flex !important;
       flex-direction: column !important;
@@ -351,30 +351,34 @@ function _fixAdminAnimation() {
       window.isAdminLoggedIn === true;
   }
 
-  // Agar admin already logged in hai aur admin panel open kar raha hai
-  // toh sirf opening animation dikhao, full re-login nahi
-  const origNavigate = window.navigate;
-  if (typeof origNavigate === 'function') {
-    window.navigate = function (view, ...args) {
-      if (view === 'admin' && _isAdminLoggedIn() && window.isAdminLoggedIn) {
-        // Already logged in — sirf navigate, no login gate
-        return origNavigate.apply(this, [view, ...args]);
-      }
-      return origNavigate.apply(this, [view, ...args]);
-    };
-  }
+  // Note: navigate patch hata diya — dono branches same kaam kar rahe the (dead code).
+  // Admin animation admin-luxury-anim.js mein handle hoti hai apne guard ke saath.
 }
 
 /* ────────────────────────────────────────────────────────────────
    6. INFLUENCER PAGE FIX — Earnings + Submissions properly dikhein
-   Problem: loadInfluencerRequests table 'influencer_requests' se
-   data fetch karta hai, column names mismatch ho sakta hai
+   FIXED: loadInfluencerRequests ko override NAHI karte —
+   script-core-patch.js ka version retry logic ke saath better hai.
    ──────────────────────────────────────────────────────────────── */
 function _fixInfluencerPage() {
-  // Override loadInfluencerRequests with robust version
+  // Guard: agar script-core-patch ka retry wala version already loaded hai to skip
+  if (window._megaFixInfluencerDone) return;
+  window._megaFixInfluencerDone = true;
+  const origFn = window.loadInfluencerRequests;
+  if (origFn) {
+    const fnStr = origFn.toString();
+    if (fnStr.includes('retry') || fnStr.includes('setTimeout(window.loadInfluencerRequests')) {
+      console.log('[mega-fix] loadInfluencerRequests: retry version detected — skipping override');
+      return;
+    }
+  }
+  // Fallback version (agar core-patch ka retry wala load nahi hua)
   window.loadInfluencerRequests = async function () {
     const cu = window.currentUser;
-    if (!cu) return;
+    if (!cu) {
+      setTimeout(window.loadInfluencerRequests, 500);
+      return;
+    }
 
     const container = document.getElementById('inf-requests-list');
     const totalEl = document.getElementById('inf-total-earned');
@@ -513,9 +517,9 @@ function _fixBottomNavOverlap() {
     #cart-sidebar {
       z-index: 70 !important;
     }
-    /* Profile pages above nav */
+    /* Profile pages above nav — z-index 200 (mega-patch ke saath consistent) */
     .profile-page {
-      z-index: 65 !important;
+      z-index: 200 !important;
     }
     /* Admin above everything */
     #view-admin {
