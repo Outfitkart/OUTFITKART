@@ -143,8 +143,8 @@ function getComboSizeGroups(sizeArray=[]){
     return{
         topwear:topwear.length?topwear:['XS','S','M','L','XL','XXL'],
         bottomwear:bottomwear.length?bottomwear:['28','30','32','34','36'],
-        footwear:footwear.length?footwear:['6','7','8','9','10'],
-        accessories:accessories.length?accessories:['Free Size'],
+        footwear:footwear,
+        accessories:accessories,
         watch:watch.length?watch:[]
     };
 }
