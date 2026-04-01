@@ -221,18 +221,7 @@ const _d=n=>SHORT[n]||n;
 let _activeCat=0;
 
 /* Get real product image for subcat if available */
-function _prodImg(catKey, subName) {
-  const isGold = catKey==='Gold';
-  const pool=[...(window.products||[]),...(window.allProducts||[]),...(window._allProducts||[]),...(isGold?(window.goldProducts||window.allGoldProducts||[]):[])];
-  for(const p of pool){
-    const pc=(p.category||p.cat||'').trim();
-    const ps=(p.subcategory||p.subcat||p.sub_category||p.sub||'').trim();
-    const pi=(p.imgs&&p.imgs[0])||p.img||p.image||'';
-    const cm=isGold?(p.is_gold||p.gold||pc.toLowerCase()==='gold'):pc.toLowerCase()===catKey.toLowerCase();
-    if(cm&&ps.toLowerCase()===subName.toLowerCase()&&pi)return pi;
-  }
-  return null;
-}
+
 
 /* ── BUILD CATEGORIES PAGE ── */
 function _buildCatPage(){
@@ -282,9 +271,7 @@ function _renderRight(i){
   let groupsHtml='';
   cat.groups.forEach(grp=>{
     const cards=grp.subs.map(sub=>{
-      /* Real product image override karein agar available ho */
-      const prodImg=_prodImg(cat.key,sub.n);
-      const imgSrc=prodImg||sub.img;
+      const imgSrc=sub.img;
       const act=isGold?`navigate('gold');_closeCategories();`:`openSubcatProducts('${cat.key}','${sub.n.replace(/'/g,"\\'")}');_closeCategories();`;
       return `<div class="ok-sc" onclick="${act}">
         <img src="${imgSrc}" alt="${_d(sub.n)}" loading="lazy" onerror="this.src='${sub.img}'">
