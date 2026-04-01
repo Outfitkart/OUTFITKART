@@ -26,7 +26,7 @@
   .ok-si.active{background:white;border-left-color:#e11d48;}
   .ok-si img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;}
   .ok-si.active img{border-color:#e11d48;}
-  .ok-si span{font-size:9.5px;font-weight:700;color:#4b5563;line-height:1.2;word-break:break-word;}
+  .ok-si span{font-size:9.5px;font-weight:800;color:#111827;line-height:1.2;word-break:break-word;}
   .ok-si.active span{color:#e11d48;}
   #ok-crp{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:white;padding:10px;}
   .ok-vabtn{display:flex;align-items:center;justify-content:space-between;background:#fff1f2;border:1.5px solid #fecdd3;border-radius:12px;padding:11px 14px;cursor:pointer;margin-bottom:10px;}
@@ -291,9 +291,8 @@ function _renderRight(i){
 
 /* _openCategories — turant define, _init se pehle bhi kaam kare */
 window._openCategories=function(){
-  if(!document.getElementById('view-categories')){_buildCatPage();_buildCartPage();}
+  if(!document.getElementById('view-categories')){_buildCatPage();}
   document.querySelectorAll('.view-section').forEach(v=>v.classList.add('hidden'));
-  document.getElementById('view-cart-page')?.classList.add('hidden');
   document.getElementById('view-categories')?.classList.remove('hidden');
   _navActive(true);window.currentView='categories';
 };
