@@ -332,7 +332,7 @@
         <div id="view-category" class="view-section hidden pb-24">
             <div class="sticky top-16 z-10 bg-white border-b shadow-sm">
                 <div class="flex items-center gap-3 px-4 py-3">
-                    <button onclick="navigate('home')" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 active:scale-95 transition-all flex-shrink-0">
+                    <button onclick="if(typeof window._openCategories==='function'){window._openCategories();}else{window.history.back();}" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 active:scale-95 transition-all flex-shrink-0">
                         <i class="fas fa-arrow-left text-gray-700 text-sm"></i>
                     </button>
                     <h2 id="cat-page-title" class="font-black text-xl text-gray-900 flex-1 truncate">Collection</h2>
@@ -351,6 +351,9 @@
         <div id="view-shop" class="view-section hidden">
             <div id="shop-header-bar" class="bg-white px-4 pt-3 pb-2">
                 <div class="flex items-center justify-between gap-3">
+                    <button id="shop-back-btn" onclick="window.history.back()" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 active:scale-95 transition-all flex-shrink-0">
+                        <i class="fas fa-arrow-left text-gray-700 text-sm"></i>
+                    </button>
                     <h2 class="font-bold text-lg truncate flex-1" id="shop-title">Shop All Products</h2>
                     <select id="shop-sort" onchange="shopSortProducts(this.value)" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-rose-500 text-sm bg-white shadow-sm flex-shrink-0">
                         <option value="default">Recommended</option>
@@ -367,7 +370,7 @@
 
         <!-- PRODUCT DETAIL PAGE -->
         <div id="view-product" class="view-section hidden p-4 md:p-8 max-w-6xl mx-auto">
-            <button onclick="navigate(window._pdpPreviousView||'home')" class="text-gray-500 text-sm mb-4 flex items-center gap-1 hover:text-gray-700"><i class="fas fa-arrow-left"></i> Back</button>
+            <button onclick="window.history.back()" class="text-gray-500 text-sm mb-4 flex items-center gap-1 hover:text-gray-700"><i class="fas fa-arrow-left"></i> Back</button>
             <div class="grid md:grid-cols-2 gap-8 bg-white p-4 rounded-xl shadow-sm border" id="pdp-container"></div>
 
             <!-- PRODUCT PROMO CODE SECTION -->
@@ -1450,7 +1453,8 @@
     <script src="giveaway-patch.js"></script>
     <script src="categories-nav-patch.js"></script>
     <script src="outfitkart-final-patch.js"></script>
-    <script src="final-fix-patch.js"></script>
+ <script src="final-fix-patch.js"></script>
+
     
     
     <script>
