@@ -102,32 +102,44 @@
 @keyframes luxCrestIn { 0%{opacity:0;transform:translateY(-14px)} 100%{opacity:1;transform:translateY(0)} }
 
 .lux-crest-ring {
-  width:72px; height:72px; border-radius:50%;
-  border:1px solid rgba(201,168,76,0.32);
-  background:radial-gradient(circle at 38% 38%,rgba(201,168,76,0.18) 0%,transparent 65%);
+  width:80px; height:80px; border-radius:50%;
+  border:1.5px solid rgba(201,168,76,0.45);
+  background:radial-gradient(circle at 38% 38%,rgba(201,168,76,0.22) 0%,rgba(201,168,76,0.05) 50%,transparent 70%);
   display:flex; align-items:center; justify-content:center;
   margin-bottom:16px; position:relative;
-  box-shadow:0 0 32px rgba(201,168,76,0.1), 0 0 0 6px rgba(201,168,76,0.05);
+  box-shadow:0 0 0 4px rgba(201,168,76,0.07),0 0 0 10px rgba(201,168,76,0.03),0 0 40px rgba(201,168,76,0.18),inset 0 0 20px rgba(201,168,76,0.06);
+  animation:ringBreath 3s ease infinite;
+}
+.lux-crest-ring::before {
+  content:''; position:absolute; inset:-8px; border-radius:50%;
+  border:1px solid rgba(201,168,76,0.13);
+  animation:ringBreath 3s ease 0.5s infinite;
 }
 .lux-crest-ring::after {
-  content:''; position:absolute; inset:-5px;
-  border-radius:50%; border:1px solid rgba(201,168,76,0.1);
-  animation:ringBreath 2.5s ease infinite;
+  content:''; position:absolute; inset:-16px; border-radius:50%;
+  border:1px dashed rgba(201,168,76,0.07);
+  animation:ringRotate 12s linear infinite;
 }
-@keyframes ringBreath { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.04)} }
+@keyframes ringBreath { 0%,100%{opacity:0.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.05)} }
+@keyframes ringRotate { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
 
 .lux-crest-img {
-  width:38px; height:38px; object-fit:contain;
-  filter:drop-shadow(0 0 10px rgba(201,168,76,0.45));
+  width:44px; height:44px; object-fit:contain;
+  filter:drop-shadow(0 0 14px rgba(201,168,76,0.65)) drop-shadow(0 0 6px rgba(201,168,76,0.4));
+  animation:logoGlow 3s ease infinite;
 }
+@keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(201,168,76,0.5)) drop-shadow(0 0 5px rgba(201,168,76,0.3))}50%{filter:drop-shadow(0 0 22px rgba(201,168,76,0.9)) drop-shadow(0 0 12px rgba(245,230,192,0.5))}}
 
 .lux-crest-wordmark {
-  font-family:'Cinzel',serif; font-size:19px; font-weight:700;
-  letter-spacing:0.28em; text-transform:uppercase;
-  background:linear-gradient(135deg,var(--lux-gold-3) 0%,var(--lux-gold-1) 40%,var(--lux-gold-2) 60%,var(--lux-gold-3) 100%);
+  font-family:'Cinzel',serif; font-size:20px; font-weight:700;
+  letter-spacing:0.32em; text-transform:uppercase;
+  background:linear-gradient(135deg,var(--lux-gold-3) 0%,var(--lux-gold-1) 35%,var(--lux-gold-2) 55%,var(--lux-gold-1) 75%,var(--lux-gold-3) 100%);
+  background-size:200% auto;
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   background-clip:text; line-height:1;
+  animation:wordmarkShimmer 4s linear infinite;
 }
+@keyframes wordmarkShimmer{0%{background-position:0% center}100%{background-position:200% center}}
 
 .lux-divider {
   display:flex; align-items:center; gap:8px; margin-top:9px;
@@ -349,12 +361,23 @@
 @keyframes statusPulse { 0%,100%{opacity:0.48} 50%{opacity:0.9} }
 
 /* ── Admin panel entrance ── */
-#view-admin.lux-enter > div:first-child { animation:panelTopIn 0.5s cubic-bezier(0.16,1,0.3,1) 0.08s both; }
-#view-admin.lux-enter #admin-sidebar    { animation:panelLeftIn 0.6s cubic-bezier(0.16,1,0.3,1) 0.18s both; }
-#view-admin.lux-enter .flex-1.p-4      { animation:panelFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+#view-admin.lux-enter > div:first-child { animation:panelTopIn 0.55s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+#view-admin.lux-enter #admin-sidebar    { animation:panelLeftIn 0.65s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
+#view-admin.lux-enter .flex-1.p-4      { animation:panelFadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.28s both; }
 @keyframes panelTopIn  { 0%{opacity:0;transform:translateY(-100%)} 100%{opacity:1;transform:translateY(0)} }
-@keyframes panelLeftIn { 0%{opacity:0;transform:translateX(-100%)} 100%{opacity:1;transform:translateX(0)} }
-@keyframes panelFadeUp { 0%{opacity:0;transform:translateY(22px)} 100%{opacity:1;transform:translateY(0)} }
+@keyframes panelLeftIn { 0%{opacity:0;transform:translateX(-110%)} 100%{opacity:1;transform:translateX(0)} }
+@keyframes panelFadeUp { 0%{opacity:0;transform:translateY(28px) scale(0.98)} 100%{opacity:1;transform:translateY(0) scale(1)} }
+
+/* ── Admin card / stat tiles ── */
+#view-admin.lux-enter .bg-white,
+#view-admin.lux-enter .rounded-xl {
+  animation:tileReveal 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+#view-admin.lux-enter .bg-white:nth-child(1){animation-delay:0.35s}
+#view-admin.lux-enter .bg-white:nth-child(2){animation-delay:0.42s}
+#view-admin.lux-enter .bg-white:nth-child(3){animation-delay:0.49s}
+#view-admin.lux-enter .bg-white:nth-child(4){animation-delay:0.56s}
+@keyframes tileReveal{0%{opacity:0;transform:scale(0.92) translateY(16px)}100%{opacity:1;transform:scale(1) translateY(0)}}
   `;
 
   function injectCss() {
