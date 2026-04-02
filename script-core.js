@@ -57,20 +57,22 @@ let _referralChannel=null;
 const CATEGORIES=[
     {id:'men',name:'Men',
      photo:'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=120&h=120&fit=crop&q=80',
-     subs:['T-Shirts','Casual Shirts','Formal Shirts','Oversized Tees','Oversized Shirts','Hoodies','Denim Jacket','Baggy Jeans','Straight Fit Jeans','Slim Fit Jeans','Cotton Trousers','Joggers','Cargo Pants','Formal Pant','Trousers','Sneakers','Formal Shoes','Sports Shoes','Sandals','Slippers'],
+     subs:['T-Shirts','Casual Shirts','Formal Shirts','Oversized Tees','Oversized Shirts','Hoodies','Denim Jacket','Baggy Jeans','Straight Fit Jeans','Slim Fit Jeans','Cotton Trousers','Joggers','Cargo Pants','Formal Pant','Trousers','Sneakers','Formal Shoes','Sports Shoes','Sandals','Slippers','Formal Combo (Shirt+Trouser+Belt+Tie)','Casual Combo (Tee+Baggy Jeans+Locket)','Streetwear Combo (Oversized Tee+Cargo+Chain)','Tracksuit (Full Upper & Lower)','Ethnic Combo (Kurta+Pant Set)','Sherwani Set (Sherwani+Pant Set)','Nehru Jacket Combo'],
      groups:[
          {label:'👕 Topwear',items:['T-Shirts','Casual Shirts','Formal Shirts','Oversized Tees','Oversized Shirts','Hoodies','Denim Jacket']},
          {label:'👖 Bottomwear',items:['Baggy Jeans','Straight Fit Jeans','Slim Fit Jeans','Cotton Trousers','Joggers','Cargo Pants','Formal Pant','Trousers']},
          {label:'👟 Footwear',items:['Sneakers','Formal Shoes','Sports Shoes','Sandals','Slippers']},
+         {label:'🎁 Full Combos',items:['Formal Combo (Shirt+Trouser+Belt+Tie)','Casual Combo (Tee+Baggy Jeans+Locket)','Streetwear Combo (Oversized Tee+Cargo+Chain)','Tracksuit (Full Upper & Lower)','Ethnic Combo (Kurta+Pant+Dupatta)','Sherwani Set (Sherwani+Pant+Dupatta)','Nehru Jacket Combo']},
      ]},
     {id:'women',name:'Women',
      photo:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=120&h=120&fit=crop&q=80',
-     subs:['Sarees','Kurtis','Lehengas','Shirts','Tops','Straight Fit Jeans','Trousers','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans','Palazzo','Tops & Tunics','Dresses','Skirts','Heels','Flats','Sandals','Sneakers','Wedges'],
+     subs:['Sarees','Kurtis','Lehengas','Tops','Straight Fit Jeans','Trousers','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans','Palazzo','Tops & Tunics','Dresses','Skirts','Heels','Flats','Sandals','Sneakers','Wedges','Ethnic Set (Kurti+Pant+Dupatta)','Western Combo (Top+Straight Jeans+Belt)','Party Combo (Saree+Blouse+Belt)','Indo-Western (Top+Palazzo+Shrug)'],
      groups:[
          {label:'🥻 Ethnic',items:['Sarees','Kurtis','Lehengas']},
-         {label:'👖 Bottomwear',items:['Straight Fit Jeans','Trousers','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans']},
-         {label:'👗 Western',items:['Shirts','Tops','Palazzo','Tops & Tunics','Dresses','Skirts']},
+         {label:'👖 Bottomwear',items:['Straight Fit Jeans','trousers','Baggy Jeans','Cargo Jeans','Skinny Fit Jeans','Slim Fit Jeans']},
+         {label:'👗 Western',items:['Tops','Palazzo','Tops & Tunics','Dresses','Skirts']},
          {label:'👠 Footwear',items:['Heels','Flats','Sandals','Sneakers','Wedges']},
+         {label:'🎁 Full Combos',items:['Ethnic Set (Kurti+Pant+Dupatta)','Western Combo (Top+Straight Jeans+Belt)','Party Combo (Saree+Blouse+Belt)','Indo-Western (Top+Palazzo+Shrug)']},
      ]},
     {id:'Perfumes',name:'Perfumes',
      photo:'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=120&h=120&fit=crop&q=80',
@@ -84,8 +86,11 @@ const CATEGORIES=[
     {id:'combos',name:'Combos',
      photo:'https://images.unsplash.com/photo-1445205170230-053b83016050?w=120&h=120&fit=crop&q=80',
      subs:[
+         // Men Combos
          'Casual Combo','Party Wear Combo','Gym Combo','Streetwear Combo','Office Combo',
+         // Women Combos
          'Casual Outfit Combo','Party Combo','Ethnic Combo','Western Combo','College Wear Combo',
+         // Unisex Combos
          'Couple Combo','Best Friend Combo','Matching Outfit Combo'
      ],
      groups:[
@@ -96,19 +101,15 @@ const CATEGORIES=[
      isComboCategory:true},
     {id:'accessories',name:'Accessories',
      photo:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=120&h=120&fit=crop&q=80',
-     subs:['Sunglasses','Watches','Wallets','Belts','Caps','Chains','Bracelets','Socks','Handbags','Clutches','Earrings','Necklace Sets','Bangles','Hair Accessories','Scrunchies','Unisex Sunglasses','Earbuds','Power Banks','Phone Cases','Backpacks'],
+     subs:['Sunglasses','Watches','Wallets','Belts','Caps','Chains','Bracelets','Socks','Handbags','Clutches','Earrings','Necklace Sets','Bangles','Hair Accessories','Scrunchies','Unisex Sunglasses'],
      groups:[
          {label:"👨 Men's Accessories",items:['Sunglasses','Watches','Wallets','Belts','Caps','Chains','Bracelets','Socks']},
          {label:"👩 Women's Accessories",items:['Handbags','Clutches','Earrings','Necklace Sets','Bangles','Bracelets','Hair Accessories','Scrunchies','Socks','Belts']},
-         {label:'✨ Unisex & Tech',items:['Unisex Sunglasses','Earbuds','Power Banks','Phone Cases','Backpacks']},
+         {label:'✨ Unisex',items:['Unisex Sunglasses']},
      ]},
     {id:'bags',name:'Bags',
      photo:'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=120&h=120&fit=crop&q=80',
-     subs:[
-         'Casual Backpacks','Laptop Backpacks','Anti-Theft Bags',
-         'Stylish Backpacks','Tote Bags','Mini Backpacks',
-         'Handbags','Clutches','Sling Bags','Travel Bags','Waist Bags','Gym Bags','Duffle Bags'
-     ],
+     subs:['Casual Backpacks','Laptop Backpacks','Anti-Theft Bags','Stylish Backpacks','Tote Bags','Mini Backpacks','Handbags','Clutches','Sling Bags','Travel Bags','Waist Bags','Gym Bags','Duffle Bags'],
      groups:[
          {label:"🎒 Men's College Bags",items:['Casual Backpacks','Laptop Backpacks','Anti-Theft Bags']},
          {label:"👜 Women's College Bags",items:['Stylish Backpacks','Tote Bags','Mini Backpacks']},
@@ -117,13 +118,7 @@ const CATEGORIES=[
      ]},
     {id:'jewellery',name:'Jewellery',
      photo:'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=120&h=120&fit=crop&q=80',
-     subs:[
-         'Necklaces','Earrings','Rings','Bracelets & Bangles','Anklets','Jewelry Sets',
-         'Chains','Men Bracelets','Men Rings','Pendants',
-         'Kundan','Temple Jewelry','Bridal Sets',
-         'Minimal Jewelry','Layered Necklaces','Statement Pieces',
-         'Nose Pins','Hair Jewelry'
-     ],
+     subs:['Necklaces','Earrings','Rings','Bracelets & Bangles','Anklets','Jewelry Sets','Chains','Men Bracelets','Men Rings','Pendants','Kundan','Temple Jewelry','Bridal Sets','Minimal Jewelry','Layered Necklaces','Statement Pieces','Nose Pins','Hair Jewelry'],
      groups:[
          {label:"💍 Women's Jewelry",items:['Necklaces','Earrings','Rings','Bracelets & Bangles','Anklets','Jewelry Sets']},
          {label:"⚡ Men's Jewelry",items:['Chains','Men Bracelets','Men Rings','Pendants']},
@@ -133,15 +128,7 @@ const CATEGORIES=[
      ]},
     {id:'electronics',name:'Electronics',
      photo:'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=120&h=120&fit=crop&q=80',
-     subs:[
-         'Phone Cases','Charging Cables','Power Banks','Selfie Sticks','Screen Protectors','Mobile Holders','USB Hubs',
-         'Earbuds','Wireless Headphones','Wired Headphones','Bluetooth Speakers','Neckbands',
-         'Gaming Controllers','Gaming Headsets','Gaming Mouse','Gaming Keyboards','Gaming Chairs',
-         'Smartwatches','Smart Bands','Smart Glasses','Mini Projectors','Smart Plugs',
-         'Laptop Stands','Keyboard & Mouse Combos','Webcams','USB Drives','Mouse Pads',
-         'LED Strip Lights','Table Fans','Desk Lamps','Digital Clocks','Air Purifiers',
-         'Ring Lights','Tripods','Green Screens','Lavalier Mics','Camera Lens Kits'
-     ],
+     subs:['Phone Cases','Charging Cables','Power Banks','Selfie Sticks','Screen Protectors','Mobile Holders','USB Hubs','Earbuds','Wireless Headphones','Wired Headphones','Bluetooth Speakers','Neckbands','Gaming Controllers','Gaming Headsets','Gaming Mouse','Gaming Keyboards','Gaming Chairs','Smartwatches','Smart Bands','Smart Glasses','Mini Projectors','Smart Plugs','Laptop Stands','Keyboard & Mouse Combos','Webcams','USB Drives','Mouse Pads','LED Strip Lights','Table Fans','Desk Lamps','Digital Clocks','Air Purifiers','Ring Lights','Tripods','Green Screens','Lavalier Mics','Camera Lens Kits'],
      groups:[
          {label:'📱 Mobile Accessories',items:['Phone Cases','Charging Cables','Power Banks','Selfie Sticks','Screen Protectors','Mobile Holders','USB Hubs']},
          {label:'🎧 Audio Devices',items:['Earbuds','Wireless Headphones','Wired Headphones','Bluetooth Speakers','Neckbands']},
@@ -150,8 +137,7 @@ const CATEGORIES=[
          {label:'💻 Computer Accessories',items:['Laptop Stands','Keyboard & Mouse Combos','Webcams','USB Drives','Mouse Pads']},
          {label:'🏠 Home Electronics',items:['LED Strip Lights','Table Fans','Desk Lamps','Digital Clocks','Air Purifiers']},
          {label:'🎬 Creator Tools',items:['Ring Lights','Tripods','Green Screens','Lavalier Mics','Camera Lens Kits']},
-     ],
-     isElectronicsCategory:true},
+     ]},
 ];
 const GOLD_SUBCATS={Men:['Topwear','Bottomwear','Footwear'],Women:['Topwear','Bottomwear','Footwear']};
 function isPerfumeCategory(cat){return String(cat||'').toLowerCase()==='perfumes';}
@@ -176,30 +162,17 @@ const SUB_DISPLAY_MAP={'Cargo Jeans':'Cargo Pant','Formal Combo (Shirt+Trouser+B
 function getSubDisplayName(sub){return SUB_DISPLAY_MAP[sub]||sub;}
 
 function isComboCategory(cat){return String(cat||'').toLowerCase()==='combos';}
-function isElectronicsCategory(cat){return String(cat||'').toLowerCase()==='electronics';}
-function isBagsCategory(cat){return String(cat||'').toLowerCase()==='bags';}
-function isJewelleryCategory(cat){return ['jewellery','jewelry','jewel'].includes(String(cat||'').toLowerCase());}
 function getComboSizeGroups(sizeArray=[]){
     const arr=(sizeArray||[]).map(s=>String(s||'').trim()).filter(Boolean);
     const topSet=new Set(['XS','S','M','L','XL','XXL','3XL','4XL','XXXL']);
     const topwear=arr.filter(s=>topSet.has(s.toUpperCase()));
-    // Bottomwear: waist sizes 24-44
     const bottomwear=arr.filter(s=>/^\d+$/.test(s)&&Number(s)>=24&&Number(s)<=44);
-    // Footwear: shoe sizes 4-13 (not overlapping with bottomwear)
     const footwear=arr.filter(s=>/^\d+$/.test(s)&&Number(s)>=4&&Number(s)<=13&&!bottomwear.includes(s));
-    // Free Size / One Size
     const freesize=arr.filter(s=>s.toLowerCase().includes('free')||s.toLowerCase()==='one size'||s.toLowerCase()==='onesize');
     const accessories=arr.filter(s=>s.toLowerCase().includes('accessori'));
     const watch=arr.filter(s=>s.toLowerCase().includes('watch'));
-    // Return ONLY what admin selected — no defaults/fallbacks
-    return{
-        topwear,
-        bottomwear,
-        footwear,
-        freesize,
-        accessories,
-        watch
-    };
+    // Return ONLY what admin selected — no defaults
+    return{topwear,bottomwear,footwear,freesize,accessories,watch};
 }
 function _composeComboSizeLabel(){
     if(!selectedComboParts)return selectedSize;
@@ -208,7 +181,7 @@ function _composeComboSizeLabel(){
     if(selectedComboParts.bottomwear)parts.push(`Bottom:${selectedComboParts.bottomwear}`);
     if(selectedComboParts.footwear)parts.push(`Footwear:${selectedComboParts.footwear}`);
     if(selectedComboParts.freesize)parts.push(`Size:${selectedComboParts.freesize}`);
-    if(selectedComboParts.accessories)parts.push(`Accessories:${selectedComboParts.accessories}`);
+    if(selectedComboParts.accessories)parts.push(`Acc:${selectedComboParts.accessories}`);
     if(selectedComboParts.watch)parts.push(`Watch:${selectedComboParts.watch}`);
     selectedSize=parts.join(' | ')||selectedSize;return selectedSize;
 }
@@ -859,8 +832,7 @@ function renderProductGrid(containerId,list,loading=false){
 
 function renderCategoryBubbles(){
     const container=document.getElementById('category-bubbles');if(!container)return;
-    let html=CATEGORIES.map(c=>`<div class="flex flex-col items-center gap-2 cursor-pointer min-w-[72px] active:scale-95 transition-transform" onclick="openCategoryPage('${c.name}')"><div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md hover:scale-110 transition-transform flex-shrink-0" style="box-shadow:0 4px 12px rgba(0,0,0,0.15)"><img src="${c.photo}" alt="${c.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.parentNode.innerHTML='<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e11d48,#be123c);color:white;font-size:1.5rem;\\'>👗</div>'"></div><span class="text-xs font-semibold text-gray-700 whitespace-nowrap">${c.name}</span></div>`).join('');
-    html+=`<div class="flex flex-col items-center gap-2 cursor-pointer min-w-[72px] active:scale-95 transition-transform" onclick="navigate('gold')"><div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl hover:scale-110 transition-transform flex-shrink-0" style="background:linear-gradient(135deg,#1a0800,#3d2c00,#C9A84C);border:2.5px solid #C9A84C;box-shadow:0 4px 16px rgba(201,168,76,0.5);">⭐</div><span class="text-xs font-bold whitespace-nowrap" style="color:#B8860B;">Gold</span></div>`;
+    let html=CATEGORIES.map(c=>`<div class="flex flex-col items-center gap-2 cursor-pointer min-w-[72px] active:scale-95 transition-transform" onclick="(function(){if(typeof window._openCategoriesTo==='function'){window._openCategoriesTo('${c.name}');}else if(typeof window._openCategories==='function'){window._openCategories();}else{openCategoryPage('${c.name}');}})()" ><div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md hover:scale-110 transition-transform flex-shrink-0" style="box-shadow:0 4px 12px rgba(0,0,0,0.15)"><img src="${c.photo}" alt="${c.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.parentNode.innerHTML='<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e11d48,#be123c);color:white;font-size:1.5rem;\\'>\u{1F457}</div>'"></div><span class="text-xs font-semibold text-gray-700 whitespace-nowrap">${c.name}</span></div>`).join('');
     container.innerHTML=html;
 }
 
@@ -1050,8 +1022,8 @@ async function openProductPage(id, isGoldProduct = false) {
         if (groups.bottomwear.length) selectedComboParts.bottomwear = groups.bottomwear[0];
         if (groups.footwear.length) selectedComboParts.footwear = groups.footwear[0];
         if (groups.freesize.length) selectedComboParts.freesize = groups.freesize[0];
-        if (groups.watch.length) selectedComboParts.watch = groups.watch[0];
         if (groups.accessories.length) selectedComboParts.accessories = groups.accessories[0];
+        if (groups.watch.length) selectedComboParts.watch = groups.watch[0];
         _composeComboSizeLabel();
     }
 
@@ -1130,12 +1102,7 @@ async function openProductPage(id, isGoldProduct = false) {
                     ['watch',      '⌚ Watch',            'Free Size'],
                 ];
                 const activeGroups = groupOrder.filter(([k]) => groups[k]?.length);
-                if (!activeGroups.length) {
-                    // Fallback: agar koi bhi size nahi mila to plain size buttons dikhao
-                    return `<div class="flex flex-wrap gap-2" id="size-selector">
-                        ${sizeArray.map(s => `<button onclick="selectSize('${s}')" class="size-btn ${s === selectedSize ? 'selected' : ''} px-4 py-2 min-w-[3.5rem] rounded-xl border border-gray-200 font-bold text-sm transition-all">${s}</button>`).join('')}
-                    </div>`;
-                }
+                if (!activeGroups.length) return `<div class="flex flex-wrap gap-2" id="size-selector">${sizeArray.map(s=>`<button onclick="selectSize('${s}')" class="size-btn ${s===selectedSize?'selected':''} px-4 py-2 min-w-[3.5rem] rounded-xl border border-gray-200 font-bold text-sm transition-all">${s}</button>`).join('')}</div>`;
                 return activeGroups.map(([k, label, hint]) => `
                 <div class="mb-4">
                     <div class="flex items-center gap-2 mb-2">
