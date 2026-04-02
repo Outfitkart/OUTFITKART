@@ -104,7 +104,7 @@ const CATEGORIES=[
      subs:['Sunglasses','Watches','Wallets','Belts','Caps','Chains','Bracelets','Socks','Handbags','Clutches','Earrings','Necklace Sets','Bangles','Hair Accessories','Scrunchies','Unisex Sunglasses'],
      groups:[
          {label:"👨 Men's Accessories",items:['Sunglasses','Watches','Wallets','Belts','Caps','Chains','Bracelets','Socks']},
-         {label:"👩 Women's Accessories",items:['Handbags','Clutches','Earrings','Necklace Sets','Bangles','Bracelets','Hair Accessories','Scrunchies','Socks','Belts']},
+         {label:"👩 Women's Accessories",items:['Watches','Handbags','Clutches','Earrings','Necklace Sets','Bangles','Bracelets','Hair Accessories','Scrunchies','Socks','Belts']},
          {label:'✨ Unisex',items:['Unisex Sunglasses']},
      ]},
     {id:'bags',name:'Bags',
@@ -470,19 +470,6 @@ function _initSPAHistory(){
     window.addEventListener('popstate',e=>{
         const s=e.state||{view:'home',cat:null};
         if(isExchangeProcess){isExchangeProcess=false;exchangeSourceOrder=null;exchangeOldPrice=0;showToast('Exchange process reset 🔄');}
-        // Special: if shop state has a sub, restore it properly
-        if(s.view==='shop'&&s.sub){
-            currentCategoryFilter=s.cat||null;currentSubFilter=s.sub;
-            document.querySelectorAll('.view-section').forEach(el=>el.classList.add('hidden'));
-            currentView='shop';document.getElementById('view-shop').classList.remove('hidden');
-            const titleEl=document.getElementById('shop-title');if(titleEl)titleEl.textContent=getSubDisplayName(s.sub);
-            renderShopProducts();window.scrollTo(0,0);updateBottomNav();_initShopScrollHide();
-            return;
-        }
-        // Special: category page
-        if(s.view==='category'&&s.cat){
-            openCategoryPage(s.cat);return;
-        }
         _navigateCore(s.view||'home',s.cat||null);
     });
 }
@@ -880,102 +867,9 @@ function renderGoldGrid(){const grid=document.getElementById('gold-grid');if(!gr
 /* ============================================================
    26. CATEGORY / SHOP
    ============================================================ */
-const SUBCAT_FALLBACK_IMAGES={
-  // MEN TOPWEAR
-  'T-Shirts':'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&h=200&fit=crop&q=80',
-  'Casual Shirts':'https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=200&h=200&fit=crop&q=80',
-  'Formal Shirts':'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?w=200&h=200&fit=crop&q=80',
-  'Oversized Tees':'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=200&h=200&fit=crop&q=80',
-  'Oversized Shirts':'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=200&h=200&fit=crop&q=80',
-  'Hoodies':'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=200&h=200&fit=crop&q=80',
-  'Denim Jacket':'https://images.unsplash.com/photo-1601933513793-538b4cb3929e?w=200&h=200&fit=crop&q=80',
-  // MEN BOTTOMWEAR
-  'Baggy Jeans':'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=200&fit=crop&q=80',
-  'Straight Fit Jeans':'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=200&h=200&fit=crop&q=80',
-  'Slim Fit Jeans':'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=200&fit=crop&q=80',
-  'Cotton Trousers':'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=200&fit=crop&q=80',
-  'Joggers':'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=200&h=200&fit=crop&q=80',
-  'Cargo Pants':'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=200&h=200&fit=crop&q=80',
-  'Formal Pant':'https://images.unsplash.com/photo-1594938298603-c8148c4b4e2e?w=200&h=200&fit=crop&q=80',
-  'Trousers':'https://images.unsplash.com/photo-1560243563-062bfc001d68?w=200&h=200&fit=crop&q=80',
-  // MEN FOOTWEAR
-  'Sneakers':'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&h=200&fit=crop&q=80',
-  'Formal Shoes':'https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=200&h=200&fit=crop&q=80',
-  'Sports Shoes':'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=200&h=200&fit=crop&q=80',
-  'Sandals':'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=200&h=200&fit=crop&q=80',
-  'Slippers':'https://images.unsplash.com/photo-1625048702021-b2cf9a4e0a78?w=200&h=200&fit=crop&q=80',
-  // WOMEN ETHNIC
-  'Sarees':'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=200&h=200&fit=crop&q=80',
-  'Kurtis':'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=200&h=200&fit=crop&q=80',
-  'Lehengas':'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=200&fit=crop&q=80',
-  // WOMEN WESTERN
-  'Tops':'https://images.unsplash.com/photo-1562572159-4efd90078f40?w=200&h=200&fit=crop&q=80',
-  'Palazzo':'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=200&h=200&fit=crop&q=80',
-  'Tops & Tunics':'https://images.unsplash.com/photo-1508427953056-b00b74f7c19c?w=200&h=200&fit=crop&q=80',
-  'Dresses':'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=200&h=200&fit=crop&q=80',
-  'Skirts':'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=200&h=200&fit=crop&q=80',
-  // WOMEN BOTTOMWEAR (different from men)
-  'Cargo Jeans':'https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?w=200&h=200&fit=crop&q=80',
-  'Skinny Fit Jeans':'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=200&fit=crop&q=80',
-  // WOMEN FOOTWEAR
-  'Heels':'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200&h=200&fit=crop&q=80',
-  'Flats':'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=200&h=200&fit=crop&q=80',
-  'Wedges':'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=200&h=200&fit=crop&q=80',
-  // PERFUMES
-  "Men's Perfume":'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=200&h=200&fit=crop&q=80',
-  "Women's Perfume":'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=200&h=200&fit=crop&q=80',
-  "Unisex Perfume":'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=200&h=200&fit=crop&q=80',
-  "Luxury Perfume":'https://images.unsplash.com/photo-1541643600914-78b084683702?w=200&h=200&fit=crop&q=80',
-  "Budget Perfume":'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=200&h=200&fit=crop&q=80',
-  "Attar / Ittar":'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=200&h=200&fit=crop&q=80',
-  "Body Mist":'https://images.unsplash.com/photo-1625772452859-1c03d884dcd7?w=200&h=200&fit=crop&q=80',
-  "Deodorant Spray":'https://images.unsplash.com/photo-1526045431048-f857369baa0f?w=200&h=200&fit=crop&q=80',
-  "Gift Set":'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=200&h=200&fit=crop&q=80',
-  // ACCESSORIES
-  'Sunglasses':'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200&h=200&fit=crop&q=80',
-  'Watches':'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop&q=80',
-  'Wallets':'https://images.unsplash.com/photo-1627123424574-724758594e93?w=200&h=200&fit=crop&q=80',
-  'Belts':'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop&q=80',
-  'Caps':'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=200&h=200&fit=crop&q=80',
-  'Chains':'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&q=80',
-  'Bracelets':'https://images.unsplash.com/photo-1573408301185-9519f94816b5?w=200&h=200&fit=crop&q=80',
-  'Socks':'https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=200&h=200&fit=crop&q=80',
-  'Handbags':'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200&h=200&fit=crop&q=80',
-  'Clutches':'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200&h=200&fit=crop&q=80',
-  'Earrings':'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=200&h=200&fit=crop&q=80',
-  'Necklace Sets':'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=200&h=200&fit=crop&q=80',
-  'Bangles':'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=200&h=200&fit=crop&q=80',
-  'Hair Accessories':'https://images.unsplash.com/photo-1596466707221-3a3d803af0f4?w=200&h=200&fit=crop&q=80',
-  'Scrunchies':'https://images.unsplash.com/photo-1627163439134-7a8c47e08208?w=200&h=200&fit=crop&q=80',
-  // BAGS
-  'Casual Backpacks':'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop&q=80',
-  'Laptop Backpacks':'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop&q=80',
-  'Tote Bags':'https://images.unsplash.com/photo-1544816155-12df9643f363?w=200&h=200&fit=crop&q=80',
-  'Sling Bags':'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200&h=200&fit=crop&q=80',
-  'Travel Bags':'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=200&h=200&fit=crop&q=80',
-  'Gym Bags':'https://images.unsplash.com/photo-1547949003-9792a18a2601?w=200&h=200&fit=crop&q=80',
-  // JEWELLERY
-  'Necklaces':'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=200&h=200&fit=crop&q=80',
-  'Rings':'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=200&h=200&fit=crop&q=80',
-  'Anklets':'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=200&h=200&fit=crop&q=80',
-  'Pendants':'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=200&h=200&fit=crop&q=80',
-  // ELECTRONICS
-  'Earbuds':'https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=200&h=200&fit=crop&q=80',
-  'Wireless Headphones':'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop&q=80',
-  'Smartwatches':'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop&q=80',
-  'Phone Cases':'https://images.unsplash.com/photo-1601593346740-925612772716?w=200&h=200&fit=crop&q=80',
-  'Power Banks':'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=200&h=200&fit=crop&q=80',
-  'Bluetooth Speakers':'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=200&h=200&fit=crop&q=80',
-};
-function getSubcategoryImage(categoryName,sub){
-  const match=products.find(p=>p.category===categoryName&&p.sub===sub&&(p.imgs?.[0]||p.img));
-  if(match)return match.imgs?.[0]||match.img;
-  if(SUBCAT_FALLBACK_IMAGES[sub])return SUBCAT_FALLBACK_IMAGES[sub];
-  return`https://source.unsplash.com/600x600/?${encodeURIComponent(`${sub} fashion`)}`;
-}
+function getSubcategoryImage(categoryName,sub){const match=products.find(p=>p.category===categoryName&&p.sub===sub&&(p.imgs?.[0]||p.img));if(match)return match.imgs?.[0]||match.img;return`https://source.unsplash.com/600x600/?${encodeURIComponent(`${sub} ${categoryName} fashion`)}`;}
 function openCategoryPage(categoryName){
     const cData=CATEGORIES.find(c=>c.name===categoryName);if(!cData)return;
-    try{history.pushState({view:'category',cat:categoryName},'');}catch(e){}
     document.querySelectorAll('.view-section').forEach(el=>el.classList.add('hidden'));
     currentView='category';document.getElementById('view-category').classList.remove('hidden');
     document.getElementById('cat-page-title').textContent=`${categoryName} Collection`;
@@ -985,18 +879,7 @@ function openCategoryPage(categoryName){
     else{html+=cData.subs.map(sub=>{const safe=sub.replace(/'/g,"\\'");const img=getSubcategoryImage(categoryName,sub);return`<div onclick="openSubcatProducts('${categoryName}','${safe}')" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-3 flex items-center gap-3 cursor-pointer active:scale-95 hover:shadow-md hover:border-rose-200 transition-all min-h-[80px]"><div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0"><img src="${img}" alt="${sub}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/120x120/f3f4f6/9ca3af?text=IMG'"></div><span class="text-sm font-bold text-gray-800 text-left">${getSubDisplayName(sub)}</span></div>`;}).join('');}
     grid.innerHTML=html;window.scrollTo(0,0);updateBottomNav();
 }
-function openSubcatProducts(categoryName,sub){
-    // Push category page state first so back button returns to it
-    try{history.pushState({view:'category',cat:categoryName},'');}catch(e){}
-    currentCategoryFilter=categoryName;currentSubFilter=sub||null;
-    document.querySelectorAll('.view-section').forEach(el=>el.classList.add('hidden'));
-    currentView='shop';document.getElementById('view-shop').classList.remove('hidden');
-    const titleEl=document.getElementById('shop-title');if(titleEl)titleEl.textContent=sub?getSubDisplayName(sub):`${categoryName} Collection`;
-    const filtersEl=document.getElementById('subcategory-filters');if(filtersEl)filtersEl.innerHTML='';
-    // Push shop state so forward nav works too
-    try{history.pushState({view:'shop',cat:categoryName,sub:sub||null},'');}catch(e){}
-    renderShopProducts();window.scrollTo(0,0);updateBottomNav();_initShopScrollHide();
-}
+function openSubcatProducts(categoryName,sub){currentCategoryFilter=categoryName;currentSubFilter=sub||null;document.querySelectorAll('.view-section').forEach(el=>el.classList.add('hidden'));currentView='shop';document.getElementById('view-shop').classList.remove('hidden');const titleEl=document.getElementById('shop-title');if(titleEl)titleEl.textContent=sub?getSubDisplayName(sub):`${categoryName} Collection`;const filtersEl=document.getElementById('subcategory-filters');if(filtersEl)filtersEl.innerHTML='';renderShopProducts();window.scrollTo(0,0);updateBottomNav();_initShopScrollHide();}
 function renderShopSubcategories(){
     try{const el=document.getElementById('subcategory-filters');if(!el)return;el.classList.remove('subcat-hidden');if(!currentCategoryFilter){el.innerHTML='';return;}const cData=CATEGORIES.find(c=>c.name===currentCategoryFilter);if(!cData)return;let html=`<button class="flex-shrink-0 px-4 py-1.5 text-xs border rounded-full whitespace-nowrap font-semibold transition-all ${!currentSubFilter?'bg-rose-600 text-white border-rose-600':'bg-white text-gray-600 border-gray-300'}" onclick="filterSub(null)">All</button>`;if(cData.groups){cData.groups.forEach(group=>{html+=`<span class="flex-shrink-0 text-[10px] font-black text-gray-400 uppercase tracking-wider flex items-center px-1 whitespace-nowrap">${group.label}</span>`;html+=group.items.map(s=>{const isCombo=COMBO_SUBS.has(s);const active=currentSubFilter===s;const safe=s.replace(/'/g,"\\'");return`<button class="flex-shrink-0 px-4 py-1.5 text-xs border rounded-full whitespace-nowrap font-semibold transition-all ${active?'bg-rose-600 text-white border-rose-600':'bg-white text-gray-600 border-gray-300'} ${isCombo?'ring-1 ring-yellow-400 ring-offset-1':''}" onclick="filterSub('${safe}')">${isCombo?'🎁 ':''}${getSubDisplayName(s)}</button>`;}).join('');});}else{html+=cData.subs.map(s=>{const safe=s.replace(/'/g,"\\'");return`<button class="flex-shrink-0 px-4 py-1.5 text-xs border rounded-full whitespace-nowrap font-semibold transition-all ${currentSubFilter===s?'bg-rose-600 text-white border-rose-600':'bg-white text-gray-600 border-gray-300'}" onclick="filterSub('${safe}')">${getSubDisplayName(s)}</button>`;}).join('');}el.innerHTML=html;}catch(e){}
 }
@@ -1031,10 +914,6 @@ function _navigateCore(view,cat=null){
 }
 
 function navigate(view,cat=null){
-    if(view==='categories'){
-        try{history.pushState({view:'categories',cat:null},'');}catch(e){}
-        _navigateCore('categories',null);return;
-    }
     if(view!=='admin'){try{history.pushState({view,cat:cat||null},'');}catch(e){}}
     _navigateCore(view,cat);
 }
@@ -1132,8 +1011,6 @@ function renderWishlist(){const container=document.getElementById('wishlist-cont
 async function openProductPage(id, isGoldProduct = false) {
     let p = products.find(x => x.id === id); if (!p) p = goldProducts.find(x => x.id === id); if (!p) return;
     window._pdpPreviousView = currentView || 'home';
-    // Push history so back button works properly
-    try{history.pushState({view:currentView||'home',cat:currentCategoryFilter||null,sub:currentSubFilter||null},'');}catch(e){}
     viewingProductId = p.id; addToRecentlyViewed(id);
     const isPerf = isPerfumeCategory(p.category);
     const sizeArray = isPerf ? (p.available_sizes?.length ? p.available_sizes : PERFUME_ML_SIZES) : (p.available_sizes?.length ? p.available_sizes : getDefaultSizes(p.sub || p.category));
