@@ -2954,14 +2954,14 @@ const CATS = [
         {n:'Denim Jacket',    img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&h=220&fit=crop&q=80'},
       ]},
       { label:'👖 Bottomwear', subs:[
-        {n:'Baggy Jeans',         img:'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80'},
+        {n:'Baggy Jeans',         img:'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=200&h=220&fit=crop&q=80'},
         {n:'Straight Fit Jeans',  img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80'},
-        {n:'Slim Fit Jeans',      img:'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80'},
-        {n:'Cotton Trousers',     img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80'},
-        {n:'Joggers',             img:'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=200&h=220&fit=crop&q=80'},
-        {n:'Cargo Pants',         img:'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=220&fit=crop&q=80'},
-        {n:'Formal Pant',         img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=200&h=220&fit=crop&q=80'},
-        {n:'Trousers',            img:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80'},
+        {n:'Slim Fit Jeans',      img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=220&fit=crop&q=80'},
+        {n:'Cotton Trousers',     img:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80'},
+        {n:'Joggers',             img:'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=200&h=220&fit=crop&q=80'},
+        {n:'Cargo Pants',         img:'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=200&h=220&fit=crop&q=80'},
+        {n:'Formal Pant',         img:'https://images.unsplash.com/photo-1594938374182-a57f7f80b9d9?w=200&h=220&fit=crop&q=80'},
+        {n:'Trousers',            img:'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=200&h=220&fit=crop&q=80'},
       ]},
       { label:'👟 Footwear', subs:[
         {n:'Sneakers',      img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&h=220&fit=crop&q=80'},
@@ -2983,11 +2983,11 @@ const CATS = [
       ]},
       { label:'👖 Bottomwear', subs:[
         {n:'Straight Fit Jeans', img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=220&fit=crop&q=80'},
-        {n:'Trousers',           img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=200&h=220&fit=crop&q=80'},
-        {n:'Baggy Jeans',        img:'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80'},
-        {n:'Cargo Jeans',        img:'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=220&fit=crop&q=80'},
-        {n:'Skinny Fit Jeans',   img:'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80'},
-        {n:'Slim Fit Jeans',     img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80'},
+        {n:'Trousers',           img:'https://images.unsplash.com/photo-1594938374182-a57f7f80b9d9?w=200&h=220&fit=crop&q=80'},
+        {n:'Baggy Jeans',        img:'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=200&h=220&fit=crop&q=80'},
+        {n:'Cargo Jeans',        img:'https://images.unsplash.com/photo-1624204386084-dd374f78d12e?w=200&h=220&fit=crop&q=80'},
+        {n:'Skinny Fit Jeans',   img:'https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?w=200&h=220&fit=crop&q=80'},
+        {n:'Slim Fit Jeans',     img:'https://images.unsplash.com/photo-1565084888279-aca607bb7fe9?w=200&h=220&fit=crop&q=80'},
       ]},
       { label:'👗 Western', subs:[
         {n:'Tops',          img:'https://images.unsplash.com/photo-1598554747436-c9293d6a588f?w=200&h=220&fit=crop&q=80'},
@@ -3661,11 +3661,11 @@ const SUBCAT_IMGS = {
   'Hoodies':            'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=200&h=220&fit=crop&q=80',
   'Denim Jacket':       'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&h=220&fit=crop&q=80',
   // Men Bottomwear
-  'Baggy Jeans':        'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80',
+  'Baggy Jeans':        'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=200&h=220&fit=crop&q=80',
   'Straight Fit Jeans': 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80',
-  'Slim Fit Jeans':     'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80',
-  'Cotton Trousers':    'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80',
-  'Joggers':            'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=200&h=220&fit=crop&q=80',
+  'Slim Fit Jeans':     'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80',
+  'Cotton Trousers':    'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
+  'Joggers':            'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=200&h=220&fit=crop&q=80',
   'Cargo Pants':        'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=200&h=220&fit=crop&q=80',
   'Formal Pant':        'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
   'Trousers':           'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
@@ -3690,8 +3690,8 @@ const SUBCAT_IMGS = {
   'Flats':              'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=200&h=220&fit=crop&q=80',
   'Wedges':             'https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=200&h=220&fit=crop&q=80',
   // Women Bottomwear
-  'Cargo Jeans':        'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80',
-  'Skinny Fit Jeans':   'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80',
+  'Cargo Jeans':        'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=200&h=220&fit=crop&q=80',
+  'Skinny Fit Jeans':   'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80',
   // Accessories
   'Sunglasses':         'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200&h=220&fit=crop&q=80',
   'Watches':            'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=220&fit=crop&q=80',
@@ -3738,7 +3738,7 @@ const SUBCAT_IMGS = {
   'Couple Combo':       'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=220&fit=crop&q=80',
   'Best Friend Combo':  'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=220&fit=crop&q=80',
   'Matching Outfit Combo':'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=220&fit=crop&q=80',
-  'Formal Combo':       'https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=200&h=220&fit=crop&q=80',
+  'Formal Combo':       'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=200&h=220&fit=crop&q=80',
   'Ethnic Set':         'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=200&h=220&fit=crop&q=80',
   'Indo-Western':       'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=200&h=220&fit=crop&q=80',
   'Tracksuit':          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200&h=220&fit=crop&q=80',
@@ -4032,12 +4032,12 @@ const WORKING_SUBCAT_IMGS = {
   'Hoodies':          'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=200&h=220&fit=crop&q=80',
   'Denim Jacket':     'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&h=220&fit=crop&q=80',
   // Men Bottomwear
-  'Baggy Jeans':      'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80',
+  'Baggy Jeans':      'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=200&h=220&fit=crop&q=80',
   'Straight Fit Jeans':'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80',
-  'Slim Fit Jeans':   'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80',
-  'Cotton Trousers':  'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80',
-  'Joggers':          'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=200&h=220&fit=crop&q=80',
-  'Cargo Pants':      'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=200&h=220&fit=crop&q=80',
+  'Slim Fit Jeans':   'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80',
+  'Cotton Trousers':  'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
+  'Joggers':          'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=200&h=220&fit=crop&q=80',
+  'Cargo Pants':      'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4-bc9910d016b7?w=200&h=220&fit=crop&q=80',
   'Formal Pant':      'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
   'Trousers':         'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
   // Men Footwear
@@ -4061,7 +4061,7 @@ const WORKING_SUBCAT_IMGS = {
   'Flats':            'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=200&h=220&fit=crop&q=80',
   'Wedges':           'https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=200&h=220&fit=crop&q=80',
   // Combos
-  'Formal Combo':     'https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=200&h=220&fit=crop&q=80',
+  'Formal Combo':     'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=200&h=220&fit=crop&q=80',
   'Casual Combo':     'https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=200&h=220&fit=crop&q=80',
   'Ethnic Combo':     'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=200&h=220&fit=crop&q=80',
   'Western Combo':    'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=200&h=220&fit=crop&q=80',
@@ -4841,10 +4841,10 @@ const FIXED_IMAGES = {
   // Men Bottomwear
   'Joggers':             'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=200&h=220&fit=crop&q=80',
   'Formal Pant':         'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
-  'Trousers':            'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80',
-  'Cotton Trousers':     'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80',
-  'Cargo Pants':         'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=220&fit=crop&q=80',
-  'Baggy Jeans':         'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80',
+  'Trousers':            'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
+  'Cotton Trousers':     'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80',
+  'Cargo Pants':         'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=200&h=220&fit=crop&q=80',
+  'Baggy Jeans':         'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=200&h=220&fit=crop&q=80',
   'Slim Fit Jeans':      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80',
   'Straight Fit Jeans':  'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=220&fit=crop&q=80',
   // Men Footwear
@@ -5827,14 +5827,14 @@ function _exposeCatsData() {
           {n:'Denim Jacket',img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&h=220&fit=crop&q=80'},
         ]},
         { label:'Bottomwear', subs:[
-          {n:'Baggy Jeans',img:'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80'},
+          {n:'Baggy Jeans',img:'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=200&h=220&fit=crop&q=80'},
           {n:'Straight Fit Jeans',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80'},
-          {n:'Slim Fit Jeans',img:'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80'},
-          {n:'Cotton Trousers',img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80'},
-          {n:'Joggers',img:'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=200&h=220&fit=crop&q=80'},
-          {n:'Cargo Pants',img:'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=220&fit=crop&q=80'},
+          {n:'Slim Fit Jeans',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80'},
+          {n:'Cotton Trousers',img:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80'},
+          {n:'Joggers',img:'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=200&h=220&fit=crop&q=80'},
+          {n:'Cargo Pants',img:'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=200&h=220&fit=crop&q=80'},
           {n:'Formal Pant',img:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80'},
-          {n:'Trousers',img:'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&h=220&fit=crop&q=80'},
+          {n:'Trousers',img:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&h=220&fit=crop&q=80'},
         ]},
         { label:'Footwear', subs:[
           {n:'Sneakers',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&h=220&fit=crop&q=80'},
@@ -5859,10 +5859,10 @@ function _exposeCatsData() {
         ]},
         { label:'Bottomwear', subs:[
           {n:'Straight Fit Jeans',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=200&h=220&fit=crop&q=80'},
-          {n:'Baggy Jeans',img:'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=200&h=220&fit=crop&q=80'},
-          {n:'Skinny Fit Jeans',img:'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=200&h=220&fit=crop&q=80'},
-          {n:'Cargo Jeans',img:'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=200&h=220&fit=crop&q=80'},
-          {n:'Trousers',img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=200&h=220&fit=crop&q=80'},
+          {n:'Baggy Jeans',img:'https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=200&h=220&fit=crop&q=80'},
+          {n:'Skinny Fit Jeans',img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=220&fit=crop&q=80'},
+          {n:'Cargo Jeans',img:'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=200&h=220&fit=crop&q=80'},
+          {n:'Trousers',img:'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=200&h=220&fit=crop&q=80'},
         ]},
         { label:'Footwear', subs:[
           {n:'Heels',img:'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200&h=220&fit=crop&q=80'},
@@ -6047,5 +6047,498 @@ if (document.readyState === 'loading') {
 } else {
   setTimeout(_init, 600);
 }
+
+})();
+
+/* ================================================================
+   OutfitKart V7 — REAL WORKING FEATURES
+   1. Gender Filter (strict)
+   2. You Might Also Like (PDP mein products)
+   3. Popular Categories (category page circles)
+   4. Smart Back Navigation (sub → PDP → back → sub)
+   ================================================================ */
+(function _v7Features() {
+  'use strict';
+
+  /* ── CSS ── */
+  function _injectCSS() {
+    if (document.getElementById('ok-v7-css')) return;
+    const s = document.createElement('style');
+    s.id = 'ok-v7-css';
+    s.textContent = `
+      /* You Might Also Like */
+      #ok-ymla-section {
+        padding: 18px 16px 20px;
+        background: #f8f9fa;
+        border-top: 1px solid #eee;
+        margin-top: 8px;
+      }
+      #ok-ymla-section h3 {
+        font-size: 15px; font-weight: 900; color: #111827;
+        margin: 0 0 12px; display: flex; align-items: center; gap: 6px;
+      }
+      .ok-ymla-row {
+        display: flex; gap: 10px; overflow-x: auto;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none;
+        padding-bottom: 4px;
+      }
+      .ok-ymla-row::-webkit-scrollbar { display: none; }
+      .ok-ymla-card {
+        flex-shrink: 0; width: 120px; cursor: pointer;
+        border-radius: 12px; overflow: hidden;
+        background: white; border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        transition: transform 0.18s;
+      }
+      .ok-ymla-card:active { transform: scale(0.96); }
+      .ok-ymla-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+      .ok-ymla-info { padding: 7px 8px; }
+      .ok-ymla-name {
+        font-size: 11px; font-weight: 700; color: #111827;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .ok-ymla-price { font-size: 12px; font-weight: 900; color: #e11d48; margin-top: 2px; }
+
+      /* Popular Categories */
+      #ok-popular-cats {
+        padding: 14px 16px 10px; background: #fff;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      #ok-popular-cats h3 {
+        font-size: 11px; font-weight: 900; color: #374151;
+        margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.08em;
+        display: flex; align-items: center; gap: 5px;
+      }
+      .ok-popcats-row {
+        display: flex; gap: 12px; overflow-x: auto;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      }
+      .ok-popcats-row::-webkit-scrollbar { display: none; }
+      .ok-popcat {
+        flex-shrink: 0; display: flex; flex-direction: column;
+        align-items: center; gap: 5px; cursor: pointer; width: 64px;
+      }
+      .ok-popcat-img {
+        width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
+        border: 2.5px solid #e5e7eb; transition: border-color 0.2s, transform 0.18s;
+        position: relative;
+      }
+      .ok-popcat:active .ok-popcat-img { transform: scale(0.9); }
+      .ok-popcat:hover .ok-popcat-img { border-color: #e11d48; }
+      .ok-popcat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .ok-popcat-lbl {
+        font-size: 9px; font-weight: 800; color: #374151;
+        text-align: center; line-height: 1.3; max-width: 64px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .ok-hot-dot {
+        position: absolute; top: -2px; right: -2px;
+        width: 14px; height: 14px; border-radius: 50%;
+        background: #e11d48; border: 2px solid white;
+        font-size: 7px; display: flex; align-items: center;
+        justify-content: center; color: white; font-weight: 900;
+      }
+
+      /* COD Payment Toggle */
+      #ok-pay-toggle {
+        margin: 10px 16px 4px;
+        background: #f8f9fa; border: 1.5px solid #e5e7eb;
+        border-radius: 12px; padding: 10px 12px;
+      }
+      #ok-pay-toggle .opt-lbl {
+        font-size: 9px; font-weight: 800; color: #6b7280;
+        text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;
+      }
+      .ok-pay-opts { display: flex; gap: 8px; }
+      .ok-pay-btn {
+        flex: 1; padding: 9px 6px; border-radius: 10px;
+        border: 2px solid #e5e7eb; background: white;
+        font-size: 11px; font-weight: 700; color: #374151;
+        cursor: pointer; text-align: center; transition: all 0.2s;
+        display: flex; flex-direction: column; align-items: center; gap: 1px;
+      }
+      .ok-pay-btn.sel { border-color: #e11d48; background: #fff1f2; color: #e11d48; }
+      .ok-pay-sub { font-size: 9px; color: #9ca3af; font-weight: 500; }
+      .ok-pay-btn.sel .ok-pay-sub { color: #f87171; }
+      .ok-cod-warning {
+        font-size: 10px; color: #f59e0b; font-weight: 700;
+        margin-top: 7px; display: none; align-items: center; gap: 4px;
+      }
+      .ok-cod-warning.show { display: flex; }
+    `;
+    document.head.appendChild(s);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     1. GENDER FILTER — Women category mein sirf Women products
+  ══════════════════════════════════════════════════════ */
+  function _applyGenderFilter(cat) {
+    if (!cat) return;
+    const catL = cat.toLowerCase();
+    const isWomen = catL === 'women';
+    const isMen   = catL === 'men';
+    if (!isWomen && !isMen) return;
+
+    const grid = document.getElementById('shop-grid') || document.getElementById('products-grid') || document.querySelector('[id*="shop-grid"],[id*="product-grid"]');
+    if (!grid) return;
+
+    const allProds = [...(window.products||[]), ...(window.allProducts||[])];
+
+    grid.querySelectorAll('.product-card[onclick], [class*="product"][onclick]').forEach(card => {
+      const oc = card.getAttribute('onclick') || '';
+      const m = oc.match(/\d+/);
+      if (!m) return;
+      const pid = +m[0];
+      const p = allProds.find(x => x.id === pid || String(x.id) === String(pid));
+      if (!p) return;
+      const pCat = (p.category||'').toLowerCase();
+      const wrong = (isWomen && pCat === 'men') || (isMen && pCat === 'women');
+      card.style.display = wrong ? 'none' : '';
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════
+     2. YOU MIGHT ALSO LIKE — PDP ke neeche
+  ══════════════════════════════════════════════════════ */
+  function _injectYMLA(product) {
+    // Purana hata do
+    document.getElementById('ok-ymla-section')?.remove();
+
+    const all = [...(window.products||[]), ...(window.allProducts||[]), ...(window.goldProducts||[])];
+    const seen = new Set(); const unique = all.filter(p => { if(seen.has(p.id))return false; seen.add(p.id); return true; });
+
+    let recs = unique.filter(p =>
+      p.id !== product.id &&
+      p.category === product.category &&
+      p.is_active !== false
+    ).sort(() => Math.random() - 0.5).slice(0, 8);
+
+    if (!recs.length) {
+      // Same sub se try karo
+      recs = unique.filter(p => p.id !== product.id && p.sub === product.sub && p.is_active !== false)
+                   .sort(() => Math.random() - 0.5).slice(0, 8);
+    }
+    if (!recs.length) return;
+
+    const cards = recs.map(p => {
+      const img = p.imgs?.[0]||p.img||'https://placehold.co/120x140/f3f4f6/9ca3af?text=?';
+      const isG  = !!(p.is_gold || (window.goldProducts||[]).find(g=>g.id===p.id));
+      return `<div class="ok-ymla-card" onclick="openProductPage(${p.id}${isG?',true':''})">
+        <img src="${img}" loading="lazy" onerror="this.src='https://placehold.co/120x140/f3f4f6/9ca3af?text=?'">
+        <div class="ok-ymla-info">
+          ${isG?'<div style="font-size:8px;font-weight:900;color:#B8860B;margin-bottom:1px;">⭐ GOLD</div>':''}
+          <div class="ok-ymla-name">${p.name||''}</div>
+          <div class="ok-ymla-price">₹${(p.price||0).toLocaleString('en-IN')}
+            ${p.oldprice&&p.oldprice>p.price?`<span style="text-decoration:line-through;font-size:9px;color:#bbb;font-weight:400;margin-left:3px;">₹${p.oldprice}</span>`:''}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const sec = document.createElement('div');
+    sec.id = 'ok-ymla-section';
+    sec.innerHTML = `<h3>🔥 You Might Also Like</h3><div class="ok-ymla-row">${cards}</div>`;
+
+    // PDP ke andar sabse neeche insert karo
+    const pdp = document.getElementById('pdp-container') || document.getElementById('view-product');
+    if (!pdp) return;
+
+    // Review/rating section ke baad, ya end mein
+    const rev = pdp.querySelector('[id*="review"],[id*="rating"],#pdp-reviews');
+    if (rev) rev.insertAdjacentElement('afterend', sec);
+    else pdp.appendChild(sec);
+
+    console.log('[YMLA] ✅ ' + recs.length + ' products inject kiye');
+  }
+
+  /* ══════════════════════════════════════════════════════
+     3. POPULAR CATEGORIES — Category page par circles
+  ══════════════════════════════════════════════════════ */
+  const POP_CATS = [
+    { lbl:'Oversized Tees', cat:'Men',         sub:'Oversized Tees',   img:'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=120&h=120&fit=crop&q=80', hot:true },
+    { lbl:"Women's Kurtis", cat:'Women',       sub:'Kurtis',           img:'https://images.unsplash.com/photo-1610189352649-ff58ea8ffe71?w=120&h=120&fit=crop&q=80', hot:true },
+    { lbl:'Cargo Pants',    cat:'Men',         sub:'Cargo Pants',      img:'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=120&h=120&fit=crop&q=80', hot:false },
+    { lbl:'Dresses',        cat:'Women',       sub:'Dresses',          img:'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=120&h=120&fit=crop&q=80', hot:true },
+    { lbl:'Sneakers',       cat:'Men',         sub:'Sneakers',         img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=120&h=120&fit=crop&q=80', hot:false },
+    { lbl:"Men's Watches",  cat:'Accessories', sub:'Watches',          img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=120&h=120&fit=crop&q=80', hot:false },
+    { lbl:'Couple Combo',   cat:'Combos',      sub:'Couple Combo',     img:'https://images.unsplash.com/photo-1529111290557-82f6d5c6cf85?w=120&h=120&fit=crop&q=80', hot:true },
+    { lbl:'Hoodies',        cat:'Men',         sub:'Hoodies',          img:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=120&h=120&fit=crop&q=80', hot:false },
+  ];
+
+  function _injectPopularCats() {
+    if (document.getElementById('ok-popular-cats')) return;
+    const catPage = document.getElementById('view-categories');
+    if (!catPage) return;
+
+    const sec = document.createElement('div');
+    sec.id = 'ok-popular-cats';
+
+    const items = POP_CATS.map(c => `
+      <div class="ok-popcat" onclick="openSubcatProducts('${c.cat}','${c.sub.replace(/'/g,"\\'")}');_closeCategories&&_closeCategories()">
+        <div class="ok-popcat-img">
+          <img src="${c.img}" alt="${c.lbl}" loading="lazy" onerror="this.style.display='none'">
+          ${c.hot ? '<div class="ok-hot-dot">🔥</div>' : ''}
+        </div>
+        <div class="ok-popcat-lbl">${c.lbl}</div>
+      </div>`).join('');
+
+    sec.innerHTML = `<h3>🔥 Popular Right Now</h3><div class="ok-popcats-row">${items}</div>`;
+
+    // Categories page ke top mein — sidebar+content ke upar
+    const body = document.getElementById('ok-cpbody') || catPage.querySelector('.flex');
+    if (body) catPage.insertBefore(sec, body);
+    else catPage.prepend(sec);
+
+    console.log('[PopCats] ✅ Circles injected');
+  }
+
+  /* ══════════════════════════════════════════════════════
+     4. COD PRICING TOGGLE — PDP par +₹19
+  ══════════════════════════════════════════════════════ */
+  function _injectCODToggle(product) {
+    document.getElementById('ok-pay-toggle')?.remove();
+    const base = product.price || 0;
+    window._pdpBasePrice = base;
+    window._pdpPayMode   = 'upi';
+
+    const toggle = document.createElement('div');
+    toggle.id = 'ok-pay-toggle';
+    toggle.innerHTML = `
+      <div class="opt-lbl">💳 Payment Mode</div>
+      <div class="ok-pay-opts">
+        <div class="ok-pay-btn sel" id="ok-pay-upi" onclick="window._okPay('upi')">
+          <span>📱 UPI / Online</span>
+          <span class="ok-pay-sub">₹${base.toLocaleString('en-IN')} — Best Price</span>
+        </div>
+        <div class="ok-pay-btn" id="ok-pay-cod" onclick="window._okPay('cod')">
+          <span>💵 Cash on Delivery</span>
+          <span class="ok-pay-sub">₹${(base+19).toLocaleString('en-IN')} (+₹19)</span>
+        </div>
+      </div>
+      <div class="ok-cod-warning" id="ok-cod-warn">⚠️ COD pe ₹19 extra handling charge</div>
+    `;
+
+    // Price element ke neeche insert karo
+    const priceEl = document.querySelector('#pdp-container .text-3xl, #pdp-container .text-2xl.font-black, #pdp-container [class*="price"]');
+    if (priceEl) {
+      const sect = priceEl.closest('.px-4,.p-4,.px-3') || priceEl.parentElement?.parentElement || priceEl.parentElement;
+      sect?.insertAdjacentElement('afterend', toggle);
+    }
+
+    window._okPay = function(mode) {
+      window._pdpPayMode = mode;
+      document.getElementById('ok-pay-upi')?.classList.toggle('sel', mode==='upi');
+      document.getElementById('ok-pay-cod')?.classList.toggle('sel', mode==='cod');
+      document.getElementById('ok-cod-warn')?.classList.toggle('show', mode==='cod');
+      const liveP = document.querySelector('#pdp-container .text-3xl, #pdp-container .text-2xl.font-black');
+      if (liveP) {
+        const newP = mode==='cod' ? base+19 : base;
+        liveP.textContent = '₹' + newP.toLocaleString('en-IN');
+        liveP.style.color = mode==='cod' ? '#f59e0b' : '';
+      }
+    };
+  }
+
+  /* ══════════════════════════════════════════════════════
+     5. SMART BACK NAVIGATION
+     openSubcatProducts → lastSubCat save
+     Back on PDP → return to subcat
+  ══════════════════════════════════════════════════════ */
+  function _patchSmartBack() {
+    if (window._v7SmartBackDone) return;
+    window._v7SmartBackDone = true;
+
+    /* --- openSubcatProducts wrap REMOVED from here ---
+       Ab yeh kaam _hookGenderFilter() karta hai (merged).
+       Dono ka state-save + gender filter wahan ek saath hota hai.
+    */
+
+    /* --- navigate wrap — track view + subcat --- */
+    const origNav = window.navigate;
+    if (origNav && !window._v7NavDone) {
+      window._v7NavDone = true;
+      window.navigate = function(view, ...args) {
+        const prev = window.currentView || 'home';
+        if (view === 'product') {
+          // PDP kholne se pehle current state save
+          window._pdpBackTo = {
+            view: prev,
+            cat:  window._currentCatFilter || null,
+            sub:  window.lastSubCat         || null,
+            subCat: window.lastSubCatCat    || null,
+          };
+        }
+        return origNav(view, ...args);
+      };
+    }
+
+    /* --- PDP back button patch --- */
+    function _patchPDPBack() {
+      // PDP mein jo bhi back button hai
+      const selectors = [
+        '#view-product .back-btn',
+        '#pdp-container .back-btn',
+        '#view-product button[onclick*="navigate"]',
+        '#view-product [onclick*="navigate(\'shop\')"]',
+        '#view-product [onclick*="navigate(\'home\')"]',
+      ];
+      selectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(btn => {
+          if (btn.dataset.v7back) return;
+          btn.dataset.v7back = '1';
+          const origClick = btn.onclick;
+          btn.onclick = function(e) {
+            e.preventDefault(); e.stopPropagation();
+            const state = window._pdpBackTo;
+            if (state && state.sub && state.subCat && typeof window.openSubcatProducts === 'function') {
+              // Sub-category wapas jao
+              if (typeof navigate === 'function') navigate('shop');
+              setTimeout(() => window.openSubcatProducts(state.subCat, state.sub), 150);
+            } else if (state && state.view && state.view !== 'product') {
+              navigate(state.view);
+            } else {
+              navigate('home');
+            }
+          };
+        });
+      });
+    }
+
+    // PDP view appear hone par back button patch karo
+    new MutationObserver(() => {
+      const pdp = document.getElementById('view-product');
+      if (pdp && !pdp.classList.contains('hidden') && !pdp.classList.contains('translate-x-full')) {
+        setTimeout(_patchPDPBack, 300);
+      }
+    }).observe(document.body, { subtree:true, attributes:true, attributeFilter:['class'] });
+
+    setTimeout(_patchPDPBack, 800);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     6. PDP HOOK — openProductPage wrap
+  ══════════════════════════════════════════════════════ */
+  function _hookPDP() {
+    if (window._v7PDPHooked) return;
+
+    const _tryHook = () => {
+      if (typeof window.openProductPage !== 'function') return false;
+      if (window._v7PDPHooked) return true;
+      window._v7PDPHooked = true;
+
+      const origPP = window.openProductPage;
+      window.openProductPage = async function(id, isGold) {
+        // Back state save
+        window._pdpBackTo = {
+          view:    window.currentView || 'home',
+          cat:     window._currentCatFilter || null,
+          sub:     window.lastSubCat         || null,
+          subCat:  window.lastSubCatCat      || null,
+        };
+
+        const result = await origPP(id, isGold);
+
+        setTimeout(() => {
+          // Product find karo
+          const allP = [...(window.products||[]),...(window.allProducts||[]),...(window.goldProducts||[])];
+          const seen2 = new Set(); const uniq = allP.filter(p=>{if(seen2.has(p.id))return false;seen2.add(p.id);return true;});
+          const product = uniq.find(p => p.id===id || String(p.id)===String(id));
+          if (!product) return;
+
+          // Inject features
+          _injectCODToggle(product);
+          setTimeout(() => _injectYMLA(product), 300);
+        }, 500);
+
+        return result;
+      };
+      return true;
+    };
+
+    if (!_tryHook()) {
+      const iv = setInterval(() => { if (_tryHook()) clearInterval(iv); }, 250);
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     7. GENDER FILTER HOOK — openSubcatProducts ke baad
+  ══════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════
+     7. UNIFIED SUBCAT HOOK
+        - State save (lastSubCat, _currentCatFilter, etc.) — Smart Back ke liye
+        - Gender filter apply — product grid filter ke liye
+        Dono kaam ab ek hi wrap mein hote hain (no double-wrap)
+  ══════════════════════════════════════════════════════ */
+  function _hookGenderFilter() {
+    if (window._v7GenderHooked) return;
+
+    const _try = () => {
+      if (typeof window.openSubcatProducts !== 'function' || window._v7GenderHooked) return false;
+      window._v7GenderHooked = true;
+
+      const origSub = window.openSubcatProducts;
+      window.openSubcatProducts = function(cat, sub) {
+        // ── 1. State save (Smart Back ke liye — pehle _patchSmartBack mein tha) ──
+        window.lastSubCat         = sub;
+        window.lastSubCatCat      = cat;
+        window._currentCatFilter  = cat;
+        window._currentSubFilter  = sub;
+
+        // ── 2. Original function call ──
+        const r = origSub(cat, sub);
+
+        // ── 3. Gender filter apply (render ke baad) ──
+        setTimeout(() => _applyGenderFilter(cat), 400);
+        setTimeout(() => _applyGenderFilter(cat), 1000);
+
+        return r;
+      };
+      return true;
+    };
+
+    if (!_try()) {
+      const iv = setInterval(() => { if (_try()) clearInterval(iv); }, 250);
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     8. POPULAR CATS — categories page observe karo
+  ══════════════════════════════════════════════════════ */
+  function _watchCatPage() {
+    new MutationObserver(() => {
+      const cp = document.getElementById('view-categories');
+      if (!cp) return;
+      const isVisible = !cp.classList.contains('hidden') && cp.style.display !== 'none';
+      if (isVisible && !document.getElementById('ok-popular-cats')) {
+        setTimeout(_injectPopularCats, 200);
+      }
+    }).observe(document.body, { subtree:true, attributes:true, attributeFilter:['class','style'] });
+
+    // Abhi bhi visible hai to inject karo
+    setTimeout(_injectPopularCats, 500);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     INIT
+  ══════════════════════════════════════════════════════ */
+  function _init() {
+    _injectCSS();
+    _hookPDP();
+    // _hookGenderFilter must run BEFORE _patchSmartBack
+    // kyunki ab openSubcatProducts wrap sirf yahan hota hai (merged)
+    // _patchSmartBack sirf navigate wrap + PDP back button karta hai
+    _hookGenderFilter();
+    _patchSmartBack();
+    _watchCatPage();
+
+    console.log('%c✅ V7 Features: YMLA + Gender Filter + PopCats + COD Pricing + Smart Back — ALL ACTIVE (Unified Subcat Hook)',
+      'background:#16a34a;color:white;font-weight:900;font-size:11px;padding:4px 12px;border-radius:6px;');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(_init, 800));
+  } else {
+    setTimeout(_init, 800);
+  }
 
 })();
