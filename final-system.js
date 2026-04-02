@@ -6542,3 +6542,210 @@ if (document.readyState === 'loading') {
   }
 
 })();
+
+/* ================================================================
+   NAV-BACK-FIX — Definitive PDP Back Navigation Fix
+   Appended after all patches. Fixes: PDP → Back → same subcategory.
+   
+   WHY THIS WORKS WHERE OTHERS FAILED:
+   - Uses event delegation (survives innerHTML rebuilds)
+   - Sets _pdpPreviousView (fixes HTML attr fallback)
+   - Overrides _pdpGoBack + _pdpSmartBack (fixes injected button)
+   - Guard: window._navBackFixDone prevents re-run
+================================================================ */
+(function () {
+  'use strict';
+  if (window._navBackFixDone) return;
+  window._navBackFixDone = true;
+
+  /* ── 1. State store ── */
+  // Stores where user was BEFORE opening product
+  var _backState = null;
+
+  function _saveBackState() {
+    var cat = window._currentCatFilter
+           || window.currentCategoryFilter
+           || window.lastSubCatCat
+           || null;
+    var sub = window._currentSubFilter
+           || window.currentSubFilter
+           || window.lastSubCat
+           || null;
+    var view = window.currentView || 'home';
+
+    _backState = { view: view, cat: cat, sub: sub };
+
+    // Sync ALL legacy vars so every existing system also works
+    window._pdpPreviousView  = view;           // fixes HTML attribute fallback
+    window._pdpReturnState   = { view: view, cat: cat, sub: sub };
+    window._pdpBackTo        = { view: view, cat: cat, sub: sub, subCat: cat };
+  }
+
+  /* ── 2. The actual back logic ── */
+  function _doBack() {
+    var st = _backState || window._pdpBackTo || window._pdpReturnState;
+
+    if (!st) { navigate('home'); return; }
+
+    // If came from a subcategory → re-open that exact subcategory
+    if (st.sub && st.cat && typeof window.openSubcatProducts === 'function') {
+      // Show shop view
+      document.querySelectorAll('.view-section').forEach(function(el) {
+        el.classList.add('hidden');
+      });
+      var shopEl = document.getElementById('view-shop');
+      if (shopEl) shopEl.classList.remove('hidden');
+      window.currentView = 'shop';
+      if (typeof window.updateBottomNav === 'function') window.updateBottomNav();
+
+      // Re-render the subcategory products
+      window.openSubcatProducts(st.cat, st.sub);
+
+      // Reset so next back works cleanly
+      _backState = null;
+      return;
+    }
+
+    // If came from shop (no subcat filter)
+    if (st.view === 'shop') {
+      if (typeof navigate === 'function') navigate('shop');
+      _backState = null;
+      return;
+    }
+
+    // If came from categories overlay
+    if (st.view === 'categories') {
+      if (typeof window._openCategories === 'function') {
+        window._openCategories();
+      } else if (typeof navigate === 'function') {
+        navigate('shop');
+      }
+      _backState = null;
+      return;
+    }
+
+    // If came from electronics
+    if (st.view === 'electronics') {
+      if (typeof window._openElectronics === 'function') {
+        window._openElectronics();
+      } else if (typeof navigate === 'function') {
+        navigate('home');
+      }
+      _backState = null;
+      return;
+    }
+
+    // Generic fallback
+    if (typeof navigate === 'function') {
+      navigate(st.view && st.view !== 'product' ? st.view : 'home');
+    }
+    _backState = null;
+  }
+
+  /* ── 3. Override _pdpGoBack and _pdpSmartBack ──
+     These are called by the injected ok-pdp-back-btn button */
+  window._pdpGoBack    = _doBack;
+  window._pdpSmartBack = _doBack;
+  window.handleBackFromPDP = _doBack;
+
+  /* ── 4. Wrap openProductPage to save state (guard-protected) ── */
+  function _hookOpenProduct() {
+    if (window._navBackPDPHooked) return;
+    if (typeof window.openProductPage !== 'function') return;
+    window._navBackPDPHooked = true;
+
+    var _origPP = window.openProductPage;
+    window.openProductPage = async function(id, isGold) {
+      _saveBackState();           // Save BEFORE opening product
+      return _origPP(id, isGold);
+    };
+  }
+
+  /* ── 5. Event delegation on view-product ──
+     Survives innerHTML rebuilds. Catches ALL click events that bubble
+     from back buttons, regardless of whether they were patched or not. */
+  function _attachDelegation() {
+    var productView = document.getElementById('view-product');
+    if (!productView || productView._navBackDelegate) return;
+    productView._navBackDelegate = true;
+
+    productView.addEventListener('click', function(e) {
+      var btn = e.target.closest('button, [role="button"], a');
+      if (!btn) return;
+
+      var isBackBtn = false;
+
+      // Check by ID
+      if (btn.id === 'ok-pdp-back-btn' || btn.id === 'ok-pdp-smart-back') {
+        isBackBtn = true;
+      }
+
+      // Check by onclick attribute content
+      var oc = btn.getAttribute('onclick') || '';
+      if (
+        oc.indexOf('_pdpPreviousView') !== -1 ||
+        oc.indexOf('_pdpGoBack') !== -1 ||
+        oc.indexOf('_pdpSmartBack') !== -1 ||
+        oc.indexOf('handleBackFromPDP') !== -1
+      ) {
+        isBackBtn = true;
+      }
+
+      // Check by class or aria-label
+      if (btn.classList.contains('back-btn') || btn.getAttribute('aria-label') === 'Back') {
+        // Only if it's visually a back button (has arrow icon or "Back" text)
+        var txt = btn.textContent || '';
+        var hasArrow = btn.querySelector('.fa-arrow-left, .fa-chevron-left');
+        if (hasArrow || txt.trim() === 'Back' || txt.trim() === '← Back') {
+          isBackBtn = true;
+        }
+      }
+
+      if (isBackBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        _doBack();
+      }
+    }, true); // capture phase - runs before onclick
+  }
+
+  /* ── 6. MutationObserver: re-attach delegation if view-product is replaced ── */
+  new MutationObserver(function() {
+    var pdp = document.getElementById('view-product');
+    if (pdp && !pdp._navBackDelegate) {
+      _attachDelegation();
+    }
+  }).observe(document.body, { childList: true, subtree: true });
+
+  /* ── 7. Init ── */
+  function _init() {
+    _hookOpenProduct();
+    _attachDelegation();
+
+    // Also set _pdpGoBack immediately in case ok-pdp-back-btn already exists
+    var injBtn = document.getElementById('ok-pdp-back-btn');
+    if (injBtn) {
+      injBtn.onclick = function(e) { e.preventDefault(); _doBack(); };
+    }
+
+    console.log(
+      '%c✅ NAV-BACK-FIX active — PDP Back → Subcategory restored',
+      'background:#0f172a;color:#4ade80;font-weight:900;font-size:11px;padding:4px 12px;border-radius:6px;'
+    );
+  }
+
+  // Poll until openProductPage is ready
+  var _iv = setInterval(function() {
+    if (typeof window.openProductPage === 'function') {
+      clearInterval(_iv);
+      _hookOpenProduct();
+    }
+  }, 200);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(_init, 900); });
+  } else {
+    setTimeout(_init, 900);
+  }
+
+})();
