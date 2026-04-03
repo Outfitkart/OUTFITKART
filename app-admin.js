@@ -2052,8 +2052,7 @@ const { data: user, error } = await client
         });
       }, 200);
     };
-  }
-
+             }
   /* ── 6. INIT ── */
   function _initComboAdmin() {
     _injectComboIntoAddForm();
